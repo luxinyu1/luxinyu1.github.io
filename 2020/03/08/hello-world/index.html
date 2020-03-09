@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5） 源程序12345678910111213141516#include &lt;stdio.h&gt;int Fabonacci(int n) &amp;#123;    if (n &#x3D;&#x3D; 1 || n &#x3D;&#x3D; 2) &amp;#123;        return 1;">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5） 源程序12345678910111213141516#include &lt;stdio.h&gt;int Fabonacci(int n) &amp;#123;    if (n &#x3D;&#x3D; 1 || n &#x3D;&#x3D; 2) &amp;#123;        return 1;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-08T09:50:03.382Z">
-<meta property="article:modified_time" content="2020-03-08T14:50:26.949Z">
+<meta property="article:modified_time" content="2020-03-09T02:06:10.615Z">
 <meta property="article:author" content="Franklin">
 <meta name="twitter:card" content="summary">
 
@@ -106,7 +106,6 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -145,39 +144,9 @@
     <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="search-pop-overlay">
-  <div class="popup search-popup">
-      <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-  </div>
-</div>
-
-  </div>
 </div>
     </header>
 
@@ -186,6 +155,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+
+  <a href="https://github.com/luxinyu1" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
 
     <main class="main">
@@ -223,10 +194,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-08 17:50:03 / 修改时间：22:50:26" itemprop="dateCreated datePublished" datetime="2020-03-08T17:50:03+08:00">2020-03-08</time>
+              <time title="创建时间：2020-03-08 17:50:03" itemprop="dateCreated datePublished" datetime="2020-03-08T17:50:03+08:00">2020-03-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-09 10:06:10" itemprop="dateModified" datetime="2020-03-09T10:06:10+08:00">2020-03-09</time>
+              </span>
 
           
 
@@ -243,22 +220,21 @@
 <h3 id="Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）"><a href="#Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）" class="headerlink" title="Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）"></a>Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）</h3></blockquote>
 <h3 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a><strong>源程序</strong></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fabonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Fabonacci(n<span class="number">-1</span>) + Fabonacci(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,Fabonacci(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h3><p>使用递归生成Fabonacci数列后输出</p>
-<h3 id="nbsp"><a href="#nbsp" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
+<blockquote>
 <h3 id="Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo"><a href="#Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo" class="headerlink" title="Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo"></a>Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo</h3></blockquote>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h3><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: fibo.c</span></span><br><span class="line">	gcc -o fibo fibo.c</span><br></pre></td></tr></table></figure>
 <h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a><strong>注意点</strong></h3><p>每一个指令前必须有一个TAB，而非4个或两个空格</p>
-<h3 id="nbsp-1"><a href="#nbsp-1" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
+<blockquote>
 <h3 id="Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。"><a href="#Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。" class="headerlink" title="Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。"></a>Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。</h3></blockquote>
 <h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a><strong>代码</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">sed -e 8w<span class="variable">$2</span> -e 32w<span class="variable">$2</span> -e 128w<span class="variable">$2</span> -e 512w<span class="variable">$2</span> -e 1024w<span class="variable">$2</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure>
 <h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><strong>思路</strong></h3><p>连续使用<code>sed -e [行号]w[目标文件名] [源文件名]</code>指令复制生成</p>
-<h3 id="nbsp-2"><a href="#nbsp-2" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
+<h3 id="nbsp"><a href="#nbsp" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
 <h3 id="Exercise-4-拷贝文件"><a href="#Exercise-4-拷贝文件" class="headerlink" title="Exercise 4 拷贝文件"></a>Exercise 4 拷贝文件</h3></blockquote>
 <h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a><strong>指令</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
-<h3 id="nbsp-3"><a href="#nbsp-3" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
+<blockquote>
 <h3 id="实验环境下Git的使用"><a href="#实验环境下Git的使用" class="headerlink" title="实验环境下Git的使用"></a>实验环境下Git的使用</h3></blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">获取Git服务器IP: cat .cgconfig</span><br><span class="line">克隆远程仓库: git clone git@IP:$CGUSERID-lab</span><br><span class="line">打开仓库: cd 181303216-lab</span><br><span class="line">查看分支: git branch -a</span><br><span class="line">检出分支: git checkout ...</span><br><span class="line">添加文件至暂存区: git add ...</span><br><span class="line">提交所有更改: git commit -all</span><br><span class="line">提交: git push</span><br></pre></td></tr></table></figure>
-
-<h3 id="nbsp-4"><a href="#nbsp-4" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote>
+<blockquote>
 <h3 id="Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。"><a href="#Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。" class="headerlink" title="Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。"></a>Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。</h3></blockquote>
 <ul>
 <li>GLI Shell的门槛比较低，易于学习，相比之下CUI Shell学习成本高</li>
@@ -336,7 +312,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）"><span class="nav-number">1.</span> <span class="nav-text">Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源程序"><span class="nav-number">2.</span> <span class="nav-text">源程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp"><span class="nav-number">4.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo"><span class="nav-number">5.</span> <span class="nav-text">Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">6.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意点"><span class="nav-number">7.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp-1"><span class="nav-number">8.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。"><span class="nav-number">9.</span> <span class="nav-text">Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">10.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">11.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp-2"><span class="nav-number">12.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-4-拷贝文件"><span class="nav-number">13.</span> <span class="nav-text">Exercise 4 拷贝文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">14.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp-3"><span class="nav-number">15.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境下Git的使用"><span class="nav-number">16.</span> <span class="nav-text">实验环境下Git的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp-4"><span class="nav-number">17.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。"><span class="nav-number">18.</span> <span class="nav-text">Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）"><span class="nav-number">1.</span> <span class="nav-text">Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源程序"><span class="nav-number">2.</span> <span class="nav-text">源程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo"><span class="nav-number">4.</span> <span class="nav-text">Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意点"><span class="nav-number">6.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。"><span class="nav-number">7.</span> <span class="nav-text">Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码-1"><span class="nav-number">8.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路-1"><span class="nav-number">9.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp"><span class="nav-number">10.</span> <span class="nav-text">&amp;nbsp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exercise-4-拷贝文件"><span class="nav-number">11.</span> <span class="nav-text">Exercise 4 拷贝文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">12.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境下Git的使用"><span class="nav-number">13.</span> <span class="nav-text">实验环境下Git的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。"><span class="nav-number">14.</span> <span class="nav-text">Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -356,6 +332,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/luxinyu1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luxinyu1" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:luxinyu12345@foxmail.com" title="E-Mail → mailto:luxinyu12345@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -419,10 +403,6 @@
   
 
 
-
-
-  
-<script src="/js/local-search.js"></script>
 
 
 
