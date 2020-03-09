@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Franklinの灵质空间</title>
+  
+  <subtitle>给岁月以文明，时光以生命。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://luxinyu1.github.io/"/>
+  <updated>2020-03-08T14:50:26.949Z</updated>
+  <id>http://luxinyu1.github.io/</id>
+  
+  <author>
+    <name>Franklin</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>操作系统实验 - lab0</title>
+    <link href="http://luxinyu1.github.io/2020/03/08/hello-world/"/>
+    <id>http://luxinyu1.github.io/2020/03/08/hello-world/</id>
+    <published>2020-03-08T09:50:03.382Z</published>
+    <updated>2020-03-08T14:50:26.949Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><h3 id="Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）"><a href="#Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）" class="headerlink" title="Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）"></a>Exercise 1 在fibo.c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1 1 2 3 5）</h3></blockquote><h3 id="源程序"><a href="#源程序" class="headerlink" title="源程序"></a><strong>源程序</strong></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fabonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span> || n == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Fabonacci(n<span class="number">-1</span>) + Fabonacci(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>;i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,Fabonacci(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a><strong>思路</strong></h3><p>使用递归生成Fabonacci数列后输出</p><h3 id="nbsp"><a href="#nbsp" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote><h3 id="Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo"><a href="#Exercise-2-完善Makefile，要求用make指令可实现fibo-c的编译链接，可执行文件名为fibo" class="headerlink" title="Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo"></a>Exercise 2 完善Makefile，要求用make指令可实现fibo.c的编译链接，可执行文件名为fibo</h3></blockquote><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h3><figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: fibo.c</span></span><br><span class="line">gcc -o fibo fibo.c</span><br></pre></td></tr></table></figure><h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a><strong>注意点</strong></h3><p>每一个指令前必须有一个TAB，而非4个或两个空格</p><h3 id="nbsp-1"><a href="#nbsp-1" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote><h3 id="Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。"><a href="#Exercise-3-在文件夹sh-test中新建文件hello-os-sh，要求通过指令bash-hello-os-sh-file-hello-os-c-可以在当前为文件夹下生成hello-os-c，其内容为file的第8、32、128、512、1024-行的内容提取。" class="headerlink" title="Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。"></a>Exercise 3 在文件夹sh_test中新建文件hello_os.sh，要求通过指令bash hello_os.sh file hello_os.c 可以在当前为文件夹下生成hello_os.c，其内容为file的第8、32、128、512、1024 行的内容提取。</h3></blockquote><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a><strong>代码</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">sed -e 8w<span class="variable">$2</span> -e 32w<span class="variable">$2</span> -e 128w<span class="variable">$2</span> -e 512w<span class="variable">$2</span> -e 1024w<span class="variable">$2</span> <span class="variable">$1</span></span><br></pre></td></tr></table></figure><h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><strong>思路</strong></h3><p>连续使用<code>sed -e [行号]w[目标文件名] [源文件名]</code>指令复制生成</p><h3 id="nbsp-2"><a href="#nbsp-2" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote><h3 id="Exercise-4-拷贝文件"><a href="#Exercise-4-拷贝文件" class="headerlink" title="Exercise 4 拷贝文件"></a>Exercise 4 拷贝文件</h3></blockquote><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a><strong>指令</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure><h3 id="nbsp-3"><a href="#nbsp-3" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote><h3 id="实验环境下Git的使用"><a href="#实验环境下Git的使用" class="headerlink" title="实验环境下Git的使用"></a>实验环境下Git的使用</h3></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">获取Git服务器IP: cat .cgconfig</span><br><span class="line">克隆远程仓库: git clone git@IP:$CGUSERID-lab</span><br><span class="line">打开仓库: cd 181303216-lab</span><br><span class="line">查看分支: git branch -a</span><br><span class="line">检出分支: git checkout ...</span><br><span class="line">添加文件至暂存区: git add ...</span><br><span class="line">提交所有更改: git commit -all</span><br><span class="line">提交: git push</span><br></pre></td></tr></table></figure><h3 id="nbsp-4"><a href="#nbsp-4" class="headerlink" title="&nbsp;"></a>&nbsp;</h3><blockquote><h3 id="Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。"><a href="#Thinking-0-1-通过你的使用经验，简单分析CLI-Shell-GUI-Shell在你使用过程中的各自优劣。" class="headerlink" title="Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。"></a>Thinking 0.1 通过你的使用经验，简单分析CLI Shell,GUI Shell在你使用过程中的各自优劣。</h3></blockquote><ul><li>GLI Shell的门槛比较低，易于学习，相比之下CUI Shell学习成本高</li><li>GUI Shell可以更为直观地展现图片，富文本的内容，而CUI Shell更专注于文字处理与编辑</li><li>GUI可以运行带有图形界面的可执行程序，而CUI不行</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;h3 id=&quot;Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前n位的程序（n为评测时的输入数据，输出用空格分隔，例如1-1-2-3-5）&quot;&gt;&lt;a href=&quot;#Exercise-1-在fibo-c中使用c语言实现输出斐波那契数列前
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
