@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luxinyu1.github.io/"/>
-  <updated>2020-04-04T14:33:47.759Z</updated>
+  <updated>2020-04-11T03:25:44.316Z</updated>
   <id>http://luxinyu1.github.io/</id>
   
   <author>
@@ -15,6 +15,96 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>装配线问题</title>
+    <link href="http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/"/>
+    <id>http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/</id>
+    <published>2020-04-10T04:46:01.783Z</published>
+    <updated>2020-04-11T03:25:44.316Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,如果它移动到另一条线上,则花费时间为$ t_i[j] $。在离开一条装配线的第$ n $个装配站后,完成的汽车底盘花费时间为$ x_i $离开工厂。<br><strong>待求解的问题是,确定应该在装配线 1 内选择哪些站,在装配线 2 内选择哪些站,才能使汽车通过工厂的总时间最短。</strong>  </p></blockquote><p>暴力办法由于每个站都有两个选择，总装配路线数就是$ 2^{n} $，当n很大时，变得不可行。</p><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>对于每一个问题$ S_i[j] $，其子问题有两种情况：</p><ol><li>经历了装配线的转换到了$ j $号装配站</li><li>没经历转换直接到了$ j $号装配站  </li></ol><p>所以转化成递归问题，就是两种情况：</p><ol><li>$ j=1, f^* = min(e_1+a_1[j],e_2+a_2[j]) $</li><li>$ j\neq1, f_1[j] = min(f_1[j-1]+a_1[j],f_2[j-1]+t_2[j-1]+a_1[j]) $<br>$ j\neq1, f_2[j] = min(f_2[j-1]+a_2[j],f_1[j-1]+t_1[j-1]+a_2[j])$  </li></ol><h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用填表法，可以先将所有$ f_1[j],f_2[j] $的值全部计算出来，同时设置箭头指向用来回溯，或者新设一个$ l_i[j] $专门记录到$ S_i[j] $的最快路径的上一个工作台所在的装配线号。</p><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote><p>Professor Canty conjectures that there might exist some $ e_i $, $ a_i[j] $, and $ t_i[j] $ values for which FASTEST-WAY produces $ l_i[j] $ values such that $ l_1[j] = 2 $ and $ l_2[j] = 1 $ for some station number $ j $. Assuming that all transfer costs $ t_i[j] $ are nonnegative, show that the professor is wrong.  </p></blockquote><p>简而言之，就是要证明对于同一个$ j $，不可能出现$ l_1[j] = 2 $ and $ l_2[j] = 1 $这样的情况。 </p><p>假设$ l_1[j] = 2 $ and $ l_2[j] = 1 $成立，则：  </p><p>$ l_1[j] = 2 $ 即 $ f_2[j-1]+t_2[j-1] &lt; f_1[j-1] ①$  </p><p>$ l_2[j] = 1 $ 即 $ f_1[j-1]+t_1[j-1] &lt; f_2[j-1] ②$  </p><p>显然①②两个式子矛盾，故假设不成立。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>最大公共子序列问题</title>
+    <link href="http://luxinyu1.github.io/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/"/>
+    <id>http://luxinyu1.github.io/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/</id>
+    <published>2020-04-09T07:52:50.695Z</published>
+    <updated>2020-04-10T05:07:48.596Z</updated>
+    
+    <content type="html"><![CDATA[<p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p><h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p><ol><li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li><li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li></ol><p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p><ol><li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li><li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li><li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li></ol><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure><p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。&lt;br&gt;假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>矩阵连乘问题</title>
+    <link href="http://luxinyu1.github.io/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/"/>
+    <id>http://luxinyu1.github.io/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/</id>
+    <published>2020-04-09T06:58:34.957Z</published>
+    <updated>2020-04-09T07:52:05.473Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>需要找到以最小次数计算矩阵乘法的运算方式，在矩阵连乘过程中，不同的“加括号”方式会对运算速度造成很大影响。<br>思路：由矩阵乘法的性质，A[1:4] = A[1:2] + A[3:4]，即(AB)(CD) = ABCD，递推或递归解决。   </p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;需要找到以最小次数计算矩阵乘法的运算方式，在矩阵连乘过程中，不同的“加括号”方式会对运算速度造成很大影响。&lt;br&gt;思路：由矩阵乘法的性质，A[1:4] = A[1:2] + A[3:4]，即(AB)(CD) = ABCD，递推或递归解决。   &lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>动态规划</title>
+    <link href="http://luxinyu1.github.io/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    <id>http://luxinyu1.github.io/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</id>
+    <published>2020-04-09T06:18:13.423Z</published>
+    <updated>2020-04-09T06:58:24.130Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>动态规划的本质是对递归中产生的结果进行存储（用表存储，在代码中以数组的形式体现），避免<strong>重复调用相同子问题</strong>的递归造成时间上的损失。可以看成是分治法的一种改进。其与分治法的最大不同是：它遵循自底向上的计算方式，而分治法通常是自顶向下的。<br>学术一点来讲：动态规划是研究多阶段决策过程中采用最优化原理，把多阶段的问题转化为单阶段解决。  </p><h3 id="动态规划的基本步骤"><a href="#动态规划的基本步骤" class="headerlink" title="动态规划的基本步骤"></a>动态规划的基本步骤</h3><ol><li>找出最优解的性质并刻画其结构特征</li><li>递归定义最优值</li><li>以<strong>自底向上</strong>的方式计算最优值</li><li>根据计算最优值时的信息构造最优解</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;动态规划的本质是对递归中产生的结果进行存储（用表存储，在代码中以数组的形式体现），避免&lt;strong&gt;重复调用相同子问题&lt;/strong&gt;的
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>最近点对问题</title>
@@ -44,9 +134,9 @@
     <link href="http://luxinyu1.github.io/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/"/>
     <id>http://luxinyu1.github.io/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/</id>
     <published>2020-04-03T14:35:11.616Z</published>
-    <updated>2020-04-03T15:04:58.710Z</updated>
+    <updated>2020-04-10T13:02:42.709Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。</p><h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>2NF在1NF的基础之上，消除了<strong>非主属性</strong>对于<strong>码</strong>的部分函数依赖。</p><blockquote><p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。  </p></blockquote><blockquote><p>部分函数依赖：假如Y函数依赖于X，但同时Y并不完全函数依赖于X，那么我们就称Y部分函数依赖于X。</p></blockquote><blockquote><p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码。<br>例如，（学号、课名）这个属性组就可以是码。该表中有且仅有这一个码。</p></blockquote><blockquote><p>主键：等同于主属性。</p></blockquote><blockquote><p>主属性和非主属性：包含在任何一个码中的属性成为<strong>主属性</strong>，其余为非主属性。<br>在上面的例子里，学号和课名都是主属性。<br>假设有（学号，课名） → 系名，学号 → 系名，即存在非主属性系名对码（学号，课名）的部分函数依赖，不满足2NF</p></blockquote><h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>3NF在2NF的基础之上，消除了非主属性对于码的<strong>传递函数依赖</strong>。<br>学号 → 系名，同时 系名 → 系主任，就不符合3NF。</p><h2 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h2><p>在3NF的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。</p><h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>2NF在1NF的基础之上，消除了<strong>非主属性</strong>对于<strong>码</strong>的部分函数依赖。</p><blockquote><p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即<strong>X确定Y</strong>。  </p></blockquote><ol><li>平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B这种，<strong>平凡函数依赖在任意条件下必然成立，所以称其为平凡</strong>。</li><li>非平凡函数依赖：确定的东西不是原先条件的一部分，即X不是Y的一部分，如(A, B) → C</li></ol><blockquote><p>部分函数依赖：假如Y函数依赖于X，即X确定Y，但同时Y并不完全函数依赖于X，即X的真子集可以确定Y，那么我们就称Y部分函数依赖于X，反之为完全函数依赖。</p></blockquote><blockquote><p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码，<strong>码可以有多个</strong>，故可以选一个为<strong>主码</strong>。<br>例如，（学号、课名）这个属性组就可以是码。（姓名，课名）这个属性也可是码（只要没有重复的姓名）。</p></blockquote><blockquote><p>主键：等同于主属性。</p></blockquote><blockquote><p>主属性和非主属性：包含在任何一个码中的属性成为<strong>主属性</strong>，其余为非主属性。<br>在上面的例子里，学号和课名都是主属性。<br>假设有（学号，课名） → 系名，学号 → 系名，即存在非主属性系名对码（学号，课名）的部分函数依赖，不满足2NF</p></blockquote><h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>3NF在2NF的基础之上，消除了非主属性对于码的<strong>传递函数依赖</strong>。<br>学号 → 系名，同时 系名 → 系主任，就不符合3NF。</p><h2 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h2><p>在3NF的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p><h2 id="求属性集闭包的方法"><a href="#求属性集闭包的方法" class="headerlink" title="求属性集闭包的方法"></a>求属性集闭包的方法</h2><blockquote><p>关系模式R&lt;U，F&gt;，其中U={A，B，C，D，E}，F={AB→C，B→D，C→E，EC→B，AC→B}，求(AB)+  </p></blockquote><ol><li>令X(0)=AB。  </li><li>求X(1)。先列出X(0)的非空子集，即AB的非空子集为{A，B，AB}。然后扫描F集合，寻找{A，B，AB}可能存在的函数依赖，就可以得到：AB→C，B→D。于是就可以求得X(1)=X(0)∪C∪D=ABCD。然后判断X(0)如果等于X(1)就结束，所求即为答案，如果X(0)不等于X(1)就继续计算。</li><li>求X(2)。同第二步求X(1)得非空真子集，然后在F中一次寻找函数依赖，可以得到：AB→C，B→D，C→E，AC→B。求得X(2)=X(1)∪C∪D∪E∪B=ABCDE。这时候发现X(2)已经等于全部属性集U了，就结束计算，得出(AB)+ = ABCDE。  </li></ol><p>注：如果计算的X(2)不等于U,并且仍然不等于X(1)，则继续计算下去。直到满足X(i)=X(i-1)或X(i)=U时停止，此时所求闭包为X(i)。</p><p>简而言之，就是首先把要求闭包的元素求所有非空子集，对每一个非空子集在关系集F种进行扫描，得到可以确定的其他元素以后添加进来，继续递归求所有非空子集，得到可以确定地元素，直到两次确定的元素相同或已经把所有属性全部包括为止。</p>]]></content>
     
     <summary type="html">
     
@@ -67,9 +157,9 @@
     <link href="http://luxinyu1.github.io/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/"/>
     <id>http://luxinyu1.github.io/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/</id>
     <published>2020-04-02T07:38:25.180Z</published>
-    <updated>2020-04-03T15:14:05.268Z</updated>
+    <updated>2020-04-11T02:38:27.416Z</updated>
     
-    <content type="html"><![CDATA[<p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p><h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p><ol><li>最大子段和在a[1:n]上，设其为s1</li><li>最大子段和在a[n/2+1:n]上，设其为s2</li><li>最大子段和就是a[n]的最大子段和，即s1+s2  </li></ol><p>此时时间复杂度为O(nlogn)</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p><h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p><ol><li>最大子段和在a[1:n]上，设其为s1</li><li>最大子段和在a[n/2+1:n]上，设其为s2</li><li>最大子段和就是a[n]的最大子段和，即s1+s2  </li></ol><p>此时时间复杂度为O(nlogn)</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p><ol><li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li><li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li></ol>]]></content>
     
     <summary type="html">
     

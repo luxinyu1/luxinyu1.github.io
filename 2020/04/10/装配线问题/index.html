@@ -20,15 +20,19 @@
     var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Franklinの灵质空间">
-<meta property="og:url" content="http://luxinyu1.github.io/archives/index.html">
+  <meta name="description" content="某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装配线问题">
+<meta property="og:url" content="http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
+<meta property="og:description" content="某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-10T04:46:01.783Z">
+<meta property="article:modified_time" content="2020-04-11T03:25:44.316Z">
 <meta property="article:author" content="Franklin">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://luxinyu1.github.io/archives/">
+<link rel="canonical" href="http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -36,11 +40,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false
+    isPost : true
   };
 </script>
 
-  <title>归档 | Franklinの灵质空间</title>
+  <title>装配线问题 | Franklinの灵质空间</title>
   
 
 
@@ -194,232 +198,106 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 11 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          装配线问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-10 12:46:01" itemprop="dateCreated datePublished" datetime="2020-04-10T12:46:01+08:00">2020-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-11 11:25:44" itemprop="dateModified" datetime="2020-04-11T11:25:44+08:00">2020-04-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-10T12:46:01+08:00"
-              content="2020-04-10">
-          04-10
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">装配线问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T15:52:50+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最大公共子序列问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T14:58:34+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">矩阵连乘问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T14:18:13+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url">
-            <span itemprop="name">动态规划</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-03T23:37:48+08:00"
-              content="2020-04-03">
-          04-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/03/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最近点对问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-03T22:35:11+08:00"
-              content="2020-04-03">
-          04-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">数据库中的范式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T15:38:25+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最大子段和问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T14:32:17+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/" itemprop="url">
-            <span itemprop="name">大整数乘法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T13:46:00+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">残缺棋盘问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-30T11:32:53+08:00"
-              content="2020-03-30">
-          03-30
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/30/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" itemprop="url">
-            <span itemprop="name">归并排序</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p>某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,如果它移动到另一条线上,则花费时间为$ t_i[j] $。在离开一条装配线的第$ n $个装配站后,完成的汽车底盘花费时间为$ x_i $离开工厂。<br><strong>待求解的问题是,确定应该在装配线 1 内选择哪些站,在装配线 2 内选择哪些站,才能使汽车通过工厂的总时间最短。</strong>  </p>
+</blockquote>
+<p>暴力办法由于每个站都有两个选择，总装配路线数就是$ 2^{n} $，当n很大时，变得不可行。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>对于每一个问题$ S_i[j] $，其子问题有两种情况：</p>
+<ol>
+<li>经历了装配线的转换到了$ j $号装配站</li>
+<li>没经历转换直接到了$ j $号装配站  </li>
+</ol>
+<p>所以转化成递归问题，就是两种情况：</p>
+<ol>
+<li>$ j=1, f^* = min(e_1+a_1[j],e_2+a_2[j]) $</li>
+<li>$ j\neq1, f_1[j] = min(f_1[j-1]+a_1[j],f_2[j-1]+t_2[j-1]+a_1[j]) $<br>$ j\neq1, f_2[j] = min(f_2[j-1]+a_2[j],f_1[j-1]+t_1[j-1]+a_2[j])$  </li>
+</ol>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用填表法，可以先将所有$ f_1[j],f_2[j] $的值全部计算出来，同时设置箭头指向用来回溯，或者新设一个$ l_i[j] $专门记录到$ S_i[j] $的最快路径的上一个工作台所在的装配线号。</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
+<p>Professor Canty conjectures that there might exist some $ e_i $, $ a_i[j] $, and $ t_i[j] $ values for which FASTEST-WAY produces $ l_i[j] $ values such that $ l_1[j] = 2 $ and $ l_2[j] = 1 $ for some station number $ j $. Assuming that all transfer costs $ t_i[j] $ are nonnegative, show that the professor is wrong.  </p>
+</blockquote>
+<p>简而言之，就是要证明对于同一个$ j $，不可能出现$ l_1[j] = 2 $ and $ l_2[j] = 1 $这样的情况。 </p>
+<p>假设$ l_1[j] = 2 $ and $ l_2[j] = 1 $成立，则：  </p>
+<p>$ l_1[j] = 2 $ 即 $ f_2[j-1]+t_2[j-1] &lt; f_1[j-1] ①$  </p>
+<p>$ l_2[j] = 1 $ 即 $ f_1[j-1]+t_1[j-1] &lt; f_2[j-1] ②$  </p>
+<p>显然①②两个式子矛盾，故假设不成立。</p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" rel="prev" title="最大公共子序列问题">
+      <i class="fa fa-chevron-left"></i> 最大公共子序列问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -470,6 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">1.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -563,7 +442,7 @@
 
 
   
-<script src="/js/local-search.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script src="/js/local-search.js"></script>
 
 
 
@@ -580,6 +459,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
 
   
 

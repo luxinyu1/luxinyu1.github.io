@@ -22,25 +22,25 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Franklinの灵质空间">
-<meta property="og:url" content="http://luxinyu1.github.io/archives/index.html">
+<meta property="og:url" content="http://luxinyu1.github.io/page/2/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Franklin">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://luxinyu1.github.io/archives/">
+<link rel="canonical" href="http://luxinyu1.github.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false
   };
 </script>
 
-  <title>归档 | Franklinの灵质空间</title>
+  <title>Franklinの灵质空间</title>
   
 
 
@@ -194,230 +194,83 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 11 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/03/26/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/26/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">快速排序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-26 15:41:48" itemprop="dateCreated datePublished" datetime="2020-03-26T15:41:48+08:00">2020-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-02 15:34:33" itemprop="dateModified" datetime="2020-04-02T15:34:33+08:00">2020-04-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+          <p>快速排序<strong>仍然采用了分治法的思想</strong>，只是在其基础上引入了哨兵，实现了<strong>跨度更大</strong>的交换。因此，主程序实现用递归显得更加简单和清晰。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (q &lt; r) &#123; <span class="comment">// 仅仅确保它是个合法数组</span></span><br><span class="line">        <span class="keyword">int</span> q = Partition(a, p, r); <span class="comment">// 表面切分数组，获得哨兵q的位置与一个全部比q小的数组切分，一个全部比q大的数组切分</span></span><br><span class="line">        QuickSort(a, p, q<span class="number">-1</span>); <span class="comment">// 子问题求解</span></span><br><span class="line">        QuickSort(a, q+<span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很显然Partition是这个算法的精髓。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = p;</span><br><span class="line">    <span class="keyword">int</span> j = r + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x = a[p];</span><br><span class="line">    <span class="keyword">while</span>(True) &#123;</span><br><span class="line">        <span class="keyword">while</span> (a[++i] &lt; x); <span class="comment">// 找到比x大或等于x的左边区元素下标，准备换到右边</span></span><br><span class="line">        <span class="keyword">while</span> (a[--j] &gt; x); <span class="comment">// 找到比x小或等于x的右边区元素下标，准备换到左边</span></span><br><span class="line">        <span class="comment">// 上面造成的结果就是标兵与比其大/小元素反复左右大跨度交换，i和j下标对应的元素交替为标兵</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= j) <span class="keyword">break</span>; <span class="comment">// 这一句放在实际交换之前，i = j时将陷入死循环，i,j都为标兵的最终位置，必须退出</span></span><br><span class="line">        swap(a[i], a[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j; <span class="comment">// 也可以return i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过想一想，每次都初始化同一个哨兵位置是最合理的吗？显然不是，当分治时一边为0个元素，中间为哨兵，另一边为n-1个元素时，陷入了最坏的情况，与插入排序差不多慢，算法导论上有详细的说明。<strong>所以可以增加一点随机性去规避极端性</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RandomizedPartition</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = Random(p, r);</span><br><span class="line">    Swap(a[i], a[p]);</span><br><span class="line">    <span class="keyword">return</span> Partition(a, p, r)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速排序在常数倍分割时时间复杂度为O(nlogn)，在最坏条件下（一边为0个元素，中间为哨兵，另一边为n-1个元素）时，时间复杂度为O(n^2)</p>
+
+      
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-10T12:46:01+08:00"
-              content="2020-04-10">
-          04-10
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">装配线问题</span>
-          </a>
-      </h2>
-
-    </header>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
   </article>
+  
+  
+  
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T15:52:50+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最大公共子序列问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T14:58:34+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">矩阵连乘问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T14:18:13+08:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url">
-            <span itemprop="name">动态规划</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-03T23:37:48+08:00"
-              content="2020-04-03">
-          04-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/03/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最近点对问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-03T22:35:11+08:00"
-              content="2020-04-03">
-          04-03
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">数据库中的范式</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T15:38:25+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">最大子段和问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T14:32:17+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/" itemprop="url">
-            <span itemprop="name">大整数乘法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-02T13:46:00+08:00"
-              content="2020-04-02">
-          04-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/04/02/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/" itemprop="url">
-            <span itemprop="name">残缺棋盘问题</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-30T11:32:53+08:00"
-              content="2020-03-30">
-          03-30
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/03/30/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" itemprop="url">
-            <span itemprop="name">归并排序</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-
-    </div>
   </div>
-  
-  
-  
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 

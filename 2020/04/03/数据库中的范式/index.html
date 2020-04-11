@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1NF1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。 2NF2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖。  函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。     部分函数依赖：假如Y函数依赖于X，但同时Y并不完全函数依赖于X，那么我们就称Y部分函数依赖于X。">
+  <meta name="description" content="1NF1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。 2NF2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖。  函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即X确定Y。     平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库中的范式">
 <meta property="og:url" content="http://luxinyu1.github.io/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
-<meta property="og:description" content="1NF1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。 2NF2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖。  函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。     部分函数依赖：假如Y函数依赖于X，但同时Y并不完全函数依赖于X，那么我们就称Y部分函数依赖于X。">
+<meta property="og:description" content="1NF1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。 2NF2NF在1NF的基础之上，消除了非主属性对于码的部分函数依赖。  函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即X确定Y。     平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-03T14:35:11.616Z">
-<meta property="article:modified_time" content="2020-04-03T15:04:58.710Z">
+<meta property="article:modified_time" content="2020-04-10T13:02:42.709Z">
 <meta property="article:author" content="Franklin">
 <meta name="twitter:card" content="summary">
 
@@ -225,10 +225,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-03 22:35:11 / 修改时间：23:04:58" itemprop="dateCreated datePublished" datetime="2020-04-03T22:35:11+08:00">2020-04-03</time>
+              <time title="创建时间：2020-04-03 22:35:11" itemprop="dateCreated datePublished" datetime="2020-04-03T22:35:11+08:00">2020-04-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-10 21:02:42" itemprop="dateModified" datetime="2020-04-10T21:02:42+08:00">2020-04-10</time>
+              </span>
 
           
 
@@ -244,13 +250,17 @@
         <h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。</p>
 <h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>2NF在1NF的基础之上，消除了<strong>非主属性</strong>对于<strong>码</strong>的部分函数依赖。</p>
 <blockquote>
-<p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y。  </p>
+<p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即<strong>X确定Y</strong>。  </p>
+</blockquote>
+<ol>
+<li>平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B这种，<strong>平凡函数依赖在任意条件下必然成立，所以称其为平凡</strong>。</li>
+<li>非平凡函数依赖：确定的东西不是原先条件的一部分，即X不是Y的一部分，如(A, B) → C</li>
+</ol>
+<blockquote>
+<p>部分函数依赖：假如Y函数依赖于X，即X确定Y，但同时Y并不完全函数依赖于X，即X的真子集可以确定Y，那么我们就称Y部分函数依赖于X，反之为完全函数依赖。</p>
 </blockquote>
 <blockquote>
-<p>部分函数依赖：假如Y函数依赖于X，但同时Y并不完全函数依赖于X，那么我们就称Y部分函数依赖于X。</p>
-</blockquote>
-<blockquote>
-<p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码。<br>例如，（学号、课名）这个属性组就可以是码。该表中有且仅有这一个码。</p>
+<p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码，<strong>码可以有多个</strong>，故可以选一个为<strong>主码</strong>。<br>例如，（学号、课名）这个属性组就可以是码。（姓名，课名）这个属性也可是码（只要没有重复的姓名）。</p>
 </blockquote>
 <blockquote>
 <p>主键：等同于主属性。</p>
@@ -260,6 +270,16 @@
 </blockquote>
 <h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>3NF在2NF的基础之上，消除了非主属性对于码的<strong>传递函数依赖</strong>。<br>学号 → 系名，同时 系名 → 系主任，就不符合3NF。</p>
 <h2 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h2><p>在3NF的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p>
+<h2 id="求属性集闭包的方法"><a href="#求属性集闭包的方法" class="headerlink" title="求属性集闭包的方法"></a>求属性集闭包的方法</h2><blockquote>
+<p>关系模式R&lt;U，F&gt;，其中U={A，B，C，D，E}，F={AB→C，B→D，C→E，EC→B，AC→B}，求(AB)+  </p>
+</blockquote>
+<ol>
+<li>令X(0)=AB。  </li>
+<li>求X(1)。先列出X(0)的非空子集，即AB的非空子集为{A，B，AB}。然后扫描F集合，寻找{A，B，AB}可能存在的函数依赖，就可以得到：AB→C，B→D。于是就可以求得X(1)=X(0)∪C∪D=ABCD。然后判断X(0)如果等于X(1)就结束，所求即为答案，如果X(0)不等于X(1)就继续计算。</li>
+<li>求X(2)。同第二步求X(1)得非空真子集，然后在F中一次寻找函数依赖，可以得到：AB→C，B→D，C→E，AC→B。求得X(2)=X(1)∪C∪D∪E∪B=ABCDE。这时候发现X(2)已经等于全部属性集U了，就结束计算，得出(AB)+ = ABCDE。  </li>
+</ol>
+<p>注：如果计算的X(2)不等于U,并且仍然不等于X(1)，则继续计算下去。直到满足X(i)=X(i-1)或X(i)=U时停止，此时所求闭包为X(i)。</p>
+<p>简而言之，就是首先把要求闭包的元素求所有非空子集，对每一个非空子集在关系集F种进行扫描，得到可以确定的其他元素以后添加进来，继续递归求所有非空子集，得到可以确定地元素，直到两次确定的元素相同或已经把所有属性全部包括为止。</p>
 
     </div>
 
@@ -341,7 +361,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1NF"><span class="nav-number">1.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2NF"><span class="nav-number">2.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3NF"><span class="nav-number">3.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BCNF"><span class="nav-number">4.</span> <span class="nav-text">BCNF</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1NF"><span class="nav-number">1.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2NF"><span class="nav-number">2.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3NF"><span class="nav-number">3.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BCNF"><span class="nav-number">4.</span> <span class="nav-text">BCNF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求属性集闭包的方法"><span class="nav-number">5.</span> <span class="nav-text">求属性集闭包的方法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -355,7 +375,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
