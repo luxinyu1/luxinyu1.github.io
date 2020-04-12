@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://luxinyu1.github.io/"/>
-  <updated>2020-04-11T03:25:44.316Z</updated>
+  <updated>2020-04-12T09:09:33.126Z</updated>
   <id>http://luxinyu1.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BERT</title>
+    <link href="http://luxinyu1.github.io/2020/04/12/BERT/"/>
+    <id>http://luxinyu1.github.io/2020/04/12/BERT/</id>
+    <published>2020-04-12T09:22:40.589Z</published>
+    <updated>2020-04-12T09:09:33.126Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p><h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p><ol><li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li><li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li><li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li></ol><p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p><p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p><h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p><ul><li>通过不同的head得到多个特征表达</li><li>拼接特征</li><li>全连接降维<br>放在Attention中，就是可以有不同的$ Q,K,V $表示，最后再将其结果结合起来。  </li></ul><p>Multi-head Attention可以进行多次，效果更佳。</p><h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT也用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些冗余层能够完成恒等映射，保证经过该恒等层的输入和输出完全相同。具体哪些层是恒等层，这个会有网络训练的时候自己判断出来。</p><h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;传统Word2Vector的不足&quot;&gt;&lt;a href=&quot;#传统Word2Vector的不足&quot; class=&quot;headerlink&quot; title=&quot;传统Word2Vector的不足&quot;&gt;&lt;/a&gt;传统Word2Vector的不足&lt;/h2&gt;&lt;p&gt;传统词向量化的过程中，不同语
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>装配线问题</title>
