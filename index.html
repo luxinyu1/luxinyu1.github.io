@@ -13,19 +13,21 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="给岁月以文明，时光以生命。">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Franklinの灵质空间">
 <meta property="og:url" content="http://luxinyu1.github.io/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
+<meta property="og:description" content="给岁月以文明，时光以生命。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Franklin">
+<meta property="article:author" content="Franklin Lu">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://luxinyu1.github.io/">
@@ -36,7 +38,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome : true,
-    isPost : false
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -71,7 +74,6 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Franklinの灵质空间" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -90,14 +92,11 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Franklinの灵质空间</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">给岁月以文明，时光以生命。</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Franklinの灵质空间</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
   </div>
 
   <div class="site-nav-right">
@@ -108,37 +107,38 @@
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
 
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -146,17 +146,18 @@
         </a>
       </li>
   </ul>
-
 </nav>
-  <div class="site-search">
-    <div class="search-pop-overlay">
-  <div class="popup search-popup">
-      <div class="search-header">
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -170,10 +171,9 @@
   </div>
 </div>
 
+    </div>
   </div>
-</div>
 
-  </div>
 </div>
     </header>
 
@@ -191,40 +191,53 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content index posts-expand">
             
-
-  <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/BERT/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Franklinの灵质空间">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/12/BERT/" class="post-title-link" itemprop="url">BERT</a>
-        </h1>
+            <a href="/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/" class="post-title-link" itemprop="url">乘积最大</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 17:22:40 / 修改时间：17:09:33" itemprop="dateCreated datePublished" datetime="2020-04-12T17:22:40+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-16 23:07:43" itemprop="dateCreated datePublished" datetime="2020-04-16T23:07:43+08:00">2020-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-20 21:59:06" itemprop="dateModified" datetime="2020-04-20T21:59:06+08:00">2020-04-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
             </span>
 
           
@@ -238,24 +251,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
-<h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
-<ol>
-<li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
-<li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li>
-<li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li>
-</ol>
-<p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p>
-<p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p>
-<h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p>
-<ul>
-<li>通过不同的head得到多个特征表达</li>
-<li>拼接特征</li>
-<li>全连接降维<br>放在Attention中，就是可以有不同的$ Q,K,V $表示，最后再将其结果结合起来。  </li>
-</ul>
-<p>Multi-head Attention可以进行多次，效果更佳。</p>
-<h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT也用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些冗余层能够完成恒等映射，保证经过该恒等层的输入和输出完全相同。具体哪些层是恒等层，这个会有网络训练的时候自己判断出来。</p>
-<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2>
+          <blockquote>
+<p>设有一个长度N的数字串，要求选手使用K个乘号将它分成K+1个部分，找出一种分法，使得这K+1个部分的乘积能够为最大。  </p>
+</blockquote>
+<h3 id="证明满足最优性定理"><a href="#证明满足最优性定理" class="headerlink" title="证明满足最优性定理"></a>证明满足最优性定理</h3><p>设字符串长度为$ n $，用$ k $个乘号划分时，乘积最大的表达为$ T(n,k) $，那么其子问题是$ T(w,k-1) $<br>要证：$ T(n,k) $最优时，$ T(w,k-1) $也是最优的。<br>反证法：假设存在$ T’(w,k-1) &gt; T(w,k-1) $，那么一定有$ str[w+1:n-1]*T’(w,k-1) &gt; str[w+1:n-1]*T(w,k-1) $，故$ T(n,k) $不是最优的，所以其满足最优性定理。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设str[n-1]为字符串，dp[n][k]就是长度为n的数字串中插入k个乘号的最大乘积。<br>就是把所有用一个乘号截断的情况试一遍，找最大的。<br>即：$ dp[n][k]=max(dp[n][k], dp[w][k-1]*str[w+1:n-1]) $ 为动态规划递归式。  </p>
+<p>例：设数字串为31246, k = 2，即求dp[5][2]：<br>$ dp[5][2]=max(dp[5][2],dp[w][1]*str[w+1:n-1]) $</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
+<p>用动态规划的基础思想，以左上-右下对角线为基准计算dp表，根据dp表，得7488。</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^3) $</p>
+
       
     </div>
 
@@ -270,43 +275,627 @@
   
   
 
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Franklinの灵质空间">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/10/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">装配线问题</a>
-        </h1>
+            <a href="/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" class="post-title-link" itemprop="url">最优二叉搜索树</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-16 14:22:54 / 修改时间：22:48:17" itemprop="dateCreated datePublished" datetime="2020-04-16T14:22:54+08:00">2020-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ol>
+<li>若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>左、右子树也分别为二叉排序树；</li>
+<li>没有键值相等的结点。  </li>
+</ol>
+<p>在随机的情况下，二叉查找树的平均查找长度为O(nlogn)</p>
+<h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>设$ \lbrace r_1,r_2,…,r_n \rbrace $是$ n $个记录的集合，其查找概率分别是$ \lbrace p_1,p_2,…,p_n \rbrace $，最优二叉查找树是以这$ n $个记录构成的查找树中具有最少平均比较次数的二叉查找树，即$ \sum_{i=1}^n p_ic_i $最小，其中$ p_i $是记录$ r_i $的查找概率，$ c_i $是在二叉查找树中查找$ r_i $的比较次数。</p>
+<h3 id="证明最优二叉查找树满足最优性定理"><a href="#证明最优二叉查找树满足最优性定理" class="headerlink" title="证明最优二叉查找树满足最优性定理"></a>证明最优二叉查找树满足最优性定理</h3><p>将$ \lbrace r_1,r_2,…,r_n \rbrace $构成的二叉查找树记为$ T(1,n) $，其中$ r_k $是其根节点，则其左子树$ T(1,k-1) $由$ \lbrace r_1,r_2,…,r_{k-1} \rbrace $，其右子树$ T(k+1,n) $由$ \lbrace r_{k+1},r_2,…,r_n \rbrace $组成。  </p>
+<p>要证：若$ T(1,n) $最优，则$ T(1,k-1) $与$ T(k+1,n) $均最优。  </p>
+<p>用反证法来说，就是当$ T(1,n) $最优时，假设$ T’(1,k-1) $是比$ T(1,k-1) $更优的二叉搜索树，那么由$ T’(1,k-1) $与$ T(k+1,n) $构成的二叉搜索树一定是更优，与假设矛盾，故最优性定理成立。</p>
+<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均搜索次数，那么该问题就是求解$ C(1,n) $。  </p>
+<p>假设定义根节点为$ r_k $，可以得到：  </p>
+<p>$ C(i,i-1)=0 (1\leq i\leq n+1) $ </p>
+<p>$ C(i,j)=p_i (1\leq i\leq n) $</p>
+<p>$ C(i,j)=min \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
+<p>这样问题就转化为<strong>斜对角线</strong>填C[n+1][n+1]这张二维表（通过第三个式子），结果在C[i][n]处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表R[n+1][n+1]，其下标范围与C相同，R[i][j]表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">OptimalIBST</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> p[], <span class="keyword">double</span> C[][], <span class="keyword">int</span> R[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) &#123; <span class="comment">// 初始化</span></span><br><span class="line">        C[i][i<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">// 式子1</span></span><br><span class="line">        C[i][i] = p[i] <span class="comment">// 式子2</span></span><br><span class="line">        R[i][i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    C[n+<span class="number">1</span>][n]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">1</span>;d&lt;n;d++) &#123; <span class="comment">// 按对角线逐条计算</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n-d;i++) &#123;</span><br><span class="line">            j = i + d;</span><br><span class="line">            <span class="built_in">min</span> = INF;</span><br><span class="line">            mink = i;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (k=i;k&lt;=j;k++) &#123;</span><br><span class="line">                sum = sum + p[k];</span><br><span class="line">                <span class="keyword">if</span> (C[i][k<span class="number">-1</span>]+C[k+<span class="number">1</span>][j]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">                    <span class="built_in">min</span> = C[i][k<span class="number">-1</span>] + C[k+<span class="number">1</span>][j];</span><br><span class="line">                    mink = k; <span class="comment">// 记录最小根节点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            C[i][j] = <span class="built_in">min</span> + sum; <span class="comment">// 式子3</span></span><br><span class="line">            R[i][j] = mink;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> C[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/BERT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/BERT/" class="post-title-link" itemprop="url">BERT</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 23:10:39 / 修改时间：23:42:55" itemprop="dateCreated datePublished" datetime="2020-04-12T23:10:39+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>BERT的全称是Bidirectional Encoder Representation from Transformers，即双向Transformer的Encoder，说明其是在Transformers的基础上发展而来。</p>
+<h3 id="预训练"><a href="#预训练" class="headerlink" title="预训练"></a>预训练</h3><ol>
+<li>句子中有15%的词汇被随机mask，所以随机mask的时候10%的单词会被替代成其他单词，10%的单词不替换，剩下80%才被替换为<code>[MASK]</code>，去预测mask的词，最终的损失函数也只计算被mask掉那个字/词。</li>
+<li>预测两个句子是否应该前后相连在一起，<code>[SEP]</code>是分隔符，输入时输入两句连在一起的话，第一个token的位置放<code>[CLS]</code>，并将该符号对应的输出向量作为整篇文本的语义表示。  </li>
+</ol>
+<ul>
+<li>为什么要放<code>[CLS]</code>？因为与文本中已有的其它字/词相比，这个无明显语义信息的符号会更公平地融合文本中各个字/词的语义信息。最终它的值也可以很好地通过二分类模型去反映这两句句子是否连在一起。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大子段和问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:17:22" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p>
+<ol>
+<li>最大子段和在a[1:n]上，设其为s1</li>
+<li>最大子段和在a[n/2+1:n]上，设其为s2</li>
+<li>最大子段和就是a[n]的最大子段和，即s1+s2  </li>
+</ol>
+<p>此时时间复杂度为O(nlogn)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p>
+<ol>
+<li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li>
+<li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最近点对问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>暴力算可以。但分治法时间复杂度明显更低。</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
+<ol>
+<li>最近点对在左边，设其为d1</li>
+<li>最近点对在右边，设其为d2</li>
+<li>最近点对横跨了两个区  </li>
+</ol>
+<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
+<ol>
+<li>对左右点集双重遍历，分治法等于白做。</li>
+<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
+</ol>
+<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/" class="post-title-link" itemprop="url">数据库中的范式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-04-10 12:46:01" itemprop="dateCreated datePublished" datetime="2020-04-10T12:46:01+08:00">2020-04-10</time>
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-11 11:25:44" itemprop="dateModified" datetime="2020-04-11T11:25:44+08:00">2020-04-11</time>
+                <time title="修改时间：2020-04-17 14:43:08" itemprop="dateModified" datetime="2020-04-17T14:43:08+08:00">2020-04-17</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。</p>
+<h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>2NF在1NF的基础之上，消除了<strong>非主属性</strong>对于<strong>码</strong>的部分函数依赖。</p>
+<blockquote>
+<p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即<strong>X确定Y</strong>。  </p>
+</blockquote>
+<ol>
+<li>平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B这种，<strong>平凡函数依赖在任意条件下必然成立，所以称其为平凡</strong>。</li>
+<li>非平凡函数依赖：确定的东西不是原先条件的一部分，即X不是Y的一部分，如(A, B) → C</li>
+</ol>
+<blockquote>
+<p>部分函数依赖：假如Y函数依赖于X，即X确定Y，但同时Y并不完全函数依赖于X，即X的真子集可以确定Y，那么我们就称Y部分函数依赖于X，反之为完全函数依赖。</p>
+</blockquote>
+<blockquote>
+<p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码，<strong>码可以有多个</strong>，故可以选一个为<strong>主码</strong>。<br>例如，（学号、课名）这个属性组就可以是码。（姓名，课名）这个属性也可是码（只要没有重复的姓名）。</p>
+</blockquote>
+<blockquote>
+<p>主键：等同于主属性。</p>
+</blockquote>
+<blockquote>
+<p>主属性和非主属性：包含在任何一个码中的属性成为<strong>主属性</strong>，其余为非主属性。<br>在上面的例子里，学号和课名都是主属性。<br>假设有（学号，课名） → 系名，学号 → 系名，即存在非主属性系名对码（学号，课名）的部分函数依赖，不满足2NF</p>
+</blockquote>
+<h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>3NF在2NF的基础之上，消除了非主属性对于码的<strong>传递函数依赖</strong>。<br>学号 → 系名，同时 系名 → 系主任，就不符合3NF。</p>
+<h2 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h2><p>在3NF的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p>
+<h2 id="求属性集闭包的方法"><a href="#求属性集闭包的方法" class="headerlink" title="求属性集闭包的方法"></a>求属性集闭包的方法</h2><blockquote>
+<p>关系模式R&lt;U，F&gt;，其中U={A，B，C，D，E}，F={AB→C，B→D，C→E，EC→B，AC→B}，求(AB)+  </p>
+</blockquote>
+<ol>
+<li>令X(0)=AB。  </li>
+<li>求X(1)。先列出X(0)的非空子集，即AB的非空子集为{A，B，AB}。然后扫描F集合，寻找{A，B，AB}可能存在的函数依赖，就可以得到：AB→C，B→D。于是就可以求得X(1)=X(0)∪C∪D=ABCD。然后判断X(0)如果等于X(1)就结束，所求即为答案，如果X(0)不等于X(1)就继续计算。</li>
+<li>求X(2)。同第二步求X(1)得非空真子集，然后在F中一次寻找函数依赖，可以得到：AB→C，B→D，C→E，AC→B。求得X(2)=X(1)∪C∪D∪E∪B=ABCDE。这时候发现X(2)已经等于全部属性集U了，就结束计算，得出(AB)+ = ABCDE。  </li>
+</ol>
+<p>注：如果计算的X(2)不等于U,并且仍然不等于X(1)，则继续计算下去。直到满足X(i)=X(i-1)或X(i)=U时停止，此时所求闭包为X(i)。</p>
+<p>简而言之，就是首先把要求闭包的元素求所有非空子集，对每一个非空子集在关系集F种进行扫描，得到可以确定的其他元素以后添加进来，继续递归求所有非空子集，得到可以确定的元素，直到两次确定的元素相同或已经把所有属性全部包括为止。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">快速排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:08:36" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>快速排序<strong>仍然采用了分治法的思想</strong>，只是在其基础上引入了哨兵，实现了<strong>跨度更大</strong>的交换。因此，主程序实现用递归显得更加简单和清晰。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (q &lt; r) &#123; <span class="comment">// 仅仅确保它是个合法数组</span></span><br><span class="line">        <span class="keyword">int</span> q = Partition(a, p, r); <span class="comment">// 表面切分数组，获得哨兵q的位置与一个全部比q小的数组切分，一个全部比q大的数组切分</span></span><br><span class="line">        QuickSort(a, p, q<span class="number">-1</span>); <span class="comment">// 子问题求解</span></span><br><span class="line">        QuickSort(a, q+<span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很显然Partition是这个算法的精髓。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = p;</span><br><span class="line">    <span class="keyword">int</span> j = r + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> x = a[p];</span><br><span class="line">    <span class="keyword">while</span>(True) &#123;</span><br><span class="line">        <span class="keyword">while</span> (a[++i] &lt; x); <span class="comment">// 找到比x大或等于x的左边区元素下标，准备换到右边</span></span><br><span class="line">        <span class="keyword">while</span> (a[--j] &gt; x); <span class="comment">// 找到比x小或等于x的右边区元素下标，准备换到左边</span></span><br><span class="line">        <span class="comment">// 上面造成的结果就是标兵与比其大/小元素反复左右大跨度交换，i和j下标对应的元素交替为标兵</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= j) <span class="keyword">break</span>; <span class="comment">// 这一句放在实际交换之前，i = j时将陷入死循环，i,j都为标兵的最终位置，必须退出</span></span><br><span class="line">        swap(a[i], a[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j; <span class="comment">// 也可以return i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过想一想，每次都初始化同一个哨兵位置是最合理的吗？显然不是，当分治时一边为0个元素，中间为哨兵，另一边为n-1个元素时，陷入了最坏的情况，与插入排序差不多慢，算法导论上有详细的说明。<strong>所以可以增加一点随机性去规避极端性</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RandomizedPartition</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = Random(p, r);</span><br><span class="line">    Swap(a[i], a[p]);</span><br><span class="line">    <span class="keyword">return</span> Partition(a, p, r)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速排序在常数倍分割时时间复杂度为O(nlogn)，在最坏条件下（一边为0个元素，中间为哨兵，另一边为n-1个元素）时，时间复杂度为O(n^2)</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:13:33" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
+<ol>
+<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
+<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
+</ol>
+<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
+<ol>
+<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
+<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
+<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
+<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">装配线问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:12:35" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
 
           
 
@@ -357,175 +946,45 @@
   
   
 
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Franklinの灵质空间">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
+        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/09/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
-        </h1>
+            <a href="/2020/04/12/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-04-09 15:52:50" itemprop="dateCreated datePublished" datetime="2020-04-09T15:52:50+08:00">2020-04-09</time>
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:07:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-10 13:07:48" itemprop="dateModified" datetime="2020-04-10T13:07:48+08:00">2020-04-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
-<ol>
-<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
-<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
-</ol>
-<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
-<ol>
-<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
-<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
-<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
-<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">矩阵连乘问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 14:58:34 / 修改时间：15:52:05" itemprop="dateCreated datePublished" datetime="2020-04-09T14:58:34+08:00">2020-04-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>需要找到以最小次数计算矩阵乘法的运算方式，在矩阵连乘过程中，不同的“加括号”方式会对运算速度造成很大影响。<br>思路：由矩阵乘法的性质，A[1:4] = A[1:2] + A[3:4]，即(AB)(CD) = ABCD，递推或递归解决。   </p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/09/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-09 14:18:13 / 修改时间：14:58:24" itemprop="dateCreated datePublished" datetime="2020-04-09T14:18:13+08:00">2020-04-09</time>
             </span>
 
           
@@ -561,386 +1020,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/03/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/03/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最近点对问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-03 23:37:48" itemprop="dateCreated datePublished" datetime="2020-04-03T23:37:48+08:00">2020-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-04 22:33:47" itemprop="dateModified" datetime="2020-04-04T22:33:47+08:00">2020-04-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>暴力算可以。但分治法时间复杂度明显更低。</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
-<ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
-<li>最近点对横跨了两个区  </li>
-</ol>
-<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
-<ol>
-<li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
-</ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%8C%83%E5%BC%8F/" class="post-title-link" itemprop="url">数据库中的范式</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-03 22:35:11" itemprop="dateCreated datePublished" datetime="2020-04-03T22:35:11+08:00">2020-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-10 21:02:42" itemprop="dateModified" datetime="2020-04-10T21:02:42+08:00">2020-04-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>1NF的定义为：符合1NF的关系中的每个属性都不可再分，即原子属性，这很简单。</p>
-<h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>2NF在1NF的基础之上，消除了<strong>非主属性</strong>对于<strong>码</strong>的部分函数依赖。</p>
-<blockquote>
-<p>函数依赖：若在一张表中，在属性（或属性组）X的值确定的情况下，必定能确定属性Y的值，那么就可以说Y函数依赖于X，写作 X → Y，即<strong>X确定Y</strong>。  </p>
-</blockquote>
-<ol>
-<li>平凡函数依赖：确定的东西是原先条件的一部分，像(A, B) → A 或(A, B) → B这种，<strong>平凡函数依赖在任意条件下必然成立，所以称其为平凡</strong>。</li>
-<li>非平凡函数依赖：确定的东西不是原先条件的一部分，即X不是Y的一部分，如(A, B) → C</li>
-</ol>
-<blockquote>
-<p>部分函数依赖：假如Y函数依赖于X，即X确定Y，但同时Y并不完全函数依赖于X，即X的真子集可以确定Y，那么我们就称Y部分函数依赖于X，反之为完全函数依赖。</p>
-</blockquote>
-<blockquote>
-<p><strong>码：一个属性或属性组</strong>，若除K之外的所有属性都<strong>完全函数依赖</strong>于 K，那么我们称K为候选码，简称为码，<strong>码可以有多个</strong>，故可以选一个为<strong>主码</strong>。<br>例如，（学号、课名）这个属性组就可以是码。（姓名，课名）这个属性也可是码（只要没有重复的姓名）。</p>
-</blockquote>
-<blockquote>
-<p>主键：等同于主属性。</p>
-</blockquote>
-<blockquote>
-<p>主属性和非主属性：包含在任何一个码中的属性成为<strong>主属性</strong>，其余为非主属性。<br>在上面的例子里，学号和课名都是主属性。<br>假设有（学号，课名） → 系名，学号 → 系名，即存在非主属性系名对码（学号，课名）的部分函数依赖，不满足2NF</p>
-</blockquote>
-<h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>3NF在2NF的基础之上，消除了非主属性对于码的<strong>传递函数依赖</strong>。<br>学号 → 系名，同时 系名 → 系主任，就不符合3NF。</p>
-<h2 id="BCNF"><a href="#BCNF" class="headerlink" title="BCNF"></a>BCNF</h2><p>在3NF的基础上消除<strong>主属性</strong>对于码的部分与传递函数依赖。</p>
-<h2 id="求属性集闭包的方法"><a href="#求属性集闭包的方法" class="headerlink" title="求属性集闭包的方法"></a>求属性集闭包的方法</h2><blockquote>
-<p>关系模式R&lt;U，F&gt;，其中U={A，B，C，D，E}，F={AB→C，B→D，C→E，EC→B，AC→B}，求(AB)+  </p>
-</blockquote>
-<ol>
-<li>令X(0)=AB。  </li>
-<li>求X(1)。先列出X(0)的非空子集，即AB的非空子集为{A，B，AB}。然后扫描F集合，寻找{A，B，AB}可能存在的函数依赖，就可以得到：AB→C，B→D。于是就可以求得X(1)=X(0)∪C∪D=ABCD。然后判断X(0)如果等于X(1)就结束，所求即为答案，如果X(0)不等于X(1)就继续计算。</li>
-<li>求X(2)。同第二步求X(1)得非空真子集，然后在F中一次寻找函数依赖，可以得到：AB→C，B→D，C→E，AC→B。求得X(2)=X(1)∪C∪D∪E∪B=ABCDE。这时候发现X(2)已经等于全部属性集U了，就结束计算，得出(AB)+ = ABCDE。  </li>
-</ol>
-<p>注：如果计算的X(2)不等于U,并且仍然不等于X(1)，则继续计算下去。直到满足X(i)=X(i-1)或X(i)=U时停止，此时所求闭包为X(i)。</p>
-<p>简而言之，就是首先把要求闭包的元素求所有非空子集，对每一个非空子集在关系集F种进行扫描，得到可以确定的其他元素以后添加进来，继续递归求所有非空子集，得到可以确定地元素，直到两次确定的元素相同或已经把所有属性全部包括为止。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/02/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大子段和问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-02 15:38:25" itemprop="dateCreated datePublished" datetime="2020-04-02T15:38:25+08:00">2020-04-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-11 10:38:27" itemprop="dateModified" datetime="2020-04-11T10:38:27+08:00">2020-04-11</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p>
-<ol>
-<li>最大子段和在a[1:n]上，设其为s1</li>
-<li>最大子段和在a[n/2+1:n]上，设其为s2</li>
-<li>最大子段和就是a[n]的最大子段和，即s1+s2  </li>
-</ol>
-<p>此时时间复杂度为O(nlogn)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p>
-<ol>
-<li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li>
-<li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/02/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/02/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/" class="post-title-link" itemprop="url">大整数乘法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-02 14:32:17" itemprop="dateCreated datePublished" datetime="2020-04-02T14:32:17+08:00">2020-04-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-03 22:32:21" itemprop="dateModified" datetime="2020-04-03T22:32:21+08:00">2020-04-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大整数乘法(n位2进制)X*Y可以采用归并的思想解决。<br>将X按位数划分成两半，高位为a，低位为b：<br>$$ X = a * 2^{(n/2)} + b $$<br>同样的，将Y按位数分成两半，高位为c，低位为d：<br>$$ Y = c * 2^{(n/2)} + d $$<br>这样$$ XY = ac * 2^{n} + (ad + bc) * 2(n/2) + bd $$<br>然而很容易发现，$ T(n) = 4T(n-1) + O(n) $ （这里的4为$ ac $ $ ad $ $ bc $ $ bd $四次$ T(n-1) $的乘法）<strong>时间复杂度没有改进！</strong><br>那么优化一下：$ XY = ac * 2^{n} + ((a-b)(d-c) + ac + bd) * 2(n/2) + bd $，这样一来，表面上看起来更烦了，但相比起上面，这个式子只要计算$ (a-b)(d-c) $ $ ac $ $ bd $ 三次$ T(n-1) $的乘法，比上面的式子花的时间更少了。<br>为啥用$ (a-b)(d-c) $不用$ (a+b)(d+c) $呢？显然减比加的位数要少。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/02/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/02/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">残缺棋盘问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-02 13:46:00 / 修改时间：15:40:24" itemprop="dateCreated datePublished" datetime="2020-04-02T13:46:00+08:00">2020-04-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>残缺棋盘是一个有2k*2k(k≥1)个方格的棋盘，其中恰有一个方格残缺。要对其用四种三格板（L形骨牌）进行覆盖。  </p>
-</blockquote>
-<p>用分治法解决挺容易的。显然每块大棋盘都可以划分成4块k*k个方块的小棋盘，8块(k/2)*(k/2)个方块的更小棋盘，以此类推……<br>但问题是，每次分治划分出来的棋盘只有一块是残缺的，另外三块并不是。那么就要给另外三块制造一些残缺性。<br>最简单的是：<strong>在非残缺棋盘的相邻拐角处放置一块三格版</strong>，这样每块小棋盘都拥有残缺性啦！<br>这样就满足分治法的要求了，大问题能分成一样的小问题，小问题的解也能拼凑成大问题的解。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123; <span class="comment">// tr,tc为棋盘边界，dr,dc为残缺块位置 </span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span>==<span class="number">1</span>) <span class="keyword">return</span>; <span class="comment">// 递归出口，1*1的就免了</span></span><br><span class="line">    <span class="keyword">int</span> t = tile++; <span class="comment">// L型骨牌号</span></span><br><span class="line">    <span class="keyword">int</span> s = <span class="built_in">size</span> / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 左上角棋盘子问题</span></span><br><span class="line">    <span class="keyword">if</span> (dr&lt;tr+s &amp;&amp; dc&lt;tc+s) &#123; <span class="comment">// 残缺方格在此棋盘中</span></span><br><span class="line">        chessBoard(tr, tc, dr, dc, s);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 残缺方格不在此棋盘中</span></span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t; <span class="comment">// 用t号L型骨牌覆盖右下角</span></span><br><span class="line">        chessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s); <span class="comment">// 子问题求解</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 左下角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右上角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右下角棋盘子问题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-  </div>
 
   
   <nav class="pagination">
@@ -1002,26 +1081,38 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Franklin</p>
-  <div class="site-description" itemprop="description"></div>
+  <p class="site-author-name" itemprop="name">Franklin Lu</p>
+  <div class="site-description" itemprop="description">给岁月以文明，时光以生命。</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/luxinyu1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luxinyu1" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/luxinyu1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;luxinyu1" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:luxinyu12345@foxmail.com" title="E-Mail → mailto:luxinyu12345@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:luxinyu12345@foxmail.com" title="E-Mail → mailto:luxinyu12345@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -1041,17 +1132,17 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Franklin</span>
+  <span class="author" itemprop="copyrightHolder">Franklin Lu</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
-  </div>
 
         
 
