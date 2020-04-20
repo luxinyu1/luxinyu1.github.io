@@ -345,6 +345,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/Transformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/Transformer/" class="post-title-link" itemprop="url">Transformer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：23:10:04" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
+<h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
+<ol>
+<li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
+<li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li>
+<li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li>
+</ol>
+<p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p>
+<p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p>
+<h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p>
+<ul>
+<li>通过不同的head得到多个特征表达</li>
+<li>拼接特征</li>
+<li>全连接降维  </li>
+</ul>
+<p>在多头注意力机制中则是通过h个不同的线性变换对$ Q,K,V $进行投影，最后将不同的attention结果拼接起来：<br>即：$$ head_i = Attention(QW_i^{Q},KW_i^{K},VW_i^{V}) $$<br>$$ MultiHead(Q,K,V)=Concat(head_1,head_2,…,head_h) W^{O} $$</p>
+<p>Multi-head Attention可以进行多次，效果更佳。</p>
+<h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些<strong>冗余层能够完成恒等映射</strong>，保证经过该恒等层的<strong>输入和输出完全相同</strong>。</p>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p><img src="https://pic1.zhimg.com/80/v2-4b53b731a961ee467928619d14a5fd44_720w.jpg" alt="transformer"> </p>
+<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>Encoder由N=6个相同的layer组成，layer指的就是上图<strong>左侧</strong>的单元，最左边有个”Nx”，这里是6个。每个Layer由两个sub-layer组成，分别是multi-head self-attention mechanism和fully connected feed-forward network。其中每个sub-layer都加了residual connection和normalisation，因此可以将sub-layer的输出表示为：<br>$$ SubLayerOutput=LayerNorm(x+SubLayer(x)) $$</p>
+<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>Decoder和Encoder的结构差不多，但是多了一个attention的sub-layer，这里先明确一下decoder的输入输出和解码过程：</p>
+<ul>
+<li>输出：对应i位置的输出词的概率分布</li>
+<li>输入：encoder的输出 &amp; 对应i-1位置decoder的输出。所以中间的attention不是self-attention，它的K，V来自encoder，Q来自上一位置decoder的输出<br>解码：这里要特别注意一下，编码可以并行计算，一次性全部encoding出来，但解码不是一次把所有序列解出来的，而是像RNN一样一个一个解出来的，因为要用上一个位置的输入当作attention的query。  </li>
+</ul>
+<p>明确了解码过程之后最上面的图就很好懂了，这里主要的不同就是新加的attention多加了一个<strong>mask</strong>，因为训练时的output都是ground truth，这样可以<strong>确保预测第i个位置时不会接触到未来的信息</strong>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -466,99 +559,6 @@
 </blockquote>
 <p>用分治法解决挺容易的。显然每块大棋盘都可以划分成4块k*k个方块的小棋盘，8块(k/2)*(k/2)个方块的更小棋盘，以此类推……<br>但问题是，每次分治划分出来的棋盘只有一块是残缺的，另外三块并不是。那么就要给另外三块制造一些残缺性。<br>最简单的是：<strong>在非残缺棋盘的相邻拐角处放置一块三格版</strong>，这样每块小棋盘都拥有残缺性啦！<br>这样就满足分治法的要求了，大问题能分成一样的小问题，小问题的解也能拼凑成大问题的解。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123; <span class="comment">// tr,tc为棋盘边界，dr,dc为残缺块位置 </span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span>==<span class="number">1</span>) <span class="keyword">return</span>; <span class="comment">// 递归出口，1*1的就免了</span></span><br><span class="line">    <span class="keyword">int</span> t = tile++; <span class="comment">// L型骨牌号</span></span><br><span class="line">    <span class="keyword">int</span> s = <span class="built_in">size</span> / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 左上角棋盘子问题</span></span><br><span class="line">    <span class="keyword">if</span> (dr&lt;tr+s &amp;&amp; dc&lt;tc+s) &#123; <span class="comment">// 残缺方格在此棋盘中</span></span><br><span class="line">        chessBoard(tr, tc, dr, dc, s);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 残缺方格不在此棋盘中</span></span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t; <span class="comment">// 用t号L型骨牌覆盖右下角</span></span><br><span class="line">        chessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s); <span class="comment">// 子问题求解</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 左下角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右上角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右下角棋盘子问题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/Transformer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/Transformer/" class="post-title-link" itemprop="url">Transformer</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：23:10:04" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
-<h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
-<ol>
-<li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
-<li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li>
-<li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li>
-</ol>
-<p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p>
-<p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p>
-<h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p>
-<ul>
-<li>通过不同的head得到多个特征表达</li>
-<li>拼接特征</li>
-<li>全连接降维  </li>
-</ul>
-<p>在多头注意力机制中则是通过h个不同的线性变换对$ Q,K,V $进行投影，最后将不同的attention结果拼接起来：<br>即：$$ head_i = Attention(QW_i^{Q},KW_i^{K},VW_i^{V}) $$<br>$$ MultiHead(Q,K,V)=Concat(head_1,head_2,…,head_h) W^{O} $$</p>
-<p>Multi-head Attention可以进行多次，效果更佳。</p>
-<h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些<strong>冗余层能够完成恒等映射</strong>，保证经过该恒等层的<strong>输入和输出完全相同</strong>。</p>
-<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p><img src="https://pic1.zhimg.com/80/v2-4b53b731a961ee467928619d14a5fd44_720w.jpg" alt="transformer"> </p>
-<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>Encoder由N=6个相同的layer组成，layer指的就是上图<strong>左侧</strong>的单元，最左边有个”Nx”，这里是6个。每个Layer由两个sub-layer组成，分别是multi-head self-attention mechanism和fully connected feed-forward network。其中每个sub-layer都加了residual connection和normalisation，因此可以将sub-layer的输出表示为：<br>$$ SubLayerOutput=LayerNorm(x+SubLayer(x)) $$</p>
-<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>Decoder和Encoder的结构差不多，但是多了一个attention的sub-layer，这里先明确一下decoder的输入输出和解码过程：</p>
-<ul>
-<li>输出：对应i位置的输出词的概率分布</li>
-<li>输入：encoder的输出 &amp; 对应i-1位置decoder的输出。所以中间的attention不是self-attention，它的K，V来自encoder，Q来自上一位置decoder的输出<br>解码：这里要特别注意一下，编码可以并行计算，一次性全部encoding出来，但解码不是一次把所有序列解出来的，而是像RNN一样一个一个解出来的，因为要用上一个位置的输入当作attention的query。  </li>
-</ul>
-<p>明确了解码过程之后最上面的图就很好懂了，这里主要的不同就是新加的attention多加了一个<strong>mask</strong>，因为训练时的output都是ground truth，这样可以<strong>确保预测第i个位置时不会接触到未来的信息</strong>。</p>
-
       
     </div>
 
