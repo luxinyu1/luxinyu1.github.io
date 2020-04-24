@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://luxinyu1.github.io/2020/04/23/BFS/</loc>
+    
+    <lastmod>2020-04-24T03:46:30.138Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/</loc>
     
-    <lastmod>2020-04-20T14:13:30.564Z</lastmod>
+    <lastmod>2020-04-23T05:45:00.643Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://luxinyu1.github.io/2020/04/12/Transformer/</loc>
+    
+    <lastmod>2020-04-21T15:26:19.253Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>http://luxinyu1.github.io/2020/04/12/BERT/</loc>
     
     <lastmod>2020-04-12T15:42:55.630Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://luxinyu1.github.io/2020/04/12/Transformer/</loc>
-    
-    <lastmod>2020-04-12T15:10:04.422Z</lastmod>
     
   </url>
   

@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="暴力算可以。但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为d1 最近点对在右边，设其为d2 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的d1和d2，算dmin&#x3D;min(d1,">
+  <meta name="description" content="思路伪代码思路分三步：  初始化： 颜色矩阵设为全白 与根节点的距离设为无穷 前驱记录设为nil 对于单一的根节点元素，其颜色设为灰，与根节点的距离设为0，前驱也设为nil   把根节点放入队列 当队列不为空时，循环： 执行出队操作，弹出一个节点 搜索所有的直接后继（距离为1），如果已经被涂色，说明该节点已经被访问过，啥也不用干，但如果没有被涂色，那就：  ①将其涂色（灰色）  ②记录前驱  ③记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="最近点对问题">
-<meta property="og:url" content="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="广度优先搜索（Breadth First Search）">
+<meta property="og:url" content="http://luxinyu1.github.io/2020/04/23/BFS/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
-<meta property="og:description" content="暴力算可以。但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为d1 最近点对在右边，设其为d2 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的d1和d2，算dmin&#x3D;min(d1,">
+<meta property="og:description" content="思路伪代码思路分三步：  初始化： 颜色矩阵设为全白 与根节点的距离设为无穷 前驱记录设为nil 对于单一的根节点元素，其颜色设为灰，与根节点的距离设为0，前驱也设为nil   把根节点放入队列 当队列不为空时，循环： 执行出队操作，弹出一个节点 搜索所有的直接后继（距离为1），如果已经被涂色，说明该节点已经被访问过，啥也不用干，但如果没有被涂色，那就：  ①将其涂色（灰色）  ②记录前驱  ③记">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-12T11:15:42.441Z">
-<meta property="article:modified_time" content="2020-04-12T12:06:26.353Z">
+<meta property="article:published_time" content="2020-04-23T05:54:42.272Z">
+<meta property="article:modified_time" content="2020-04-24T03:46:30.138Z">
 <meta property="article:author" content="Franklin Lu">
-<meta property="article:tag" content="分治法">
+<meta property="article:tag" content="广度优先搜索">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="http://luxinyu1.github.io/2020/04/23/BFS/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>最近点对问题 | Franklinの灵质空间</title>
+  <title>广度优先搜索（Breadth First Search） | Franklinの灵质空间</title>
   
 
 
@@ -201,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/23/BFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -214,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          最近点对问题
+          广度优先搜索（Breadth First Search）
         </h1>
 
         <div class="post-meta">
@@ -223,10 +223,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-23 13:54:42" itemprop="dateCreated datePublished" datetime="2020-04-23T13:54:42+08:00">2020-04-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-24 11:46:30" itemprop="dateModified" datetime="2020-04-24T11:46:30+08:00">2020-04-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -248,20 +254,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>暴力算可以。但分治法时间复杂度明显更低。</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
+        <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>伪代码思路分三步：</p>
 <ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
-<li>最近点对横跨了两个区  </li>
+<li>初始化：<ul>
+<li>颜色矩阵设为全白</li>
+<li>与根节点的距离设为无穷</li>
+<li>前驱记录设为nil</li>
+<li>对于单一的根节点元素，其颜色设为灰，与根节点的距离设为0，前驱也设为nil</li>
+</ul>
+</li>
+<li>把根节点放入队列</li>
+<li>当队列不为空时，循环：<ul>
+<li>执行出队操作，弹出一个节点</li>
+<li>搜索所有的直接后继（距离为1），如果已经被涂色，说明该节点已经被访问过，啥也不用干，但如果没有被涂色，那就：<br>  ①将其涂色（灰色）<br>  ②记录前驱<br>  ③记录与根节点的距离d<br>  ④压入队列</li>
+<li>将弹出的节点涂成深灰色，表示已经搜索过  </li>
+</ul>
+</li>
 </ol>
-<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
-<ol>
-<li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
-</ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="算法正确性证明"><a href="#算法正确性证明" class="headerlink" title="算法正确性证明"></a>算法正确性证明</h3><p>定义$ s $到$ v $的最短路径为$ \delta(s,v) $，不可达则$ \delta(s,v)=\infty $</p>
+<blockquote>
+<p>引理1：若存在异于$ s,v $的点 $ u $，则$ \delta(s,u)+1 \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理2：$ d[v] \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理3：当广度优先搜索在树上执行时，队列中包含$ v_1,v_2,…,v_n $共$ n $个节点，那么$ d[v_i] \le d[v_{i+1}] $</p>
+</blockquote>
+<p>即要证明，$ d[v] = \delta(s,v) $  </p>
+<p>反证法：假设$ d[v] \ne \delta(s,v) $，但同时对于任意其他节点$ u $，$ d[u] = \delta(s,u) $。（就是说只有一个节点不满足，其他都满足）那么由引理2：$ d[v] \ge \delta(s,v) $，得$ d[v] &gt; \delta(s,v) $，设 $ u $ 异于 $ s,v $ ，则$ \delta(s,u)+1 = \delta(s,v) $，则$ d[v] \ge d[u] + 1$，这样回过去看算法，一个节点$ v $出队时，有三种情况：</p>
+<ul>
+<li>如果$ v $是白色的，由于紧邻节点$ d[v]=d[u]+1 $</li>
+<li>如果$ v $是深灰色的，说明它已先于$ u $被移出队列，故$ d[v] \le d[u] $</li>
+<li>如果$ v $是灰色的，说明它被之前某个顶点$ w $被出队时标记成了灰色，那么$ d[v]=d[w]+1 $，又$d[w] \le d[u]$，故$ d[v] \le d[u]+1$  </li>
+</ul>
+<p>故不论哪种情况，都与假设矛盾，假设不成立，算法正确。</p>
+<h3 id="树的直径（The-diameter-of-a-tree）"><a href="#树的直径（The-diameter-of-a-tree）" class="headerlink" title="树的直径（The diameter of a tree）"></a>树的直径（The diameter of a tree）</h3><blockquote>
+<p>The diameter of a tree $ T = (V, E) $ is given by that is $ \max _{u, v \in V} \delta(u, v) $, the diameter is the largest of all shortest-path distances in the tree. Give an efficient algorithm to compute the diameter of a tree, and analyze the running time of your algorithm.</p>
+</blockquote>
+<p>思路：通过分析可以知道，树的直径的源节点一定是<strong>以根节点进行BFS得出的最远节点，即d表中的最大值所在节点</strong>，记其为$ u $，随后以$ u $再进行BFS，找出最远节点，此时d表中的最大值所在节点即为diameter。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">BFS(G,s)</span><br><span class="line">for each vertex u in V - &#123;s&#125; do</span><br><span class="line">    color[u] &#x3D; WHITE</span><br><span class="line">    d[u] &#x3D; INF</span><br><span class="line">    pre[u] &#x3D; NIL</span><br><span class="line">color[s] &#x3D; GRAY</span><br><span class="line">d[s] &#x3D; 0</span><br><span class="line">pre[s] &#x3D; NIL</span><br><span class="line">Enqueue(Q, s)</span><br><span class="line">while Q is not empty</span><br><span class="line">    u &#x3D; Dequeue(Q)</span><br><span class="line">    for each v in adj[u] do</span><br><span class="line">        if color[v] !&#x3D; WHITE do</span><br><span class="line">            color[v] &#x3D; GRAY</span><br><span class="line">            d[v] &#x3D; d[u] + 1</span><br><span class="line">            pre[v] &#x3D; u</span><br><span class="line">            Enqueue(Q, v)</span><br><span class="line">    color[u] &#x3D; DARKGRAY</span><br><span class="line"></span><br><span class="line">Main()</span><br><span class="line">BFS(G,s)</span><br><span class="line">u &#x3D; max.index(d)</span><br><span class="line">diameter &#x3D; d[u]</span><br><span class="line">BFS(G,u)</span><br><span class="line">v &#x3D; max.index(d)</span><br><span class="line">diameter +&#x3D; d[v]</span><br><span class="line">return diameter</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为$ O(n) $</p>
+
     </div>
 
     
@@ -271,7 +305,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 分治法</a>
+              <a href="/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" rel="tag"><i class="fa fa-tag"></i> 广度优先搜索</a>
           </div>
 
         
@@ -280,13 +314,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="prev" title="快速排序">
-      <i class="fa fa-chevron-left"></i> 快速排序
+    <a href="/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/" rel="prev" title="乘积最大">
+      <i class="fa fa-chevron-left"></i> 乘积最大
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" rel="next" title="最大子段和问题">
-      最大子段和问题 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -345,7 +376,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分治法"><span class="nav-number">1.</span> <span class="nav-text">分治法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法正确性证明"><span class="nav-number">2.</span> <span class="nav-text">算法正确性证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的直径（The-diameter-of-a-tree）"><span class="nav-number">3.</span> <span class="nav-text">树的直径（The diameter of a tree）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -468,6 +499,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

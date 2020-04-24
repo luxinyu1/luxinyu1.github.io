@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>广度优先搜索（Breadth First Search）</title>
+    <url>/2020/04/23/BFS/</url>
+    <content><![CDATA[<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>伪代码思路分三步：</p>
+<ol>
+<li>初始化：<ul>
+<li>颜色矩阵设为全白</li>
+<li>与根节点的距离设为无穷</li>
+<li>前驱记录设为nil</li>
+<li>对于单一的根节点元素，其颜色设为灰，与根节点的距离设为0，前驱也设为nil</li>
+</ul>
+</li>
+<li>把根节点放入队列</li>
+<li>当队列不为空时，循环：<ul>
+<li>执行出队操作，弹出一个节点</li>
+<li>搜索所有的直接后继（距离为1），如果已经被涂色，说明该节点已经被访问过，啥也不用干，但如果没有被涂色，那就：<br>  ①将其涂色（灰色）<br>  ②记录前驱<br>  ③记录与根节点的距离d<br>  ④压入队列</li>
+<li>将弹出的节点涂成深灰色，表示已经搜索过  </li>
+</ul>
+</li>
+</ol>
+<h3 id="算法正确性证明"><a href="#算法正确性证明" class="headerlink" title="算法正确性证明"></a>算法正确性证明</h3><p>定义$ s $到$ v $的最短路径为$ \delta(s,v) $，不可达则$ \delta(s,v)=\infty $</p>
+<blockquote>
+<p>引理1：若存在异于$ s,v $的点 $ u $，则$ \delta(s,u)+1 \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理2：$ d[v] \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理3：当广度优先搜索在树上执行时，队列中包含$ v_1,v_2,…,v_n $共$ n $个节点，那么$ d[v_i] \le d[v_{i+1}] $</p>
+</blockquote>
+<p>即要证明，$ d[v] = \delta(s,v) $  </p>
+<p>反证法：假设$ d[v] \ne \delta(s,v) $，但同时对于任意其他节点$ u $，$ d[u] = \delta(s,u) $。（就是说只有一个节点不满足，其他都满足）那么由引理2：$ d[v] \ge \delta(s,v) $，得$ d[v] &gt; \delta(s,v) $，设 $ u $ 异于 $ s,v $ ，则$ \delta(s,u)+1 = \delta(s,v) $，则$ d[v] \ge d[u] + 1$，这样回过去看算法，一个节点$ v $出队时，有三种情况：</p>
+<ul>
+<li>如果$ v $是白色的，由于紧邻节点$ d[v]=d[u]+1 $</li>
+<li>如果$ v $是深灰色的，说明它已先于$ u $被移出队列，故$ d[v] \le d[u] $</li>
+<li>如果$ v $是灰色的，说明它被之前某个顶点$ w $被出队时标记成了灰色，那么$ d[v]=d[w]+1 $，又$d[w] \le d[u]$，故$ d[v] \le d[u]+1$  </li>
+</ul>
+<p>故不论哪种情况，都与假设矛盾，假设不成立，算法正确。</p>
+<h3 id="树的直径（The-diameter-of-a-tree）"><a href="#树的直径（The-diameter-of-a-tree）" class="headerlink" title="树的直径（The diameter of a tree）"></a>树的直径（The diameter of a tree）</h3><blockquote>
+<p>The diameter of a tree $ T = (V, E) $ is given by that is $ \max _{u, v \in V} \delta(u, v) $, the diameter is the largest of all shortest-path distances in the tree. Give an efficient algorithm to compute the diameter of a tree, and analyze the running time of your algorithm.</p>
+</blockquote>
+<p>思路：通过分析可以知道，树的直径的源节点一定是<strong>以根节点进行BFS得出的最远节点，即d表中的最大值所在节点</strong>，记其为$ u $，随后以$ u $再进行BFS，找出最远节点，此时d表中的最大值所在节点即为diameter。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">BFS(G,s)</span><br><span class="line">for each vertex u in V - &#123;s&#125; do</span><br><span class="line">    color[u] &#x3D; WHITE</span><br><span class="line">    d[u] &#x3D; INF</span><br><span class="line">    pre[u] &#x3D; NIL</span><br><span class="line">color[s] &#x3D; GRAY</span><br><span class="line">d[s] &#x3D; 0</span><br><span class="line">pre[s] &#x3D; NIL</span><br><span class="line">Enqueue(Q, s)</span><br><span class="line">while Q is not empty</span><br><span class="line">    u &#x3D; Dequeue(Q)</span><br><span class="line">    for each v in adj[u] do</span><br><span class="line">        if color[v] !&#x3D; WHITE do</span><br><span class="line">            color[v] &#x3D; GRAY</span><br><span class="line">            d[v] &#x3D; d[u] + 1</span><br><span class="line">            pre[v] &#x3D; u</span><br><span class="line">            Enqueue(Q, v)</span><br><span class="line">    color[u] &#x3D; DARKGRAY</span><br><span class="line"></span><br><span class="line">Main()</span><br><span class="line">BFS(G,s)</span><br><span class="line">u &#x3D; max.index(d)</span><br><span class="line">diameter &#x3D; d[u]</span><br><span class="line">BFS(G,u)</span><br><span class="line">v &#x3D; max.index(d)</span><br><span class="line">diameter +&#x3D; d[v]</span><br><span class="line">return diameter</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为$ O(n) $</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>广度优先搜索</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Transformer</title>
     <url>/2020/04/12/Transformer/</url>
-    <content><![CDATA[<h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
+    <content><![CDATA[<p>Transformer是encoder-decoder模式神经网络的一个应用，属于<strong>无监督学习</strong>中的一种。</p>
+<h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
 <h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
 <ol>
 <li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
@@ -39,6 +92,18 @@
       </tags>
   </entry>
   <entry>
+    <title>大整数乘法</title>
+    <url>/2020/04/12/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/</url>
+    <content><![CDATA[<p>大整数乘法(n位2进制)X*Y可以采用归并的思想解决。<br>将X按位数划分成两半，高位为a，低位为b：<br>$$ X = a * 2^{(n/2)} + b $$<br>同样的，将Y按位数分成两半，高位为c，低位为d：<br>$$ Y = c * 2^{(n/2)} + d $$<br>这样$$ XY = ac * 2^{n} + (ad + bc) * 2(n/2) + bd $$<br>然而很容易发现，$ T(n) = 4T(n-1) + O(n) $ （这里的4为$ ac $ $ ad $ $ bc $ $ bd $四次$ T(n-1) $的乘法）<strong>时间复杂度没有改进！</strong><br>那么优化一下：$ XY = ac * 2^{n} + ((a-b)(d-c) + ac + bd) * 2(n/2) + bd $，这样一来，表面上看起来更烦了，但相比起上面，这个式子只要计算$ (a-b)(d-c) $ $ ac $ $ bd $ 三次$ T(n-1) $的乘法，比上面的式子花的时间更少了。<br>为啥用$ (a-b)(d-c) $不用$ (a+b)(d+c) $呢？显然减比加的位数要少。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>分治法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>乘积最大</title>
     <url>/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/</url>
     <content><![CDATA[<blockquote>
@@ -52,44 +117,13 @@
 <p>例：设数字串为31246, k = 2，即求dp[5][2]：<br>$ dp[5][2]=max(dp[5][2],dp[w][1]*str[w+1:n-1]) $</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
 <p>用动态规划的基础思想，以左上-右下对角线为基准计算dp表，根据dp表，得7488。</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^3) $</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^2) $</p>
 ]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>大整数乘法</title>
-    <url>/2020/04/12/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/</url>
-    <content><![CDATA[<p>大整数乘法(n位2进制)X*Y可以采用归并的思想解决。<br>将X按位数划分成两半，高位为a，低位为b：<br>$$ X = a * 2^{(n/2)} + b $$<br>同样的，将Y按位数分成两半，高位为c，低位为d：<br>$$ Y = c * 2^{(n/2)} + d $$<br>这样$$ XY = ac * 2^{n} + (ad + bc) * 2(n/2) + bd $$<br>然而很容易发现，$ T(n) = 4T(n-1) + O(n) $ （这里的4为$ ac $ $ ad $ $ bc $ $ bd $四次$ T(n-1) $的乘法）<strong>时间复杂度没有改进！</strong><br>那么优化一下：$ XY = ac * 2^{n} + ((a-b)(d-c) + ac + bd) * 2(n/2) + bd $，这样一来，表面上看起来更烦了，但相比起上面，这个式子只要计算$ (a-b)(d-c) $ $ ac $ $ bd $ 三次$ T(n-1) $的乘法，比上面的式子花的时间更少了。<br>为啥用$ (a-b)(d-c) $不用$ (a+b)(d+c) $呢？显然减比加的位数要少。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>分治法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>BERT</title>
-    <url>/2020/04/12/BERT/</url>
-    <content><![CDATA[<p>BERT的全称是Bidirectional Encoder Representation from Transformers，即双向Transformer的Encoder，说明其是在Transformers的基础上发展而来。</p>
-<h3 id="预训练"><a href="#预训练" class="headerlink" title="预训练"></a>预训练</h3><ol>
-<li>句子中有15%的词汇被随机mask，所以随机mask的时候10%的单词会被替代成其他单词，10%的单词不替换，剩下80%才被替换为<code>[MASK]</code>，去预测mask的词，最终的损失函数也只计算被mask掉那个字/词。</li>
-<li>预测两个句子是否应该前后相连在一起，<code>[SEP]</code>是分隔符，输入时输入两句连在一起的话，第一个token的位置放<code>[CLS]</code>，并将该符号对应的输出向量作为整篇文本的语义表示。  </li>
-</ol>
-<ul>
-<li>为什么要放<code>[CLS]</code>？因为与文本中已有的其它字/词相比，这个无明显语义信息的符号会更公平地融合文本中各个字/词的语义信息。最终它的值也可以很好地通过二分类模型去反映这两句句子是否连在一起。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>NLP</category>
-      </categories>
-      <tags>
-        <tag>BERT</tag>
       </tags>
   </entry>
   <entry>
@@ -108,15 +142,22 @@
       </categories>
   </entry>
   <entry>
-    <title>归并排序</title>
-    <url>/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)<br>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(Type a[], Type b[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left; <span class="comment">// 左数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> j = mid + <span class="number">1</span>; <span class="comment">// 右数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> k = left; <span class="comment">// 合并数组的游标</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right) &#123; <span class="comment">// 在i,j有一个越界以后，循环即终止</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[j]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>BERT</title>
+    <url>/2020/04/12/BERT/</url>
+    <content><![CDATA[<p>BERT的全称是Bidirectional Encoder Representation from Transformers，即双向Transformer的Encoder，说明其是在Transformers的基础上发展而来。</p>
+<h3 id="预训练"><a href="#预训练" class="headerlink" title="预训练"></a>预训练</h3><ol>
+<li>句子中有15%的词汇被随机mask，所以随机mask的时候10%的单词会被替代成其他单词，10%的单词不替换，剩下80%才被替换为<code>[MASK]</code>，去预测mask的词，最终的损失函数也只计算被mask掉那个字/词。</li>
+<li>预测两个句子是否应该前后相连在一起，<code>[SEP]</code>是分隔符，输入时输入两句连在一起的话，第一个token的位置放<code>[CLS]</code>，并将该符号对应的输出向量作为整篇文本的语义表示。  </li>
+</ol>
+<ul>
+<li>为什么要放<code>[CLS]</code>？因为与文本中已有的其它字/词相比，这个无明显语义信息的符号会更公平地融合文本中各个字/词的语义信息。最终它的值也可以很好地通过二分类模型去反映这两句句子是否连在一起。</li>
+</ul>
+]]></content>
       <categories>
-        <category>算法</category>
+        <category>NLP</category>
       </categories>
       <tags>
-        <tag>分治法</tag>
+        <tag>BERT</tag>
       </tags>
   </entry>
   <entry>
@@ -228,36 +269,20 @@
         <category>算法</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>分治法</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
-    <title>最优二叉搜索树</title>
-    <url>/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/</url>
-    <content><![CDATA[<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ol>
-<li>若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
-<li>若右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
-<li>左、右子树也分别为二叉排序树；</li>
-<li>没有键值相等的结点。  </li>
-</ol>
-<p>在随机的情况下，二叉查找树的平均查找长度为O(nlogn)</p>
-<h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>设$ \lbrace r_1,r_2,…,r_n \rbrace $是$ n $个记录的集合，其查找概率分别是$ \lbrace p_1,p_2,…,p_n \rbrace $，最优二叉查找树是以这$ n $个记录构成的查找树中具有最少平均比较次数的二叉查找树，即$ \sum_{i=1}^n p_ic_i $最小，其中$ p_i $是记录$ r_i $的查找概率，$ c_i $是在二叉查找树中查找$ r_i $的比较次数。</p>
-<h3 id="证明最优二叉查找树满足最优性定理"><a href="#证明最优二叉查找树满足最优性定理" class="headerlink" title="证明最优二叉查找树满足最优性定理"></a>证明最优二叉查找树满足最优性定理</h3><p>将$ \lbrace r_1,r_2,…,r_n \rbrace $构成的二叉查找树记为$ T(1,n) $，其中$ r_k $是其根节点，则其左子树$ T(1,k-1) $由$ \lbrace r_1,r_2,…,r_{k-1} \rbrace $，其右子树$ T(k+1,n) $由$ \lbrace r_{k+1},r_2,…,r_n \rbrace $组成。  </p>
-<p>要证：若$ T(1,n) $最优，则$ T(1,k-1) $与$ T(k+1,n) $均最优。  </p>
-<p>用反证法来说，就是当$ T(1,n) $最优时，假设$ T’(1,k-1) $是比$ T(1,k-1) $更优的二叉搜索树，那么由$ T’(1,k-1) $与$ T(k+1,n) $构成的二叉搜索树一定是更优，与假设矛盾，故最优性定理成立。</p>
-<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均搜索次数，那么该问题就是求解$ C(1,n) $。  </p>
-<p>假设定义根节点为$ r_k $，可以得到：  </p>
-<p>$ C(i,i-1)=0 (1\leq i\leq n+1) $ </p>
-<p>$ C(i,j)=p_i (1\leq i\leq n) $</p>
-<p>$ C(i,j)=min \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
-<p>这样问题就转化为<strong>斜对角线</strong>填C[n+1][n+1]这张二维表（通过第三个式子），结果在C[i][n]处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表R[n+1][n+1]，其下标范围与C相同，R[i][j]表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">OptimalIBST</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> p[], <span class="keyword">double</span> C[][], <span class="keyword">int</span> R[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) &#123; <span class="comment">// 初始化</span></span><br><span class="line">        C[i][i<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">// 式子1</span></span><br><span class="line">        C[i][i] = p[i] <span class="comment">// 式子2</span></span><br><span class="line">        R[i][i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    C[n+<span class="number">1</span>][n]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">1</span>;d&lt;n;d++) &#123; <span class="comment">// 按对角线逐条计算</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n-d;i++) &#123;</span><br><span class="line">            j = i + d;</span><br><span class="line">            <span class="built_in">min</span> = INF;</span><br><span class="line">            mink = i;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (k=i;k&lt;=j;k++) &#123;</span><br><span class="line">                sum = sum + p[k];</span><br><span class="line">                <span class="keyword">if</span> (C[i][k<span class="number">-1</span>]+C[k+<span class="number">1</span>][j]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">                    <span class="built_in">min</span> = C[i][k<span class="number">-1</span>] + C[k+<span class="number">1</span>][j];</span><br><span class="line">                    mink = k; <span class="comment">// 记录最小根节点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            C[i][j] = <span class="built_in">min</span> + sum; <span class="comment">// 式子3</span></span><br><span class="line">            R[i][j] = mink;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> C[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>归并排序</title>
+    <url>/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)<br>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(Type a[], Type b[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left; <span class="comment">// 左数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> j = mid + <span class="number">1</span>; <span class="comment">// 右数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> k = left; <span class="comment">// 合并数组的游标</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right) &#123; <span class="comment">// 在i,j有一个越界以后，循环即终止</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[j]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
-        <tag>搜索</tag>
+        <tag>分治法</tag>
       </tags>
   </entry>
   <entry>
@@ -300,25 +325,6 @@
       </tags>
   </entry>
   <entry>
-    <title>矩阵连乘问题</title>
-    <url>/2020/04/12/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<blockquote>
-<p>需要找到以最小次数计算矩阵乘法的运算方式，在矩阵连乘过程中，不同的“加括号”方式会对运算速度造成很大影响。  </p>
-</blockquote>
-<p>设$ A[i:j] $表示$ i $位置到$ j $位置的矩阵连乘，所需要的最少数乘次数为$ m[i:j] $，则原问题的最优值为$ m[1:n] $，$A_i$的维数为$ p_{i-1}p_i $。  </p>
-<p>当$ i=j $时，$ A[i,j]=Ai $，所以$ m[i,j]=0 $, $ i = 1,..,n $  </p>
-<p>当$ i \neq j $时，$ m[i,j]=min \lbrace m[i][k] + m[k+1][j] + p_{i-1}p_kp_j \rbrace $  </p>
-<p>动态规划填表的话，应该以对角线为基准，向右上逐对角线填写，右上角$ m[1][n] $即为答案。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-        <tag>分治法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>装配线问题</title>
     <url>/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
@@ -351,6 +357,53 @@
       <tags>
         <tag>动态规划</tag>
         <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最优二叉搜索树</title>
+    <url>/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/</url>
+    <content><![CDATA[<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ol>
+<li>若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
+<li>若右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>左、右子树也分别为二叉排序树；</li>
+<li>没有键值相等的结点。  </li>
+</ol>
+<p>在随机的情况下，二叉查找树的平均查找长度为O(nlogn)</p>
+<h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>设$ \lbrace r_1,r_2,…,r_n \rbrace $是$ n $个记录的集合，其查找概率分别是$ \lbrace p_1,p_2,…,p_n \rbrace $，最优二叉查找树是以这$ n $个记录构成的查找树中具有最少平均比较次数的二叉查找树，即$ \sum_{i=1}^n p_ic_i $最小，其中$ p_i $是记录$ r_i $的查找概率，$ c_i $是在二叉查找树中查找$ r_i $的比较次数。</p>
+<h3 id="证明最优二叉查找树满足最优性定理"><a href="#证明最优二叉查找树满足最优性定理" class="headerlink" title="证明最优二叉查找树满足最优性定理"></a>证明最优二叉查找树满足最优性定理</h3><p>将$ \lbrace r_1,r_2,…,r_n \rbrace $构成的二叉查找树记为$ T(1,n) $，其中$ r_k $是其根节点，则其左子树$ T(1,k-1) $由$ \lbrace r_1,r_2,…,r_{k-1} \rbrace $，其右子树$ T(k+1,n) $由$ \lbrace r_{k+1},r_2,…,r_n \rbrace $组成。  </p>
+<p>要证：若$ T(1,n) $最优，则$ T(1,k-1) $与$ T(k+1,n) $均最优。  </p>
+<p>用反证法来说，就是当$ T(1,n) $最优时，假设$ T’(1,k-1) $是比$ T(1,k-1) $更优的二叉搜索树，那么由$ T’(1,k-1) $与$ T(k+1,n) $构成的二叉搜索树一定是更优，与假设矛盾，故最优性定理成立。</p>
+<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均搜索次数，那么该问题就是求解$ C(1,n) $。  </p>
+<p>假设定义根节点为$ r_k $，可以得到：  </p>
+<p>$ C(i,i-1)=0 (1\leq i\leq n+1) $ </p>
+<p>$ C(i,j)=p_i (1\leq i\leq n) $</p>
+<p>$ C(i,j)=min \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
+<p>这样问题就转化为<strong>斜对角线</strong>填C[n+1][n+1]这张二维表（通过第三个式子），结果在C[i][n]处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表R[n+1][n+1]，其下标范围与C相同，R[i][j]表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">OptimalIBST</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> p[], <span class="keyword">double</span> C[][], <span class="keyword">int</span> R[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) &#123; <span class="comment">// 初始化</span></span><br><span class="line">        C[i][i<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">// 式子1</span></span><br><span class="line">        C[i][i] = p[i] <span class="comment">// 式子2</span></span><br><span class="line">        R[i][i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    C[n+<span class="number">1</span>][n]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">1</span>;d&lt;n;d++) &#123; <span class="comment">// 按对角线逐条计算</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n-d;i++) &#123;</span><br><span class="line">            j = i + d;</span><br><span class="line">            <span class="built_in">min</span> = INF;</span><br><span class="line">            mink = i;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (k=i;k&lt;=j;k++) &#123;</span><br><span class="line">                sum = sum + p[k];</span><br><span class="line">                <span class="keyword">if</span> (C[i][k<span class="number">-1</span>]+C[k+<span class="number">1</span>][j]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">                    <span class="built_in">min</span> = C[i][k<span class="number">-1</span>] + C[k+<span class="number">1</span>][j];</span><br><span class="line">                    mink = k; <span class="comment">// 记录最小根节点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            C[i][j] = <span class="built_in">min</span> + sum; <span class="comment">// 式子3</span></span><br><span class="line">            R[i][j] = mink;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> C[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>搜索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵连乘问题</title>
+    <url>/2020/04/12/%E7%9F%A9%E9%98%B5%E8%BF%9E%E4%B9%98%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>需要找到以最小次数计算矩阵乘法的运算方式，在矩阵连乘过程中，不同的“加括号”方式会对运算速度造成很大影响。  </p>
+</blockquote>
+<p>设$ A[i:j] $表示$ i $位置到$ j $位置的矩阵连乘，所需要的最少数乘次数为$ m[i:j] $，则原问题的最优值为$ m[1:n] $，$A_i$的维数为$ p_{i-1}p_i $。  </p>
+<p>当$ i=j $时，$ A[i,j]=Ai $，所以$ m[i,j]=0 $, $ i = 1,..,n $  </p>
+<p>当$ i \neq j $时，$ m[i,j]=min \lbrace m[i][k] + m[k+1][j] + p_{i-1}p_kp_j \rbrace $  </p>
+<p>动态规划填表的话，应该以对角线为基准，向右上逐对角线填写，右上角$ m[1][n] $即为答案。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>分治法</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
 </search>

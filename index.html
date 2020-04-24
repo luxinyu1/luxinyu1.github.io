@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -197,6 +197,120 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/23/BFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/23/BFS/" class="post-title-link" itemprop="url">广度优先搜索（Breadth First Search）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-23 13:54:42" itemprop="dateCreated datePublished" datetime="2020-04-23T13:54:42+08:00">2020-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-24 11:46:30" itemprop="dateModified" datetime="2020-04-24T11:46:30+08:00">2020-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>伪代码思路分三步：</p>
+<ol>
+<li>初始化：<ul>
+<li>颜色矩阵设为全白</li>
+<li>与根节点的距离设为无穷</li>
+<li>前驱记录设为nil</li>
+<li>对于单一的根节点元素，其颜色设为灰，与根节点的距离设为0，前驱也设为nil</li>
+</ul>
+</li>
+<li>把根节点放入队列</li>
+<li>当队列不为空时，循环：<ul>
+<li>执行出队操作，弹出一个节点</li>
+<li>搜索所有的直接后继（距离为1），如果已经被涂色，说明该节点已经被访问过，啥也不用干，但如果没有被涂色，那就：<br>  ①将其涂色（灰色）<br>  ②记录前驱<br>  ③记录与根节点的距离d<br>  ④压入队列</li>
+<li>将弹出的节点涂成深灰色，表示已经搜索过  </li>
+</ul>
+</li>
+</ol>
+<h3 id="算法正确性证明"><a href="#算法正确性证明" class="headerlink" title="算法正确性证明"></a>算法正确性证明</h3><p>定义$ s $到$ v $的最短路径为$ \delta(s,v) $，不可达则$ \delta(s,v)=\infty $</p>
+<blockquote>
+<p>引理1：若存在异于$ s,v $的点 $ u $，则$ \delta(s,u)+1 \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理2：$ d[v] \ge \delta(s,v) $</p>
+</blockquote>
+<blockquote>
+<p>引理3：当广度优先搜索在树上执行时，队列中包含$ v_1,v_2,…,v_n $共$ n $个节点，那么$ d[v_i] \le d[v_{i+1}] $</p>
+</blockquote>
+<p>即要证明，$ d[v] = \delta(s,v) $  </p>
+<p>反证法：假设$ d[v] \ne \delta(s,v) $，但同时对于任意其他节点$ u $，$ d[u] = \delta(s,u) $。（就是说只有一个节点不满足，其他都满足）那么由引理2：$ d[v] \ge \delta(s,v) $，得$ d[v] &gt; \delta(s,v) $，设 $ u $ 异于 $ s,v $ ，则$ \delta(s,u)+1 = \delta(s,v) $，则$ d[v] \ge d[u] + 1$，这样回过去看算法，一个节点$ v $出队时，有三种情况：</p>
+<ul>
+<li>如果$ v $是白色的，由于紧邻节点$ d[v]=d[u]+1 $</li>
+<li>如果$ v $是深灰色的，说明它已先于$ u $被移出队列，故$ d[v] \le d[u] $</li>
+<li>如果$ v $是灰色的，说明它被之前某个顶点$ w $被出队时标记成了灰色，那么$ d[v]=d[w]+1 $，又$d[w] \le d[u]$，故$ d[v] \le d[u]+1$  </li>
+</ul>
+<p>故不论哪种情况，都与假设矛盾，假设不成立，算法正确。</p>
+<h3 id="树的直径（The-diameter-of-a-tree）"><a href="#树的直径（The-diameter-of-a-tree）" class="headerlink" title="树的直径（The diameter of a tree）"></a>树的直径（The diameter of a tree）</h3><blockquote>
+<p>The diameter of a tree $ T = (V, E) $ is given by that is $ \max _{u, v \in V} \delta(u, v) $, the diameter is the largest of all shortest-path distances in the tree. Give an efficient algorithm to compute the diameter of a tree, and analyze the running time of your algorithm.</p>
+</blockquote>
+<p>思路：通过分析可以知道，树的直径的源节点一定是<strong>以根节点进行BFS得出的最远节点，即d表中的最大值所在节点</strong>，记其为$ u $，随后以$ u $再进行BFS，找出最远节点，此时d表中的最大值所在节点即为diameter。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">BFS(G,s)</span><br><span class="line">for each vertex u in V - &#123;s&#125; do</span><br><span class="line">    color[u] &#x3D; WHITE</span><br><span class="line">    d[u] &#x3D; INF</span><br><span class="line">    pre[u] &#x3D; NIL</span><br><span class="line">color[s] &#x3D; GRAY</span><br><span class="line">d[s] &#x3D; 0</span><br><span class="line">pre[s] &#x3D; NIL</span><br><span class="line">Enqueue(Q, s)</span><br><span class="line">while Q is not empty</span><br><span class="line">    u &#x3D; Dequeue(Q)</span><br><span class="line">    for each v in adj[u] do</span><br><span class="line">        if color[v] !&#x3D; WHITE do</span><br><span class="line">            color[v] &#x3D; GRAY</span><br><span class="line">            d[v] &#x3D; d[u] + 1</span><br><span class="line">            pre[v] &#x3D; u</span><br><span class="line">            Enqueue(Q, v)</span><br><span class="line">    color[u] &#x3D; DARKGRAY</span><br><span class="line"></span><br><span class="line">Main()</span><br><span class="line">BFS(G,s)</span><br><span class="line">u &#x3D; max.index(d)</span><br><span class="line">diameter &#x3D; d[u]</span><br><span class="line">BFS(G,u)</span><br><span class="line">v &#x3D; max.index(d)</span><br><span class="line">diameter +&#x3D; d[v]</span><br><span class="line">return diameter</span><br></pre></td></tr></table></figure>
+<p>时间复杂度为$ O(n) $</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -228,7 +342,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-20 22:13:30" itemprop="dateModified" datetime="2020-04-20T22:13:30+08:00">2020-04-20</time>
+                <time title="修改时间：2020-04-23 13:45:00" itemprop="dateModified" datetime="2020-04-23T13:45:00+08:00">2020-04-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +376,7 @@
 <p>例：设数字串为31246, k = 2，即求dp[5][2]：<br>$ dp[5][2]=max(dp[5][2],dp[w][1]*str[w+1:n-1]) $</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
 <p>用动态规划的基础思想，以左上-右下对角线为基准计算dp表，根据dp表，得7488。</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^3) $</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^2) $</p>
 
       
     </div>
@@ -949,80 +1063,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="post-title-link" itemprop="url">动态规划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:07:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>动态规划的本质是对递归中产生的结果进行存储（用表存储，在代码中以数组的形式体现），避免<strong>重复调用相同子问题</strong>的递归造成时间上的损失。可以看成是分治法的一种改进。其与分治法的最大不同是：它遵循自底向上的计算方式，而分治法通常是自顶向下的。<br>学术一点来讲：动态规划是研究多阶段决策过程中采用最优化原理，把多阶段的问题转化为单阶段解决。  </p>
-<h3 id="动态规划的基本步骤"><a href="#动态规划的基本步骤" class="headerlink" title="动态规划的基本步骤"></a>动态规划的基本步骤</h3><ol>
-<li>找出最优解的性质并刻画其结构特征</li>
-<li>递归定义最优值</li>
-<li>以<strong>自底向上</strong>的方式计算最优值</li>
-<li>根据计算最优值时的信息构造最优解</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1092,7 +1132,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1105,7 +1145,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
