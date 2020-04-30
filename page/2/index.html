@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">17</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -193,6 +193,96 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">装配线问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:12:35" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,如果它移动到另一条线上,则花费时间为$ t_i[j] $。在离开一条装配线的第$ n $个装配站后,完成的汽车底盘花费时间为$ x_i $离开工厂。<br><strong>待求解的问题是,确定应该在装配线 1 内选择哪些站,在装配线 2 内选择哪些站,才能使汽车通过工厂的总时间最短。</strong>  </p>
+</blockquote>
+<p>暴力办法由于每个站都有两个选择，总装配路线数就是$ 2^{n} $，当n很大时，变得不可行。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>对于每一个问题$ S_i[j] $，其子问题有两种情况：</p>
+<ol>
+<li>经历了装配线的转换到了$ j $号装配站</li>
+<li>没经历转换直接到了$ j $号装配站  </li>
+</ol>
+<p>所以转化成递归问题，就是两种情况：</p>
+<ol>
+<li>$ j=1, f^* = min(e_1+a_1[j],e_2+a_2[j]) $</li>
+<li>$ j\neq1, f_1[j] = min(f_1[j-1]+a_1[j],f_2[j-1]+t_2[j-1]+a_1[j]) $<br>$ j\neq1, f_2[j] = min(f_2[j-1]+a_2[j],f_1[j-1]+t_1[j-1]+a_2[j])$  </li>
+</ol>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用填表法，可以先将所有$ f_1[j],f_2[j] $的值全部计算出来，同时设置箭头指向用来回溯，或者新设一个$ l_i[j] $专门记录到$ S_i[j] $的最快路径的上一个工作台所在的装配线号。</p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
+<p>Professor Canty conjectures that there might exist some $ e_i $, $ a_i[j] $, and $ t_i[j] $ values for which FASTEST-WAY produces $ l_i[j] $ values such that $ l_1[j] = 2 $ and $ l_2[j] = 1 $ for some station number $ j $. Assuming that all transfer costs $ t_i[j] $ are nonnegative, show that the professor is wrong.  </p>
+</blockquote>
+<p>简而言之，就是要证明对于同一个$ j $，不可能出现$ l_1[j] = 2 $ and $ l_2[j] = 1 $这样的情况。 </p>
+<p>假设$ l_1[j] = 2 $ and $ l_2[j] = 1 $成立，则：  </p>
+<p>$ l_1[j] = 2 $ 即 $ f_2[j-1]+t_2[j-1] &lt; f_1[j-1] ①$  </p>
+<p>$ l_2[j] = 1 $ 即 $ f_1[j-1]+t_1[j-1] &lt; f_2[j-1] ②$  </p>
+<p>显然①②两个式子矛盾，故假设不成立。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -723,7 +813,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -736,7 +826,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
