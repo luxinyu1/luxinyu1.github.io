@@ -72,42 +72,17 @@
       </tags>
   </entry>
   <entry>
-    <title>Transformer</title>
-    <url>/2020/04/12/Transformer/</url>
-    <content><![CDATA[<p>Transformer是encoder-decoder模式神经网络的一个应用，属于<strong>无监督学习</strong>中的一种。</p>
-<h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
-<h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
-<ol>
-<li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
-<li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li>
-<li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li>
-</ol>
-<p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p>
-<p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p>
-<h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p>
-<ul>
-<li>通过不同的head得到多个特征表达</li>
-<li>拼接特征</li>
-<li>全连接降维  </li>
-</ul>
-<p>在多头注意力机制中则是通过h个不同的线性变换对$ Q,K,V $进行投影，最后将不同的attention结果拼接起来：<br>即：$$ head_i = Attention(QW_i^{Q},KW_i^{K},VW_i^{V}) $$<br>$$ MultiHead(Q,K,V)=Concat(head_1,head_2,…,head_h) W^{O} $$</p>
-<p>Multi-head Attention可以进行多次，效果更佳。</p>
-<h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些<strong>冗余层能够完成恒等映射</strong>，保证经过该恒等层的<strong>输入和输出完全相同</strong>。</p>
-<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p><img src="https://pic1.zhimg.com/80/v2-4b53b731a961ee467928619d14a5fd44_720w.jpg" alt="transformer"> </p>
-<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>Encoder由N=6个相同的layer组成，layer指的就是上图<strong>左侧</strong>的单元，最左边有个”Nx”，这里是6个。每个Layer由两个sub-layer组成，分别是multi-head self-attention mechanism和fully connected feed-forward network。其中每个sub-layer都加了residual connection和normalisation，因此可以将sub-layer的输出表示为：<br>$$ SubLayerOutput=LayerNorm(x+SubLayer(x)) $$</p>
-<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>Decoder和Encoder的结构差不多，但是多了一个attention的sub-layer，这里先明确一下decoder的输入输出和解码过程：</p>
-<ul>
-<li>输出：对应i位置的输出词的概率分布</li>
-<li>输入：encoder的输出 &amp; 对应i-1位置decoder的输出。所以中间的attention不是self-attention，它的K，V来自encoder，Q来自上一位置decoder的输出<br>解码：这里要特别注意一下，编码可以并行计算，一次性全部encoding出来，但解码不是一次把所有序列解出来的，而是像RNN一样一个一个解出来的，因为要用上一个位置的输入当作attention的query。  </li>
-</ul>
-<p>明确了解码过程之后最上面的图就很好懂了，这里主要的不同就是新加的attention多加了一个<strong>mask</strong>，因为训练时的output都是ground truth，这样可以<strong>确保预测第i个位置时不会接触到未来的信息</strong>。</p>
+    <title>Huffman编码</title>
+    <url>/2020/05/08/Huffman%E7%BC%96%E7%A0%81/</url>
+    <content><![CDATA[<h3 id="前缀编码"><a href="#前缀编码" class="headerlink" title="前缀编码"></a>前缀编码</h3><p><strong>没有一个编码是另一个编码的前缀</strong>，这样在读取一连串没有分割符的数据的时候就不会有问题。</p>
+<p>最优即找所有前缀编码的二叉树$T$中代价（即编码一个文件所需的总位数）：$B(T)=\sum_{c \in C}f(c)d_T(c)$的最小值（其中$f(c)$为出现频率，$d_T(c)$为所在位置的深度）。</p>
+<h3 id="Huffman编码的贪心选择策略"><a href="#Huffman编码的贪心选择策略" class="headerlink" title="Huffman编码的贪心选择策略"></a>Huffman编码的贪心选择策略</h3><p>每次都选择最小的两棵树合并。</p>
 ]]></content>
       <categories>
-        <category>NLP</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>注意力机制</tag>
-        <tag>transformer</tag>
+        <tag>贪心算法</tag>
       </tags>
   </entry>
   <entry>
@@ -175,18 +150,6 @@
       </categories>
   </entry>
   <entry>
-    <title>大整数乘法</title>
-    <url>/2020/04/12/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/</url>
-    <content><![CDATA[<p>大整数乘法(n位2进制)X*Y可以采用归并的思想解决。<br>将X按位数划分成两半，高位为a，低位为b：<br>$$ X = a * 2^{(n/2)} + b $$<br>同样的，将Y按位数分成两半，高位为c，低位为d：<br>$$ Y = c * 2^{(n/2)} + d $$<br>这样$$ XY = ac * 2^{n} + (ad + bc) * 2(n/2) + bd $$<br>然而很容易发现，$ T(n) = 4T(n-1) + O(n) $ （这里的4为$ ac $ $ ad $ $ bc $ $ bd $四次$ T(n-1) $的乘法）<strong>时间复杂度没有改进！</strong><br>那么优化一下：$ XY = ac * 2^{n} + ((a-b)(d-c) + ac + bd) * 2(n/2) + bd $，这样一来，表面上看起来更烦了，但相比起上面，这个式子只要计算$ (a-b)(d-c) $ $ ac $ $ bd $ 三次$ T(n-1) $的乘法，比上面的式子花的时间更少了。<br>为啥用$ (a-b)(d-c) $不用$ (a+b)(d+c) $呢？显然减比加的位数要少。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>分治法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>快速排序</title>
     <url>/2020/04/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p>快速排序<strong>仍然采用了分治法的思想</strong>，只是在其基础上引入了哨兵，实现了<strong>跨度更大</strong>的交换。因此，主程序实现用递归显得更加简单和清晰。</p>
@@ -205,10 +168,10 @@
       </tags>
   </entry>
   <entry>
-    <title>归并排序</title>
-    <url>/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)<br>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(Type a[], Type b[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left; <span class="comment">// 左数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> j = mid + <span class="number">1</span>; <span class="comment">// 右数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> k = left; <span class="comment">// 合并数组的游标</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right) &#123; <span class="comment">// 在i,j有一个越界以后，循环即终止</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[j]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>大整数乘法</title>
+    <url>/2020/04/12/%E5%A4%A7%E6%95%B4%E6%95%B0%E4%B9%98%E6%B3%95/</url>
+    <content><![CDATA[<p>大整数乘法(n位2进制)X*Y可以采用归并的思想解决。<br>将X按位数划分成两半，高位为a，低位为b：<br>$$ X = a * 2^{(n/2)} + b $$<br>同样的，将Y按位数分成两半，高位为c，低位为d：<br>$$ Y = c * 2^{(n/2)} + d $$<br>这样$$ XY = ac * 2^{n} + (ad + bc) * 2(n/2) + bd $$<br>然而很容易发现，$ T(n) = 4T(n-1) + O(n) $ （这里的4为$ ac $ $ ad $ $ bc $ $ bd $四次$ T(n-1) $的乘法）<strong>时间复杂度没有改进！</strong><br>那么优化一下：$ XY = ac * 2^{n} + ((a-b)(d-c) + ac + bd) * 2(n/2) + bd $，这样一来，表面上看起来更烦了，但相比起上面，这个式子只要计算$ (a-b)(d-c) $ $ ac $ $ bd $ 三次$ T(n-1) $的乘法，比上面的式子花的时间更少了。<br>为啥用$ (a-b)(d-c) $不用$ (a+b)(d+c) $呢？显然减比加的位数要少。</p>
+]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -217,28 +180,42 @@
       </tags>
   </entry>
   <entry>
-    <title>最大公共子序列问题</title>
-    <url>/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
+    <title>Transformer</title>
+    <url>/2020/04/12/Transformer/</url>
+    <content><![CDATA[<p>Transformer是encoder-decoder模式神经网络的一个应用，属于<strong>无监督学习</strong>中的一种。</p>
+<h2 id="传统Word2Vector的不足"><a href="#传统Word2Vector的不足" class="headerlink" title="传统Word2Vector的不足"></a>传统Word2Vector的不足</h2><p>传统词向量化的过程中，不同语料中一个字/词的向量都是<strong>相对固定</strong>的，这样就忽略了上下文信息对词带来的影响。</p>
+<h2 id="Multi-head-Attention"><a href="#Multi-head-Attention" class="headerlink" title="Multi-head Attention"></a>Multi-head Attention</h2><h3 id="Attention机制"><a href="#Attention机制" class="headerlink" title="Attention机制"></a>Attention机制</h3><p>假设输入为一句英文的话：Tom chase Jerry.<br>如果用传统encoder-decoder模型，那么在翻译Jerry时，所有输入单词对翻译的影响都是相同的，但显然Jerry的贡献度应该更高。<br>引入attention后，每个单词都会有一个权重：$ (Tom,0.3)(Chase,0.2)(Jerry,0.5) $。<br>具体实施过程是：</p>
 <ol>
-<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
-<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
+<li>引入三个需要训练的矩阵：$ Q $，$ K $，$ V $，其中$ Q $为当前<strong>要去查询的</strong>词矩阵，$ K $为<strong>被查询的</strong>词矩阵，$ V $为<strong>实际特征信息</strong>，也可以理解为<strong>未加权的特征</strong></li>
+<li>通过计算不同词$ i,j $之间的 $ q_i·k_j $，生成词$ i,j $相关性的评分$ Score $，$ Score $越高，词与词之间越相关</li>
+<li>计算每一个字/词，与其他字/词的两两关系后，除以维度（因为维度越大并不代表越相关，大的维度反而会使分数异常的大）再$ softmax $一下，再去分别乘对应的$ V $，就是这个字在句子/段落中的重要性权值，即$$ Attention(Q,K,V)=softmax(\frac{QK^{T}}{\sqrt{d_k}})V $$</li>
 </ol>
-<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
-<ol>
-<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
-<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
-<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
-</ol>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
-<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
+<p>举个例子，在Thinking Machines这个词组中，当我们处理Thinking这个词时，我们需要计算句子中所有词与它的Attention Score，这就像将当前词作为搜索的query，去和句子中所有词（包含该词本身）的key去匹配，看看相关度有多高。我们用$ q_1 $代表Thinking对应的query vector，$ k_1 $及$ k_2 $分别代表Thinking以及Machines对应的key vector，则计算Thinking的attention score的时候我们需要计算 $q_1k_1$ 与 $q_1k_2$，同理，我们计算Machines的attention score的时候需要计算 $q_2k_1$ 与 $q_2k_2$，然后进行尺度缩放与softmax归一化。</p>
+<p>这个时候，这个词/字的特征向量<strong>就带有整个词组/句子的特征信息啦！</strong></p>
+<h3 id="Multi-headed机制-通常8个"><a href="#Multi-headed机制-通常8个" class="headerlink" title="Multi-headed机制(通常8个)"></a>Multi-headed机制(通常8个)</h3><p>类似于<strong>卷积神经网络</strong>，多头机制：</p>
+<ul>
+<li>通过不同的head得到多个特征表达</li>
+<li>拼接特征</li>
+<li>全连接降维  </li>
+</ul>
+<p>在多头注意力机制中则是通过h个不同的线性变换对$ Q,K,V $进行投影，最后将不同的attention结果拼接起来：<br>即：$$ head_i = Attention(QW_i^{Q},KW_i^{K},VW_i^{V}) $$<br>$$ MultiHead(Q,K,V)=Concat(head_1,head_2,…,head_h) W^{O} $$</p>
+<p>Multi-head Attention可以进行多次，效果更佳。</p>
+<h2 id="位置信息的表达、层归一化与残差连接"><a href="#位置信息的表达、层归一化与残差连接" class="headerlink" title="位置信息的表达、层归一化与残差连接"></a>位置信息的表达、层归一化与残差连接</h2><p>BERT用正弦余弦信号的组合表示了字/词在句子/段落中的相对位置信息。<br>BERT也使用了层规范化进行优化。<br>深层次网络是有很多网络层为冗余层的，那么我们希望这些<strong>冗余层能够完成恒等映射</strong>，保证经过该恒等层的<strong>输入和输出完全相同</strong>。</p>
+<h2 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h2><p><img src="https://pic1.zhimg.com/80/v2-4b53b731a961ee467928619d14a5fd44_720w.jpg" alt="transformer"> </p>
+<h3 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h3><p>Encoder由N=6个相同的layer组成，layer指的就是上图<strong>左侧</strong>的单元，最左边有个”Nx”，这里是6个。每个Layer由两个sub-layer组成，分别是multi-head self-attention mechanism和fully connected feed-forward network。其中每个sub-layer都加了residual connection和normalisation，因此可以将sub-layer的输出表示为：<br>$$ SubLayerOutput=LayerNorm(x+SubLayer(x)) $$</p>
+<h3 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h3><p>Decoder和Encoder的结构差不多，但是多了一个attention的sub-layer，这里先明确一下decoder的输入输出和解码过程：</p>
+<ul>
+<li>输出：对应i位置的输出词的概率分布</li>
+<li>输入：encoder的输出 &amp; 对应i-1位置decoder的输出。所以中间的attention不是self-attention，它的K，V来自encoder，Q来自上一位置decoder的输出<br>解码：这里要特别注意一下，编码可以并行计算，一次性全部encoding出来，但解码不是一次把所有序列解出来的，而是像RNN一样一个一个解出来的，因为要用上一个位置的输入当作attention的query。  </li>
+</ul>
+<p>明确了解码过程之后最上面的图就很好懂了，这里主要的不同就是新加的attention多加了一个<strong>mask</strong>，因为训练时的output都是ground truth，这样可以<strong>确保预测第i个位置时不会接触到未来的信息</strong>。</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>NLP</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
+        <tag>注意力机制</tag>
+        <tag>transformer</tag>
       </tags>
   </entry>
   <entry>
@@ -314,48 +291,25 @@
       </tags>
   </entry>
   <entry>
-    <title>最大子段和问题</title>
-    <url>/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p>
-<ol>
-<li>最大子段和在a[1:n]上，设其为s1</li>
-<li>最大子段和在a[n/2+1:n]上，设其为s2</li>
-<li>最大子段和就是a[n]的最大子段和，即s1+s2  </li>
-</ol>
-<p>此时时间复杂度为O(nlogn)</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p>
-<ol>
-<li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li>
-<li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
-</ol>
-]]></content>
+    <title>归并排序</title>
+    <url>/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)<br>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(Type a[], Type b[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left; <span class="comment">// 左数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> j = mid + <span class="number">1</span>; <span class="comment">// 右数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> k = left; <span class="comment">// 合并数组的游标</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right) &#123; <span class="comment">// 在i,j有一个越界以后，循环即终止</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[j]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>分治法</tag>
       </tags>
   </entry>
   <entry>
-    <title>最近点对问题</title>
-    <url>/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>暴力算可以。但分治法时间复杂度明显更低。</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
-<ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
-<li>最近点对横跨了两个区  </li>
-</ol>
-<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
-<ol>
-<li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
-</ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>残缺棋盘问题</title>
+    <url>/2020/04/12/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>残缺棋盘是一个有2k*2k(k≥1)个方格的棋盘，其中恰有一个方格残缺。要对其用四种三格板（L形骨牌）进行覆盖。  </p>
+</blockquote>
+<p>用分治法解决挺容易的。显然每块大棋盘都可以划分成4块k*k个方块的小棋盘，8块(k/2)*(k/2)个方块的更小棋盘，以此类推……<br>但问题是，每次分治划分出来的棋盘只有一块是残缺的，另外三块并不是。那么就要给另外三块制造一些残缺性。<br>最简单的是：<strong>在非残缺棋盘的相邻拐角处放置一块三格版</strong>，这样每块小棋盘都拥有残缺性啦！<br>这样就满足分治法的要求了，大问题能分成一样的小问题，小问题的解也能拼凑成大问题的解。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123; <span class="comment">// tr,tc为棋盘边界，dr,dc为残缺块位置 </span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span>==<span class="number">1</span>) <span class="keyword">return</span>; <span class="comment">// 递归出口，1*1的就免了</span></span><br><span class="line">    <span class="keyword">int</span> t = tile++; <span class="comment">// L型骨牌号</span></span><br><span class="line">    <span class="keyword">int</span> s = <span class="built_in">size</span> / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 左上角棋盘子问题</span></span><br><span class="line">    <span class="keyword">if</span> (dr&lt;tr+s &amp;&amp; dc&lt;tc+s) &#123; <span class="comment">// 残缺方格在此棋盘中</span></span><br><span class="line">        chessBoard(tr, tc, dr, dc, s);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 残缺方格不在此棋盘中</span></span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t; <span class="comment">// 用t号L型骨牌覆盖右下角</span></span><br><span class="line">        chessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s); <span class="comment">// 子问题求解</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 左下角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右上角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右下角棋盘子问题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>算法</category>
       </categories>
@@ -379,21 +333,6 @@
       </categories>
       <tags>
         <tag>动态规划</tag>
-        <tag>分治法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>残缺棋盘问题</title>
-    <url>/2020/04/12/%E6%AE%8B%E7%BC%BA%E6%A3%8B%E7%9B%98%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<blockquote>
-<p>残缺棋盘是一个有2k*2k(k≥1)个方格的棋盘，其中恰有一个方格残缺。要对其用四种三格板（L形骨牌）进行覆盖。  </p>
-</blockquote>
-<p>用分治法解决挺容易的。显然每块大棋盘都可以划分成4块k*k个方块的小棋盘，8块(k/2)*(k/2)个方块的更小棋盘，以此类推……<br>但问题是，每次分治划分出来的棋盘只有一块是残缺的，另外三块并不是。那么就要给另外三块制造一些残缺性。<br>最简单的是：<strong>在非残缺棋盘的相邻拐角处放置一块三格版</strong>，这样每块小棋盘都拥有残缺性啦！<br>这样就满足分治法的要求了，大问题能分成一样的小问题，小问题的解也能拼凑成大问题的解。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chessBoard</span><span class="params">(<span class="keyword">int</span> tr, <span class="keyword">int</span> tc, <span class="keyword">int</span> dr, <span class="keyword">int</span> dc, <span class="keyword">int</span> <span class="built_in">size</span>)</span> </span>&#123; <span class="comment">// tr,tc为棋盘边界，dr,dc为残缺块位置 </span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">size</span>==<span class="number">1</span>) <span class="keyword">return</span>; <span class="comment">// 递归出口，1*1的就免了</span></span><br><span class="line">    <span class="keyword">int</span> t = tile++; <span class="comment">// L型骨牌号</span></span><br><span class="line">    <span class="keyword">int</span> s = <span class="built_in">size</span> / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 左上角棋盘子问题</span></span><br><span class="line">    <span class="keyword">if</span> (dr&lt;tr+s &amp;&amp; dc&lt;tc+s) &#123; <span class="comment">// 残缺方格在此棋盘中</span></span><br><span class="line">        chessBoard(tr, tc, dr, dc, s);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 残缺方格不在此棋盘中</span></span><br><span class="line">        board[tr+s<span class="number">-1</span>][tc+s<span class="number">-1</span>] = t; <span class="comment">// 用t号L型骨牌覆盖右下角</span></span><br><span class="line">        chessBoard(tr, tc, tr+s<span class="number">-1</span>, tc+s<span class="number">-1</span>, s); <span class="comment">// 子问题求解</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 左下角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右上角棋盘子问题</span></span><br><span class="line">    <span class="comment">// 右下角棋盘子问题</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
         <tag>分治法</tag>
       </tags>
   </entry>
@@ -430,6 +369,173 @@
       <tags>
         <tag>动态规划</tag>
         <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贪心算法</title>
+    <url>/2020/05/07/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="任务选择问题（活动选择问题）"><a href="#任务选择问题（活动选择问题）" class="headerlink" title="任务选择问题（活动选择问题）"></a>任务选择问题（活动选择问题）</h3><ul>
+<li><p>任务集中每个任务需要使用同一资源$S={a_1,…,a_n}$</p>
+</li>
+<li><p>任务$ a_i $ 需要占用的时间：$ [s_i,f_i) $，开始时间$s_i$，结束时间$f_i$</p>
+</li>
+<li><p>若两个任务的占用时间 $ [s_i,f_i) $没有重合，则称两个任务是相容的</p>
+</li>
+</ul>
+<p>目标：占用资源的任务子集元素数量最多。</p>
+<p>假设任务已经按照<strong>结束时间</strong>先后升序排序，$ S_{ij} $为从$ i $时刻开始到$ j $时刻结束内的<strong>任务集合</strong>，任务$ a_k $在$ S_{ij} $中。</p>
+<p>则有：$ S_{ij} = S_{ik} + a_k + S_{kj} $，即$|S_{ij}|=|S_{ik}|+1+|S_{kj}|$</p>
+<p>$ k $有$j-i+1$种可能，检查所有的可能，填表找最大的$ S_{ij} $，这样就是<strong>动态规划的思路</strong>。</p>
+<p>设$ a_m $是$ S_{ij} $中<strong>完成时间最早的任务</strong>，那么至少存在一个最优解包含$ a_m $（可证），<strong>这样就可以大大减少时间复杂度</strong>，因为$ S_{im} $一定是空集，子问题的个数就从原来动态规划的两个转化为了一个，原来动态规划需要检查$ j-i+1 $种可能，现在只需要1种！</p>
+<p>这样就是一种贪心的算法。</p>
+<p>递归版的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">RecursiveTaskSelect(s,f,i,j)</span><br><span class="line">    m &#x3D; i + 1</span><br><span class="line">    while m &lt; j and s_m &lt; f_i do</span><br><span class="line">    	m &#x3D; m + 1</span><br><span class="line">    if m &lt; j then return &#123;a_m&#125; + RecursiveTaskSelect(s,f,m,j)</span><br><span class="line">    else return NULL</span><br></pre></td></tr></table></figure>
+
+<p>迭代版的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GreedyTaskSelect(s,f)</span><br><span class="line">	A &#x3D; &#123;a_1&#125;</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	for m &#x3D; 2 to n do</span><br><span class="line">		if then</span><br><span class="line">			A &#x3D; A + &#123;a_m&#125;</span><br><span class="line">			i &#x3D; m</span><br><span class="line">	return A</span><br></pre></td></tr></table></figure>
+
+<p>运行时间$ O(n) $</p>
+<h3 id="贪心算法基本步骤"><a href="#贪心算法基本步骤" class="headerlink" title="贪心算法基本步骤"></a>贪心算法基本步骤</h3><ol>
+<li>确定问题的最优子结构性质</li>
+<li>定义递归解</li>
+<li>证明递归的任意一步，<strong>最优选择就是贪心选择</strong></li>
+<li>证明做了贪心选择后，<strong>只留下一个非空子问题</strong></li>
+<li>设计一个实现贪心的递归算法</li>
+<li>将递归算法转化为迭代算法</li>
+</ol>
+<h3 id="贪心算法的基本要素"><a href="#贪心算法的基本要素" class="headerlink" title="贪心算法的基本要素"></a>贪心算法的基本要素</h3><p>从问题的某一个初始解出发，通过一系列的贪心选择（当前状态下的局部最优选择），逐步逼近给定的目标，尽可能快地求得更好地解。</p>
+<p>是否可以用贪心算法解决一个问题主要看两个：</p>
+<ol>
+<li><p>具有贪心选择性质</p>
+<p> 动态规划法通常是<strong>自底向上</strong>的方式解决子问题，而贪心算法通常是以<strong>自顶向下</strong>的方式进行，以迭代的方式作出相继的贪心选择，每一次贪心都会将所求问题转化为规模更小的子问题</p>
+</li>
+<li><p>具有最优子结构性质</p>
+<p> 问题的最优解包含子问题的最优解</p>
+</li>
+</ol>
+<p>贪心算法做的选择依赖于前面的选择，而非子问题的解。</p>
+<h3 id="任务选择问题的算法正确性证明"><a href="#任务选择问题的算法正确性证明" class="headerlink" title="任务选择问题的算法正确性证明"></a>任务选择问题的算法正确性证明</h3>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最近点对问题</title>
+    <url>/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>暴力算可以。但分治法时间复杂度明显更低。</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
+<ol>
+<li>最近点对在左边，设其为d1</li>
+<li>最近点对在右边，设其为d2</li>
+<li>最近点对横跨了两个区  </li>
+</ol>
+<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
+<ol>
+<li>对左右点集双重遍历，分治法等于白做。</li>
+<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
+</ol>
+<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>分治法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>背包问题</title>
+    <url>/2020/05/07/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="0-1背包"><a href="#0-1背包" class="headerlink" title="0-1背包"></a>0-1背包</h2><p>给定$ n $种物品和一个背包。物品$ i $的重量是$ w_i $，其价值为$ V_i $，背包容量为$ j $，如何选择装入背包的物品，使总价值最大？</p>
+<h3 id="最优子结构性质"><a href="#最优子结构性质" class="headerlink" title="最优子结构性质"></a>最优子结构性质</h3><p>即证：若把$ j $物品从背包中拿出去，那么剩下的装载一定是取自$n-1$个物品使得不超过载重量的最优装载方案。</p>
+<p>证明很简单，假设有$n-1$个物品的方案更优，那么加上$j$的装载方案一定比原来的方案更优，这样假设不成立，最优子结构性质就成立。</p>
+<h3 id="动态规划法"><a href="#动态规划法" class="headerlink" title="动态规划法"></a>动态规划法</h3><p>$ j $为限制的数量，$w$为限制的重量。$ V $为价值表。</p>
+<ol>
+<li><p>$ j $装不下，$ V[j,w]=V[j-1,w] $</p>
+</li>
+<li><p>$ j $装得下，$ V[j,w]=max(V[j-1,w-w_j]+V_j,V[j-1,w]) $</p>
+</li>
+</ol>
+<p>伪代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DPKmapsack(S,W)</span><br><span class="line">	for w &#x3D; 0 to do V[1,w] &#x3D; 0 &#x2F;&#x2F; 初始化V表</span><br><span class="line">    for w &#x3D; w_i to W do V[1,w] &#x3D; v_1</span><br><span class="line">    for i &#x3D; 2 to n do</span><br><span class="line">    	for w &#x3D; 0 to W do</span><br><span class="line">    		if w_i &gt; w then &#x2F;&#x2F; 情况1</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">    		else if V[i-1,w] &gt; V[i-1,w-w_i] + v_i then &#x2F;&#x2F; 情况2，不加</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">			else &#x2F;&#x2F; 情况2，加</span><br><span class="line">				V[i,w] &#x3D; V[i-1,w-w_i] + v_i</span><br><span class="line">				b[i,w] &#x3D; UL &#x2F;&#x2F; 左上箭头</span><br><span class="line">return V and b</span><br></pre></td></tr></table></figure>
+
+<p>构造最优解时，回溯b表，遇到上箭头就说明物品$ i $不拿，左上箭头就说明物品$ i $要拿。</p>
+<h2 id="普通背包问题（小数背包）"><a href="#普通背包问题（小数背包）" class="headerlink" title="普通背包问题（小数背包）"></a>普通背包问题（小数背包）</h2><p>与0-1背包的区别是：选择物品装入背包时，可以选择物品的一部分。</p>
+<p>普通背包问题可以用贪心解，而0-1不行，<strong>因为没有合适的贪心策略</strong>。</p>
+<p>普通背包的贪心策略：</p>
+<ol>
+<li>计算每种物品重量的价值，<strong>并按价值排序</strong></li>
+<li>选择价值最高的放入</li>
+</ol>
+<h3 id="贪心算法最优性证明"><a href="#贪心算法最优性证明" class="headerlink" title="贪心算法最优性证明"></a>贪心算法最优性证明</h3><p>设$ (x_1,…,x_n) $是贪心算法求得的，证明其最优。</p>
+<ol>
+<li>任意$ x_i = 1 $，显然该解就是最优解。</li>
+<li>设$ X=(1,…,1,x_j,0,…,0)(x_j\ne1)$（因为已按价值排序，所以会这样），设问题的最优解为$ Y=(y_1,..,y_n) $，则存在$ k $使得$y_k \ne x_k$的最小下标。</li>
+<li>将最优解逐步改造为贪心解，证明贪心解就是最优解。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>贪心算法</tag>
+        <tag>背包问题</tag>
+        <tag>‘动态规划’</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最大子段和问题</title>
+    <url>/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p>
+<ol>
+<li>最大子段和在a[1:n]上，设其为s1</li>
+<li>最大子段和在a[n/2+1:n]上，设其为s2</li>
+<li>最大子段和就是a[n]的最大子段和，即s1+s2  </li>
+</ol>
+<p>此时时间复杂度为O(nlogn)</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p>
+<ol>
+<li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li>
+<li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
+</ol>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>分治法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>最大公共子序列问题</title>
+    <url>/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
+<ol>
+<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
+<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
+</ol>
+<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
+<ol>
+<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
+<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
+<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
+<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
       </tags>
   </entry>
 </search>
