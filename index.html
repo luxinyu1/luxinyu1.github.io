@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 00:10:41" itemprop="dateModified" datetime="2020-05-22T00:10:41+08:00">2020-05-22</time>
+                <time title="修改时间：2020-05-26 21:42:47" itemprop="dateModified" datetime="2020-05-26T21:42:47+08:00">2020-05-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,10 +282,10 @@
 </blockquote>
 <p>思路：首先明确题目条件，不踏上相同的block意思就是所有街道能且只能通过一次，那么将地图中的每一个转角设为一个节点，如果有街道，则设置一条边$(u,v)$，源点$s$为家，汇点$t$为学校，对于任意边$(u,v)$，设置其通行能力$c(u,v)$为1，对这张图进行最大流问题求解，若$ f \ge 2$，那么说明Professor Adam还有救。</p>
 <blockquote>
-<p>Prove that for any pair of vertices $$ u $$ and $$ v $$ and any capacity and flow functions $$ c $$ and $$ f $$, we have $$c_f(u,v) + c_f(v,u) = c(u,v) + c(v,u)$$.</p>
+<p>Prove that for any pair of vertices $ u $ and $ v $ and any capacity and flow functions $ c $ and $ f $, we have $c_f(u,v) + c_f(v,u) = c(u,v) + c(v,u)$.</p>
 </blockquote>
 <p>证明：</p>
-<p>$c_f(u,v) + c_f(v,u) = c(u,v) - f(u,v) + c(v,u) - f(v,u)$</p>
+<p>$$ c_f(u,v) + c_f(v,u) = c(u,v) - f(u,v) + c(v,u) - f(v,u) $$</p>
 <p>$$\because f(u,v) = -f(v,u) $$</p>
 <p>$$ \therefore c_f(u,v) + c_f(v,u) = c(u,v) + c(v,u)$$</p>
 <p>得证。</p>

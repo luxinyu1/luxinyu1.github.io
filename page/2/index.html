@@ -272,86 +272,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最近点对问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>暴力算可以。但分治法时间复杂度明显更低。</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
-<ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
-<li>最近点对横跨了两个区  </li>
-</ol>
-<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
-<ol>
-<li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
-</ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -415,6 +335,86 @@
 <li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
 </ol>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最近点对问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>暴力算可以。但分治法时间复杂度明显更低。</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
+<ol>
+<li>最近点对在左边，设其为d1</li>
+<li>最近点对在右边，设其为d2</li>
+<li>最近点对横跨了两个区  </li>
+</ol>
+<p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
+<ol>
+<li>对左右点集双重遍历，分治法等于白做。</li>
+<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
+</ol>
+<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -613,6 +613,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:13:33" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
+<ol>
+<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
+<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
+</ol>
+<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
+<ol>
+<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
+<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
+<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
+<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -684,87 +765,6 @@
 <p>$ l_1[j] = 2 $ 即 $ f_2[j-1]+t_2[j-1] &lt; f_1[j-1] ①$  </p>
 <p>$ l_2[j] = 1 $ 即 $ f_1[j-1]+t_1[j-1] &lt; f_2[j-1] ②$  </p>
 <p>显然①②两个式子矛盾，故假设不成立。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:13:33" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
-<ol>
-<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
-<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
-</ol>
-<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
-<ol>
-<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
-<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
-<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
-<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
 
       
     </div>
