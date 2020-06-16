@@ -123,7 +123,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">20</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">23</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -193,6 +193,201 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/06/08/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E4%B8%8E%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/08/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E4%B8%8E%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">回溯算法与分支限界算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-08 19:51:27" itemprop="dateCreated datePublished" datetime="2020-06-08T19:51:27+08:00">2020-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-09 09:53:05" itemprop="dateModified" datetime="2020-06-09T09:53:05+08:00">2020-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>假设已经知道部分解的集合$\lbrace x_1, x_2, x_3, … , x_i \rbrace$，再此基础上增加解$x_{i+1}$来拓展解，然后验证新集合是否为可行解。</p>
+<h3 id="基本步骤"><a href="#基本步骤" class="headerlink" title="基本步骤"></a>基本步骤</h3><p>定义问题的解空间，这个空间内必须包含一个问题的最优解。</p>
+<p>以<strong>深度优先</strong>的办法搜索解空间，同时配合以<strong>剪枝</strong>避免进入不可能得到解的子空间。</p>
+<h4 id="解空间"><a href="#解空间" class="headerlink" title="解空间"></a>解空间</h4><p>如果$S_i$是$x_i$的范围，那么$S_1\times S_2 \times … \times S_n$就是解空间，通常这个解空间十分巨大，所以必须缩小搜索空间。</p>
+<h3 id="生成问题状态的基本方法"><a href="#生成问题状态的基本方法" class="headerlink" title="生成问题状态的基本方法"></a>生成问题状态的基本方法</h3><h4 id="拓展节点"><a href="#拓展节点" class="headerlink" title="拓展节点"></a>拓展节点</h4><p>一个<strong>正在</strong>产生儿子节点的结点成为拓展节点。</p>
+<h4 id="活结点"><a href="#活结点" class="headerlink" title="活结点"></a>活结点</h4><p>一个自身已经生成但其儿子尚未全部生成的节点称为活节点。一般拓展节点被放入活结点列表中。</p>
+<h4 id="死节点"><a href="#死节点" class="headerlink" title="死节点"></a>死节点</h4><p>一个所有儿子都生完了的节点。</p>
+<h4 id="深度优先搜索的问题状态生成方法"><a href="#深度优先搜索的问题状态生成方法" class="headerlink" title="深度优先搜索的问题状态生成方法"></a>深度优先搜索的问题状态生成方法</h4><p>如果对于一个拓展节点$R$，一旦产生了它的一个孩子$C$，就把$C$当作新的拓展节点去搜索子树，穷尽后再把$R$重新作为拓展节点。</p>
+<p>与<strong>宽度优先最大的不同</strong>就是宽度优先在一个节点变成拓展节点后，成为死节点前，它一直是拓展节点。</p>
+<p>回溯法为了避免不必要的计算，不断利用<strong>限界函数</strong>去处死那些不可能产生需要解的活结点，减少搜索时间和计算量。</p>
+<p>所以，<strong>具有限界函数的深度优先生成法称为回溯法</strong>。</p>
+<h3 id="解空间的组织"><a href="#解空间的组织" class="headerlink" title="解空间的组织"></a>解空间的组织</h3><h4 id="子集树"><a href="#子集树" class="headerlink" title="子集树"></a>子集树</h4><p>例如：0/1背包问题就是一个子集树</p>
+<p>对于一个大小为$n$的子集，如果每个$S_i$的大小是$k$，对于每个$x_i \in S_i$，共有$k^n$个子集。</p>
+<p>子集树问题的通用模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BackTrack(i):</span><br><span class="line">	if i &gt; n then Update(x) &#x2F;&#x2F; 已经走到叶子节点了，是当前最优解，记录一下</span><br><span class="line">	else</span><br><span class="line">		for each a in S_i do &#x2F;&#x2F; 当前位置的解空间S_i</span><br><span class="line">			x_i &#x3D; a &#x2F;&#x2F; 当前向量的分量</span><br><span class="line">			if C(i) and B(i) then &#x2F;&#x2F; 约束函数与限界函数B()与C()，这是与深度优先最大的区别</span><br><span class="line">				BackTrack(i+1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="排列树"><a href="#排列树" class="headerlink" title="排列树"></a>排列树</h4><p>例如：旅行商问题（从一个节点出发遍历所有节点回到该节点，每个节点仅经过一次）</p>
+<p>对于一个大小为$n$的子集，总体解空间规模就是$n!$。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BackTrack(i):</span><br><span class="line">	if i &gt; n then Update(x) &#x2F;&#x2F; 已经走到叶子节点了，是当前最优解，记录一下</span><br><span class="line">	else</span><br><span class="line">		for j &#x3D; i to n do &#x2F;&#x2F;第i个元素与其后面的所有元素进行交换位置</span><br><span class="line">			swap(x_i, x_j)</span><br><span class="line">			if C(i) and B(i) then</span><br><span class="line">				BackTrack(i+1)</span><br><span class="line">			swap(x_i, x_j)</span><br></pre></td></tr></table></figure>
+
+<h3 id="剪枝函数"><a href="#剪枝函数" class="headerlink" title="剪枝函数"></a>剪枝函数</h3><h4 id="约束函数-C-i"><a href="#约束函数-C-i" class="headerlink" title="约束函数$C(i)$"></a>约束函数$C(i)$</h4><p>区分可行解与不可行解，检查最大最小值是否已经超出范围，若超出，则停止搜索。</p>
+<h4 id="限界函数-B-i"><a href="#限界函数-B-i" class="headerlink" title="限界函数$B(i)$"></a>限界函数$B(i)$</h4><p>找到最优解</p>
+<h3 id="货物装载问题"><a href="#货物装载问题" class="headerlink" title="货物装载问题"></a>货物装载问题</h3><p>给定$n$个货箱，货箱$i$重为$W_i$，船可以装载的货箱总重量为$W$，求解最大载重量。</p>
+<p>是一个简单版的0/1背包问题，只用考虑放不放得下，不用考虑总价值大小。</p>
+<h4 id="解空间-1"><a href="#解空间-1" class="headerlink" title="解空间"></a>解空间</h4><p>$(x_1, x_2, x_3, … , x_i)$，对于每个$x_i$都可以取0或1，表示装载或不装载。显然这是个<strong>子集树</strong>。</p>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><p>就是子集树的算法框架，主要在于设计约束函数，这里的约束函数就是重量，如果重量大了，就退出，所以非常简单。</p>
+<p>改进一下，计算一个限界函数，在某一点把剩下的都放进来，如果还没之前的$bestw$大，那么剪枝。</p>
+<h3 id="0-1背包问题"><a href="#0-1背包问题" class="headerlink" title="0/1背包问题"></a>0/1背包问题</h3><p>约束函数重量没啥好说的。</p>
+<p>限界函数是价值，类似货物装载的改进算法，当剩下所有物品的价值就算全部装进来，也没以前存储的最优值大，那么剪枝。</p>
+<p>改进一下，依照单位价值率对物品进行排序，然后计算限界函数，<strong>当成小数背包问题</strong>计算当前空间内可行的最大价值，虽然实际不能这么做，但是这样的方法确定了这是一个“紧”的上界。因为已经排序，所以价值肯定是能达到的最大的。</p>
+<h2 id="分支限界算法"><a href="#分支限界算法" class="headerlink" title="分支限界算法"></a>分支限界算法</h2><h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>回溯算法以<strong>深度优先</strong>搜索一棵树，而分支限界常常以<strong>广度优先</strong>或者是最小耗费优先。但在限界函数与分支函数的主导下，实际上是以<strong>深度广度优先的结合方式</strong>进行求解的。</p>
+<p>在拓展节点的拓展方法下，它不同于回溯。<strong>每个活结点变成拓展节点有且仅有一次</strong>，<strong>当一个节点变成拓展节点时，展开所有可到达的节点</strong>，其中那些不能得到可行解的节点去掉，把剩下的装到活结点表中，然后从这个表中选一个作为下一个拓展节点。</p>
+<p><strong>选择下一个拓展节点的方法：</strong></p>
+<ol>
+<li><p>FIFO（结合广度优先算法的队列数据结构实现）</p>
+</li>
+<li><p>最小花费，最大收益</p>
+<p> 用一个堆替代一个FIFO队列。维护这个堆即可</p>
+</li>
+</ol>
+<h4 id="装载问题"><a href="#装载问题" class="headerlink" title="装载问题"></a>装载问题</h4><ul>
+<li><p>FIFO</p>
+<p>  约束函数依然是重量，如果当前重量超出，就不放入节点表。</p>
+<p>  限界函数也是在某一点把剩下的都放进来，如果还没之前的$bestw$大，那么剪枝。</p>
+</li>
+<li><p>最小花费，最大收益</p>
+<p>  用$bestw$的降序维护一个优先队列，$bestw$大的先展开，这样就具备了部分深度优先搜索的特性。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/06/04/NP%E5%AE%8C%E5%85%A8%E7%90%86%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/04/NP%E5%AE%8C%E5%85%A8%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">NP完全问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-04 14:33:29 / 修改时间：15:47:23" itemprop="dateCreated datePublished" datetime="2020-06-04T14:33:29+08:00">2020-06-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="P与NP的理解"><a href="#P与NP的理解" class="headerlink" title="P与NP的理解"></a>P与NP的理解</h3><p>P问题是最难实例下，仍然可以在多项式时间内求解的问题。</p>
+<p>NP问题是在最难实例下，不能在多项式时间内求解完毕的问题。</p>
+<h3 id="最优化问题与判定问题"><a href="#最优化问题与判定问题" class="headerlink" title="最优化问题与判定问题"></a>最优化问题与判定问题</h3><p>最优化问题：求出解，通常可以把一个最优化问题转化成判定问题。</p>
+<p>判定问题：回答是或者不是</p>
+<h3 id="多项式约简算法"><a href="#多项式约简算法" class="headerlink" title="多项式约简算法"></a>多项式约简算法</h3><p>对于判定问题，可以在<strong>多项式时间</strong>内将新问题的一个实例转化为老问题的实例，且其解（答案）不变。那么求解新问题的算法就是求解老问题的算法。</p>
+<p>用这个算法也可以证明一个算法能否在多项式时间内完成。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -940,175 +1135,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/" class="post-title-link" itemprop="url">乘积最大</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-16 23:07:43" itemprop="dateCreated datePublished" datetime="2020-04-16T23:07:43+08:00">2020-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 13:45:00" itemprop="dateModified" datetime="2020-04-23T13:45:00+08:00">2020-04-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>设有一个长度N的数字串，要求选手使用K个乘号将它分成K+1个部分，找出一种分法，使得这K+1个部分的乘积能够为最大。  </p>
-</blockquote>
-<h3 id="证明满足最优性定理"><a href="#证明满足最优性定理" class="headerlink" title="证明满足最优性定理"></a>证明满足最优性定理</h3><p>设字符串长度为$ n $，用$ k $个乘号划分时，乘积最大的表达为$ T(n,k) $，那么其子问题是$ T(w,k-1) $</p>
-<p>要证：$ T(n,k) $最优时，$ T(w,k-1) $也是最优的。  </p>
-<p>反证法：  </p>
-<p>假设存在：$$ T’(w,k-1) &gt; T(w,k-1) $$<br>那么一定有：$$ str[w+1:n-1]*T’(w,k-1) &gt; str[w+1:n-1]*T(w,k-1) $$<br>故$ T(n,k) $不是最优的，假设不成立，所以其满足最优性定理。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设str[n-1]为字符串，dp[n][k]就是长度为n的数字串中插入k个乘号的最大乘积。<br>就是把所有用一个乘号截断的情况试一遍，找最大的。<br>即：$ dp[n][k]=max(dp[n][k], dp[w][k-1]*str[w+1:n-1]) $ 为动态规划递归式。  </p>
-<p>例：设数字串为31246, k = 2，即求dp[5][2]：<br>$ dp[5][2]=max(dp[5][2],dp[w][1]*str[w+1:n-1]) $</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
-<p>用动态规划的基础思想，以左上-右下对角线为基准计算dp表，根据dp表，得7488。</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^2) $</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/" class="post-title-link" itemprop="url">最优二叉搜索树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-16 14:22:54 / 修改时间：22:48:17" itemprop="dateCreated datePublished" datetime="2020-04-16T14:22:54+08:00">2020-04-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ol>
-<li>若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
-<li>若右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
-<li>左、右子树也分别为二叉排序树；</li>
-<li>没有键值相等的结点。  </li>
-</ol>
-<p>在随机的情况下，二叉查找树的平均查找长度为O(nlogn)</p>
-<h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>设$ \lbrace r_1,r_2,…,r_n \rbrace $是$ n $个记录的集合，其查找概率分别是$ \lbrace p_1,p_2,…,p_n \rbrace $，最优二叉查找树是以这$ n $个记录构成的查找树中具有最少平均比较次数的二叉查找树，即$ \sum_{i=1}^n p_ic_i $最小，其中$ p_i $是记录$ r_i $的查找概率，$ c_i $是在二叉查找树中查找$ r_i $的比较次数。</p>
-<h3 id="证明最优二叉查找树满足最优性定理"><a href="#证明最优二叉查找树满足最优性定理" class="headerlink" title="证明最优二叉查找树满足最优性定理"></a>证明最优二叉查找树满足最优性定理</h3><p>将$ \lbrace r_1,r_2,…,r_n \rbrace $构成的二叉查找树记为$ T(1,n) $，其中$ r_k $是其根节点，则其左子树$ T(1,k-1) $由$ \lbrace r_1,r_2,…,r_{k-1} \rbrace $，其右子树$ T(k+1,n) $由$ \lbrace r_{k+1},r_2,…,r_n \rbrace $组成。  </p>
-<p>要证：若$ T(1,n) $最优，则$ T(1,k-1) $与$ T(k+1,n) $均最优。  </p>
-<p>用反证法来说，就是当$ T(1,n) $最优时，假设$ T’(1,k-1) $是比$ T(1,k-1) $更优的二叉搜索树，那么由$ T’(1,k-1) $与$ T(k+1,n) $构成的二叉搜索树一定是更优，与假设矛盾，故最优性定理成立。</p>
-<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均搜索次数，那么该问题就是求解$ C(1,n) $。  </p>
-<p>假设定义根节点为$ r_k $，可以得到：  </p>
-<p>$ C(i,i-1)=0 (1\leq i\leq n+1) $ </p>
-<p>$ C(i,j)=p_i (1\leq i\leq n) $</p>
-<p>$ C(i,j)=min \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
-<p>这样问题就转化为<strong>斜对角线</strong>填C[n+1][n+1]这张二维表（通过第三个式子），结果在C[i][n]处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表R[n+1][n+1]，其下标范围与C相同，R[i][j]表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">OptimalIBST</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> p[], <span class="keyword">double</span> C[][], <span class="keyword">int</span> R[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) &#123; <span class="comment">// 初始化</span></span><br><span class="line">        C[i][i<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">// 式子1</span></span><br><span class="line">        C[i][i] = p[i] <span class="comment">// 式子2</span></span><br><span class="line">        R[i][i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    C[n+<span class="number">1</span>][n]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">1</span>;d&lt;n;d++) &#123; <span class="comment">// 按对角线逐条计算</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n-d;i++) &#123;</span><br><span class="line">            j = i + d;</span><br><span class="line">            <span class="built_in">min</span> = INF;</span><br><span class="line">            mink = i;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (k=i;k&lt;=j;k++) &#123;</span><br><span class="line">                sum = sum + p[k];</span><br><span class="line">                <span class="keyword">if</span> (C[i][k<span class="number">-1</span>]+C[k+<span class="number">1</span>][j]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">                    <span class="built_in">min</span> = C[i][k<span class="number">-1</span>] + C[k+<span class="number">1</span>][j];</span><br><span class="line">                    mink = k; <span class="comment">// 记录最小根节点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            C[i][j] = <span class="built_in">min</span> + sum; <span class="comment">// 式子3</span></span><br><span class="line">            R[i][j] = mink;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> C[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1178,7 +1204,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1191,7 +1217,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
