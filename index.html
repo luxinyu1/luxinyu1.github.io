@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -228,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-09 09:53:05" itemprop="dateModified" datetime="2020-06-09T09:53:05+08:00">2020-06-09</time>
+                <time title="修改时间：2020-06-18 09:12:34" itemprop="dateModified" datetime="2020-06-18T09:12:34+08:00">2020-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -526,10 +526,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-14 16:23:11 / 修改时间：17:14:51" itemprop="dateCreated datePublished" datetime="2020-05-14T16:23:11+08:00">2020-05-14</time>
+              <time title="创建时间：2020-05-14 16:23:11" itemprop="dateCreated datePublished" datetime="2020-05-14T16:23:11+08:00">2020-05-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-18 11:27:13" itemprop="dateModified" datetime="2020-06-18T11:27:13+08:00">2020-06-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -553,15 +559,20 @@
       
           <h3 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h3><p>求图中一个节点到另一个节点的最短路径，若不连通，则为无穷大。</p>
 <p>初始化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InitializeSingleSource(G, s)</span><br><span class="line">	for each vertex v in V do</span><br><span class="line">		d[v] &#x3D; INF</span><br><span class="line">		pre[v] &#x3D; NIL</span><br><span class="line">	d[s] &#x3D; 0 &#x2F;&#x2F; 原点初始化</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InitializeSingleSource(G, s)</span><br><span class="line">	for each vertex v in V do</span><br><span class="line">		d[v] &#x3D; INF &#x2F;&#x2F; 源点s到v的距离</span><br><span class="line">		pre[v] &#x3D; NIL &#x2F;&#x2F; 前驱</span><br><span class="line">	d[s] &#x3D; 0 &#x2F;&#x2F; 原点初始化</span><br></pre></td></tr></table></figure>
 
 <p>松弛（调整与更新）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Relax(u, v, w)</span><br><span class="line">	if d[v] &gt; d[u] + w(u, v) then</span><br><span class="line">		d[v] &#x3D; d[u] + w(u, v) &#x2F;&#x2F; 找到更小的，更新</span><br><span class="line">		pre[v] &#x3D; u</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Relax(u, v, w) &#x2F;&#x2F; w为距离</span><br><span class="line">	if d[v] &gt; d[u] + w(u, v) then</span><br><span class="line">		d[v] &#x3D; d[u] + w(u, v) &#x2F;&#x2F; 找到更小的，更新</span><br><span class="line">		pre[v] &#x3D; u</span><br></pre></td></tr></table></figure>
 
 <h4 id="单个源点的最短路径问题"><a href="#单个源点的最短路径问题" class="headerlink" title="单个源点的最短路径问题"></a>单个源点的最短路径问题</h4><p>贝尔曼-福特算法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">BellmanFord(G, w, s)</span><br><span class="line">	InitializeSingleSource(G, s)</span><br><span class="line">	for i &#x3D; 1 to |V| - 1 do</span><br><span class="line">		for each edge(u, v) in E do</span><br><span class="line">			Relax(u, v, w)</span><br><span class="line">	for each edge(u, v) in E do</span><br><span class="line">		if d[v] &gt; d[u] + w(u, v) then return False &#x2F;&#x2F; 成环</span><br><span class="line">	return True &#x2F;&#x2F; 不成环</span><br></pre></td></tr></table></figure>
 
-<p>Dijkstra算法</p>
+<p>时间复杂度为$O(|V||E|)$</p>
+<p>Dijkstra算法（与Prim非常类似）</p>
+<p>Dijkstra算法维持一个集合，从源点$s$到集合$S$中每个点的最短路径已经确定，这个算法反复选取集合外具有最小距离的点，将其纳入$S$，随后对所有相邻的边进行松弛。</p>
+<p><img src="C:%5CUsers%5C%E9%99%86%E6%AC%A3%E9%9B%A8%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200618112547134.png" alt="image-20200618112547134"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Dijkstra(G, w, s)</span><br><span class="line">	InitialSingleSource(G,s)</span><br><span class="line">	S &#x3D; NULL</span><br><span class="line">	Q &#x3D; V</span><br><span class="line">	while Q is not empty do</span><br><span class="line">		u &#x3D; ExtractMin(Q) &#x2F;&#x2F; 找最小距离点</span><br><span class="line">		S &#x3D; S + u &#x2F;&#x2F; 纳入S</span><br><span class="line">		for each vertex v in adj[u] do</span><br><span class="line">			Relax(u, v, w)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -604,10 +615,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-14 14:23:07 / 修改时间：16:22:15" itemprop="dateCreated datePublished" datetime="2020-05-14T14:23:07+08:00">2020-05-14</time>
+              <time title="创建时间：2020-05-14 14:23:07" itemprop="dateCreated datePublished" datetime="2020-05-14T14:23:07+08:00">2020-05-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-18 10:55:41" itemprop="dateModified" datetime="2020-06-18T10:55:41+08:00">2020-06-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -637,80 +654,16 @@
 <li>并入原来的一棵树中</li>
 </ol>
 <p>当所有的顶点都连接后停止。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MSTKruskal(G,w)</span><br><span class="line">	A &#x3D; NULL</span><br><span class="line">	for each vertex v in V do</span><br><span class="line">		MakeSet(v)</span><br><span class="line">	sort the edges of E by weight w</span><br><span class="line">	for each edge(u,v) in E do</span><br><span class="line">		if FindSet(u) !&#x3D; FindSet(v) then &#x2F;&#x2F; 如果不在同一个集合里面</span><br><span class="line">			A &#x3D; A + (u,v)</span><br><span class="line">			Union(u,v)</span><br><span class="line">	return A</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MSTKruskal(G,w)</span><br><span class="line">	A &#x3D; NULL</span><br><span class="line">	for each vertex v in V do</span><br><span class="line">		MakeSet(v) &#x2F;&#x2F; 每个集合代表当前的一棵树</span><br><span class="line">	sort the edges of E by weight w</span><br><span class="line">	for each edge(u,v) in E do</span><br><span class="line">		if FindSet(u) !&#x3D; FindSet(v) then &#x2F;&#x2F; 如果不在同一个集合里面</span><br><span class="line">			A &#x3D; A + (u,v)</span><br><span class="line">			Union(u,v)</span><br><span class="line">	return A</span><br></pre></td></tr></table></figure>
 
 <p>使用<strong>循环不变量证明算法正确性</strong>：每次往集合$ A $添加一条边的时候，集合$ A $均是一个最小生成树边集的子集。</p>
-<h4 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h4><p>遍历点集中所有点，找出所有临接边的最小权值边纳入集合，同时将边的另一个顶点纳入集合。</p>
+<h4 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h4><p>遍历点集中所有点，对于每一个点，找出所有临接边的最小权值边，找出目前所有顶点的最小权值边的最小边，将其另一个顶点纳入集合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">MSTPrim(G,w,r)</span><br><span class="line">	for each vertex u in V do</span><br><span class="line">		u.key &#x3D; INF</span><br><span class="line">		pre[u] &#x3D; NIL</span><br><span class="line">	r.key &#x3D; 0</span><br><span class="line">	Q &#x3D; G.V</span><br><span class="line">	while Q is not empty</span><br><span class="line">		u &#x3D; ExtractMin(Q)</span><br><span class="line">		for each u in adj[u]</span><br><span class="line">        	if v in Q and w(u,v) &lt; v.key</span><br><span class="line">        		v.pre &#x3D; u</span><br><span class="line">        		v.key &#x3D; w(u,v)</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/05/08/Huffman%E7%BC%96%E7%A0%81/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/08/Huffman%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">Huffman编码</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-08 10:21:34 / 修改时间：11:42:18" itemprop="dateCreated datePublished" datetime="2020-05-08T10:21:34+08:00">2020-05-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="前缀编码"><a href="#前缀编码" class="headerlink" title="前缀编码"></a>前缀编码</h3><p><strong>没有一个编码是另一个编码的前缀</strong>，这样在读取一连串没有分割符的数据的时候就不会有问题。</p>
-<p>最优即找所有前缀编码的二叉树$T$中代价（即编码一个文件所需的总位数）：$B(T)=\sum_{c \in C}f(c)d_T(c)$的最小值（其中$f(c)$为出现频率，$d_T(c)$为所在位置的深度）。</p>
-<h3 id="Huffman编码的贪心选择策略"><a href="#Huffman编码的贪心选择策略" class="headerlink" title="Huffman编码的贪心选择策略"></a>Huffman编码的贪心选择策略</h3><p>每次都选择最小的两棵树合并。</p>
 
       
     </div>
@@ -761,7 +714,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 14:39:12" itemprop="dateModified" datetime="2020-05-08T14:39:12+08:00">2020-05-08</time>
+                <time title="修改时间：2020-06-17 21:44:28" itemprop="dateModified" datetime="2020-06-17T21:44:28+08:00">2020-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -792,19 +745,27 @@
 <li><p>若两个任务的占用时间 $ [s_i,f_i) $没有重合，则称两个任务是相容的</p>
 </li>
 </ul>
-<p>目标：占用资源的任务子集元素数量最多。</p>
+<p>目标：占用资源的任务子集<strong>元素数量</strong>最多。</p>
 <p>假设任务已经按照<strong>结束时间</strong>先后升序排序，$ S_{ij} $为从$ i $时刻开始到$ j $时刻结束内的<strong>任务集合</strong>，任务$ a_k $在$ S_{ij} $中。</p>
 <p>则有：$ S_{ij} = S_{ik} + a_k + S_{kj} $，即$|S_{ij}|=|S_{ik}|+1+|S_{kj}|$</p>
 <p>$ k $有$j-i+1$种可能，检查所有的可能，填表找最大的$ S_{ij} $，这样就是<strong>动态规划的思路</strong>。</p>
 <p>设$ a_m $是$ S_{ij} $中<strong>完成时间最早的任务</strong>，那么至少存在一个最优解包含$ a_m $（可证），<strong>这样就可以大大减少时间复杂度</strong>，因为$ S_{im} $一定是空集，子问题的个数就从原来动态规划的两个转化为了一个，原来动态规划需要检查$ j-i+1 $种可能，现在只需要1种！</p>
 <p>这样就是一种贪心的算法。</p>
 <p>递归版的伪代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RecursiveTaskSelect(s,f,i,j)</span><br><span class="line">    m &#x3D; i + 1</span><br><span class="line">    while m &lt; j and s_m &lt; f_i do</span><br><span class="line">    	m &#x3D; m + 1</span><br><span class="line">    if m &lt; j then return &#123;a_m&#125; + RecursiveTaskSelect(s,f,m,j)</span><br><span class="line">    else return NULL</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RecursiveTaskSelect(s, f, i, j)</span><br><span class="line">    m &#x3D; i + 1</span><br><span class="line">    while m &lt; j and s_m &lt; f_i do &#x2F;&#x2F; 找到最小的且起始时间比前一个结束时间晚</span><br><span class="line">    	m &#x3D; m + 1</span><br><span class="line">    if m &lt; j then return &#123;a_m&#125; + RecursiveTaskSelect(s,f,m,j) &#x2F;&#x2F; 迭代寻找</span><br><span class="line">    else return NULL</span><br></pre></td></tr></table></figure>
 
+<p>初次调用递归：<code>RecursiveTaskSelect(s, f, 0, n+1)</code></p>
+<p>实际上，递归就是一个线性扫描的过程，扫描整个有序队列一次即可。</p>
 <p>迭代版的伪代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GreedyTaskSelect(s,f)</span><br><span class="line">	A &#x3D; &#123;a_1&#125;</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	for m &#x3D; 2 to n do</span><br><span class="line">		if then</span><br><span class="line">			A &#x3D; A + &#123;a_m&#125;</span><br><span class="line">			i &#x3D; m</span><br><span class="line">	return A</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GreedyTaskSelect(s,f)</span><br><span class="line">	A &#x3D; &#123;a_1&#125;</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	for m &#x3D; 2 to n do</span><br><span class="line">		if m &lt; j and s_m &lt; f_i then</span><br><span class="line">			A &#x3D; A + &#123;a_m&#125;</span><br><span class="line">			i &#x3D; m</span><br><span class="line">	return A</span><br></pre></td></tr></table></figure>
 
 <p>运行时间$ O(n) $</p>
+<h3 id="Huffman编码"><a href="#Huffman编码" class="headerlink" title="Huffman编码"></a>Huffman编码</h3><h4 id="前缀编码"><a href="#前缀编码" class="headerlink" title="前缀编码"></a>前缀编码</h4><p><strong>没有一个编码是另一个编码的前缀</strong>，这样在读取一连串没有分割符的数据的时候就不会有问题。</p>
+<p>最优即找所有前缀编码的二叉树$T$中代价（即编码一个文件所需的总位数）：$B(T)=\sum_{c \in C}f(c)d_T(c)$的最小值（其中$f(c)$为出现频率，$d_T(c)$为所在位置的深度）。</p>
+<h4 id="Huffman编码的贪心选择策略"><a href="#Huffman编码的贪心选择策略" class="headerlink" title="Huffman编码的贪心选择策略"></a>Huffman编码的贪心选择策略</h4><p>每次都选择最小的两棵树合并，并生成一个新节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Huffman(C, f)</span><br><span class="line">	n &#x3D; |C|</span><br><span class="line">	Q &#x3D; C</span><br><span class="line">	for i &#x3D; 1 to n-1 do</span><br><span class="line">		allocate a new node z</span><br><span class="line">		left[z] &#x3D; x &#x3D; EXTRACT-MIN(Q)</span><br><span class="line">		right[z] &#x3D; y &#x3D; EXTRACT-MIN(Q)</span><br><span class="line">		f[z] &#x3D; f[x] + f[y]</span><br><span class="line">		INSERT(Q,z)</span><br><span class="line">	return EXTRACT-MIN(Q)</span><br></pre></td></tr></table></figure>
+
+<h4 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><p>$O(nlogn)$</p>
 <h3 id="贪心算法基本步骤"><a href="#贪心算法基本步骤" class="headerlink" title="贪心算法基本步骤"></a>贪心算法基本步骤</h3><ol>
 <li>确定问题的最优子结构性质</li>
 <li>定义递归解</li>
@@ -824,7 +785,34 @@
 </li>
 </ol>
 <p>贪心算法做的选择依赖于前面的选择，而非子问题的解。</p>
-<h3 id="任务选择问题的算法正确性证明"><a href="#任务选择问题的算法正确性证明" class="headerlink" title="任务选择问题的算法正确性证明"></a>任务选择问题的算法正确性证明</h3>
+<h3 id="贪心算法的算法正确性证明"><a href="#贪心算法的算法正确性证明" class="headerlink" title="贪心算法的算法正确性证明"></a>贪心算法的算法正确性证明</h3><p>以任务选择为例：</p>
+<ol>
+<li><p>证明最优子结构性质</p>
+<p> 假设$a_k$是结束时间最晚的任务，$S_{ij}$最优，那么$S_{ij} = S_{ik} + a_k$，即$|S_{ij}| = |S_{ik}| + 1$，若有$S_{ik}’ &gt; S_{ik}$，则有$|S_{ij}’|&gt;S_{ij}$，与其最优矛盾，故假设不成立，最优子结构性质成立。</p>
+</li>
+<li><p>证明贪心选择性质</p>
+<p> 归纳基础：设开始时间最晚的任务为$a_k$，假设$a_k$不在最优解内，那么有$S_{ij} = S_{ik}’ + a_k’$，但是有$s_k’&lt;s_k$，所以必然$S_ij = S_ik’ + a_k$，$a_k$必然是一个最优解。即S的最优解之一必定包含最早结束的活动。</p>
+<p> 归纳步骤： 假设执行到$k$步，要对$k+1$步证明成立。</p>
+<p> 设选择了活动$\lbrace a_1,…,a_k \rbrace$，$A$中剩下的活动选自集合$S’$（即为比$a_k$更早开始的任务集合），那么设$B$是$S’$的最优解，由归纳基础，存在$S’$的最优解$B$含有$S’$最早结束的活动，那么有$\lbrace a_1,…,a_k \rbrace \cup B’ = \lbrace a_1,..,a_{k+1} \rbrace \cup B- \lbrace a_{k+1} \rbrace$。</p>
+</li>
+</ol>
+<p>以Huffman算法为例：</p>
+<ol>
+<li><p>证明贪心选择性质</p>
+<p> <img src="C:%5CUsers%5C%E9%99%86%E6%AC%A3%E9%9B%A8%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200617210652496.png" alt="image-20200617210652496"></p>
+<p> 如果说最优解$B(T)$到贪心解$B(T’’)$的中间步$B(T’)$比贪心解不会更优，那么贪心选择性质成立：</p>
+<p> $ B(T)-B(T’’) = \sum_{c \in C}f(c)d_T(c) - \sum_{c \in C}f(c)d_{T’}(c) $</p>
+<p> $= f(a)d_T(a) + f(x)d_T(x) - f(a)d_T(x) - f(x)d_T(a) $</p>
+<p> $= f(a)(d_T(a)-d_T(x)) - f(x)(d_T(a)-d_T(x)) $</p>
+<p> $= (f(a) - f(x))(d_T(a)-d_T(x)) \ge 0$</p>
+</li>
+<li><p>证明最优子结构性质</p>
+<p> 若$T’$不是最优解，那么存在最优解$T’’’$。将$x,y$作为$T’’$中$z$的儿子，得到$C$的解$T’’’$</p>
+<p> $B(T’’’) = B(T’’)+f(x)+f(y)&lt;B(T’)+f(x)+f(y)=B(T)$</p>
+<p> 与$T$是最优解矛盾。</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -874,7 +862,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 10:21:18" itemprop="dateModified" datetime="2020-05-08T10:21:18+08:00">2020-05-08</time>
+                <time title="修改时间：2020-06-17 20:43:51" itemprop="dateModified" datetime="2020-06-17T20:43:51+08:00">2020-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -902,13 +890,13 @@
 <p>证明很简单，假设有$n-1$个物品的方案更优，那么加上$j$的装载方案一定比原来的方案更优，这样假设不成立，最优子结构性质就成立。</p>
 <h3 id="动态规划法"><a href="#动态规划法" class="headerlink" title="动态规划法"></a>动态规划法</h3><p>$ j $为限制的数量，$w$为限制的重量。$ V $为价值表。</p>
 <ol>
-<li><p>$ j $装不下，$ V[j,w]=V[j-1,w] $</p>
+<li><p>$ j $装不下，只能不装，$ V[j,w]=V[j-1,w] $</p>
 </li>
-<li><p>$ j $装得下，$ V[j,w]=max(V[j-1,w-w_j]+V_j,V[j-1,w]) $</p>
+<li><p>$ j $装得下，可以装也可以不装，因为并不知道哪种情况会导致更优，不存在一个统一的策略可言，$ V[j,w]=max(V[j-1,w-w_j]+V_j,V[j-1,w]) $</p>
 </li>
 </ol>
 <p>伪代码实现：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DPKmapsack(S,W)</span><br><span class="line">	for w &#x3D; 0 to do V[1,w] &#x3D; 0 &#x2F;&#x2F; 初始化V表</span><br><span class="line">    for w &#x3D; w_i to W do V[1,w] &#x3D; v_1</span><br><span class="line">    for i &#x3D; 2 to n do</span><br><span class="line">    	for w &#x3D; 0 to W do</span><br><span class="line">    		if w_i &gt; w then &#x2F;&#x2F; 情况1</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">    		else if V[i-1,w] &gt; V[i-1,w-w_i] + v_i then &#x2F;&#x2F; 情况2，不加</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">			else &#x2F;&#x2F; 情况2，加</span><br><span class="line">				V[i,w] &#x3D; V[i-1,w-w_i] + v_i</span><br><span class="line">				b[i,w] &#x3D; UL &#x2F;&#x2F; 左上箭头</span><br><span class="line">return V and b</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DPKmapsack(S,W)</span><br><span class="line">	for w &#x3D; 0 to do V[1,w] &#x3D; 0 &#x2F;&#x2F; 初始化V表</span><br><span class="line">    for w &#x3D; w_i to W do V[1,w] &#x3D; v_1</span><br><span class="line">    for i &#x3D; 2 to n do</span><br><span class="line">    	for w &#x3D; 0 to W do</span><br><span class="line">    		if w_i &gt; w then &#x2F;&#x2F; 情况1</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">    		else if V[i-1,w] &gt; V[i-1,w-w_i] + v_i then &#x2F;&#x2F; 情况2，装</span><br><span class="line">    			V[i,w] &#x3D; V[i-1,w]</span><br><span class="line">    			b[i,w] &#x3D; U &#x2F;&#x2F; 上箭头</span><br><span class="line">			else &#x2F;&#x2F; 情况2，不装</span><br><span class="line">				V[i,w] &#x3D; V[i-1,w-w_i] + v_i</span><br><span class="line">				b[i,w] &#x3D; UL &#x2F;&#x2F; 左上箭头</span><br><span class="line">return V and b</span><br></pre></td></tr></table></figure>
 
 <p>构造最优解时，回溯b表，遇到上箭头就说明物品$ i $不拿，左上箭头就说明物品$ i $要拿。</p>
 <h2 id="普通背包问题（小数背包）"><a href="#普通背包问题（小数背包）" class="headerlink" title="普通背包问题（小数背包）"></a>普通背包问题（小数背包）</h2><p>与0-1背包的区别是：选择物品装入背包时，可以选择物品的一部分。</p>
@@ -1056,7 +1044,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-24 11:46:30" itemprop="dateModified" datetime="2020-04-24T11:46:30+08:00">2020-04-24</time>
+                <time title="修改时间：2020-06-17 22:06:20" itemprop="dateModified" datetime="2020-06-17T22:06:20+08:00">2020-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1120,6 +1108,98 @@
 <p>思路：通过分析可以知道，树的直径的源节点一定是<strong>以根节点进行BFS得出的最远节点，即d表中的最大值所在节点</strong>，记其为$ u $，随后以$ u $再进行BFS，找出最远节点，此时d表中的最大值所在节点即为diameter。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">BFS(G,s)</span><br><span class="line">for each vertex u in V - &#123;s&#125; do</span><br><span class="line">    color[u] &#x3D; WHITE</span><br><span class="line">    d[u] &#x3D; INF</span><br><span class="line">    pre[u] &#x3D; NIL</span><br><span class="line">color[s] &#x3D; GRAY</span><br><span class="line">d[s] &#x3D; 0</span><br><span class="line">pre[s] &#x3D; NIL</span><br><span class="line">Enqueue(Q, s)</span><br><span class="line">while Q is not empty</span><br><span class="line">    u &#x3D; Dequeue(Q)</span><br><span class="line">    for each v in adj[u] do</span><br><span class="line">        if color[v] !&#x3D; WHITE do</span><br><span class="line">            color[v] &#x3D; GRAY</span><br><span class="line">            d[v] &#x3D; d[u] + 1</span><br><span class="line">            pre[v] &#x3D; u</span><br><span class="line">            Enqueue(Q, v)</span><br><span class="line">    color[u] &#x3D; DARKGRAY</span><br><span class="line"></span><br><span class="line">Main()</span><br><span class="line">BFS(G,s)</span><br><span class="line">u &#x3D; max.index(d)</span><br><span class="line">diameter &#x3D; d[u]</span><br><span class="line">BFS(G,u)</span><br><span class="line">v &#x3D; max.index(d)</span><br><span class="line">diameter +&#x3D; d[v]</span><br><span class="line">return diameter</span><br></pre></td></tr></table></figure>
 <p>时间复杂度为$ O(n) $</p>
+<h3 id="k-着色问题"><a href="#k-着色问题" class="headerlink" title="k-着色问题"></a>k-着色问题</h3><h4 id="2-着色问题"><a href="#2-着色问题" class="headerlink" title="2-着色问题"></a>2-着色问题</h4><p>伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for each vertex u in V do</span><br><span class="line">	color[u] &#x3D; WHITE</span><br><span class="line">color[s] &#x3D; RED</span><br><span class="line">Initalize Q as an empty list</span><br><span class="line">Enqueue(Q,s)</span><br><span class="line">while Q is not empty</span><br><span class="line">	u &#x3D; Dequeue(Q)</span><br><span class="line">	for each v in adj[u] do</span><br><span class="line">		if color[v] &#x3D;&#x3D; WHITE do </span><br><span class="line">			color[v] &#x3D; BLUE</span><br><span class="line">			Enqueue(Q,v)</span><br><span class="line">		else if color[v] &#x3D;&#x3D; color[u] then</span><br><span class="line">			return(not 2-colorable)</span><br><span class="line">return(2-colorable)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/" class="post-title-link" itemprop="url">乘积最大</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-16 23:07:43" itemprop="dateCreated datePublished" datetime="2020-04-16T23:07:43+08:00">2020-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 15:21:22" itemprop="dateModified" datetime="2020-06-16T15:21:22+08:00">2020-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>设有一个长度n的数字串，要求选手使用k个乘号将它分成k+1个部分，找出一种分法，使得这k+1个部分的乘积能够为最大。  </p>
+</blockquote>
+<h3 id="证明满足最优性定理"><a href="#证明满足最优性定理" class="headerlink" title="证明满足最优性定理"></a>证明满足最优性定理</h3><p>设字符串长度为$ n $，用$ k $个乘号划分时，乘积最大的表达为$ T(n,k) $，那么其子问题是$ T(w,k-1) $</p>
+<p>要证：$ T(n,k) $最优时，$ T(w,k-1) $也是最优的。  </p>
+<p>反证法：  </p>
+<p>假设存在：$$ T’(w,k-1) &gt; T(w,k-1) $$<br>那么一定有：$$ str[w+1:n-1] \times T’(w,k-1) &gt; str[w+1:n-1] \times T(w,k-1) $$<br>故$ T(n,k) $不是最优的，假设不成立，所以其满足最优性定理。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设$str[n-1]$为字符串，$dp[n][k]$就是长度为n的数字串中插入k个乘号的最大乘积。<br>就是把所有用一个乘号截断的情况试一遍，找最大的。<br>即：$ dp[n][k]=max_{0 \le w \le n-1}(dp[w][k-1]*str[w+1:n-1]) $ 为动态规划递归式。  </p>
+<p>例：设数字串为31246, k = 2，即求$dp[5][2]$：<br>$ dp[5][2]=max_{0 \le w \le n-1}(dp[w][1]*str[w+1:4]) $</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
+<p>用动态规划的基础思想，以左上-右下对角线为基准计算$dp$表，根据$dp$表，得7488。</p>
+<p>同时有$s$表记录断开位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0 1 2 3 4</span><br><span class="line">1</span><br><span class="line">2 1 </span><br><span class="line">3 2 2</span><br><span class="line">4 3 3</span><br><span class="line">5 4 4 ...</span><br></pre></td></tr></table></figure>
+
+<p>根据$s$表信息得知，在3，4两个位置加了乘号，即$312 \times 4 \times 6 = 7488$</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$O(n)$个元素需要计算，每个比较$O(n)$次，输出为线性时间复杂度，故$ O(n^2) $。</p>
 
       
     </div>
@@ -1204,7 +1284,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

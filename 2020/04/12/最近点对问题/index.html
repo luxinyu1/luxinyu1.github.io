@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="暴力算可以。但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为d1 最近点对在右边，设其为d2 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的d1和d2，算dmin&#x3D;min(d1,">
+  <meta name="description" content="暴力算可以，但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为$d_1$ 最近点对在右边，设其为$d_2$ 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的$d_1$和$d_2$，算$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最近点对问题">
 <meta property="og:url" content="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
-<meta property="og:description" content="暴力算可以。但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为d1 最近点对在右边，设其为d2 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的d1和d2，算dmin&#x3D;min(d1,">
+<meta property="og:description" content="暴力算可以，但分治法时间复杂度明显更低。 分治法其实和最大子段和是大同小异的。划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。  最近点对在左边，设其为$d_1$ 最近点对在右边，设其为$d_2$ 最近点对横跨了两个区    显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。  对左右点集双重遍历，分治法等于白做。 用递归生成的$d_1$和$d_2$，算$">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-12T11:15:42.441Z">
-<meta property="article:modified_time" content="2020-04-12T12:06:26.353Z">
+<meta property="article:modified_time" content="2020-06-16T12:35:40.094Z">
 <meta property="article:author" content="Franklin Lu">
 <meta property="article:tag" content="分治法">
 <meta name="twitter:card" content="summary">
@@ -136,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -223,10 +223,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 20:35:40" itemprop="dateModified" datetime="2020-06-16T20:35:40+08:00">2020-06-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -248,19 +254,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>暴力算可以。但分治法时间复杂度明显更低。</p>
+        <p>暴力算可以，但分治法时间复杂度明显更低。</p>
 <h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
 <ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
+<li>最近点对在左边，设其为$d_1$</li>
+<li>最近点对在右边，设其为$d_2$</li>
 <li>最近点对横跨了两个区  </li>
 </ol>
 <p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
 <ol>
 <li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
+<li>用递归生成的$d_1$和$d_2$，算$d_{min}=min(d_1, d_2)$，显然，<strong>在中心线$\pm d_{min}$范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在$\pm d_{min}$区域中）下的时间复杂度与1相同。  </li>
 </ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
+<p>改进一下2，通过观察可以发现，以中轴线为中心的的$2d_{min}*d_{min}$空间内至多含有8个点，故最近点对必在$T[i]$到$T[i+7]$中，故只需将$T$从小到大排序，选下标连续的8个点算距离即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -280,12 +286,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" rel="prev" title="快速排序">
-      <i class="fa fa-chevron-left"></i> 快速排序
+    <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" rel="prev" title="最大子段和问题">
+      <i class="fa fa-chevron-left"></i> 最大子段和问题
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" rel="next" title="最大子段和问题">
-      最大子段和问题 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/12/BERT/" rel="next" title="BERT">
+      BERT <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -359,7 +365,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -468,6 +474,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -197,91 +197,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/16/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/" class="post-title-link" itemprop="url">乘积最大</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-16 23:07:43" itemprop="dateCreated datePublished" datetime="2020-04-16T23:07:43+08:00">2020-04-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 13:45:00" itemprop="dateModified" datetime="2020-04-23T13:45:00+08:00">2020-04-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>设有一个长度N的数字串，要求选手使用K个乘号将它分成K+1个部分，找出一种分法，使得这K+1个部分的乘积能够为最大。  </p>
-</blockquote>
-<h3 id="证明满足最优性定理"><a href="#证明满足最优性定理" class="headerlink" title="证明满足最优性定理"></a>证明满足最优性定理</h3><p>设字符串长度为$ n $，用$ k $个乘号划分时，乘积最大的表达为$ T(n,k) $，那么其子问题是$ T(w,k-1) $</p>
-<p>要证：$ T(n,k) $最优时，$ T(w,k-1) $也是最优的。  </p>
-<p>反证法：  </p>
-<p>假设存在：$$ T’(w,k-1) &gt; T(w,k-1) $$<br>那么一定有：$$ str[w+1:n-1]*T’(w,k-1) &gt; str[w+1:n-1]*T(w,k-1) $$<br>故$ T(n,k) $不是最优的，假设不成立，所以其满足最优性定理。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设str[n-1]为字符串，dp[n][k]就是长度为n的数字串中插入k个乘号的最大乘积。<br>就是把所有用一个乘号截断的情况试一遍，找最大的。<br>即：$ dp[n][k]=max(dp[n][k], dp[w][k-1]*str[w+1:n-1]) $ 为动态规划递归式。  </p>
-<p>例：设数字串为31246, k = 2，即求dp[5][2]：<br>$ dp[5][2]=max(dp[5][2],dp[w][1]*str[w+1:n-1]) $</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> <span class="number">1</span>     <span class="number">2</span>    <span class="number">3</span>    <span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">62</span>    <span class="number">6</span></span><br><span class="line"><span class="number">4</span> <span class="number">1248</span>  <span class="number">248</span>  <span class="number">24</span></span><br><span class="line"><span class="number">5</span> <span class="number">18744</span> <span class="number">7488</span> <span class="number">2852</span> <span class="number">144</span></span><br></pre></td></tr></table></figure>
-<p>用动态规划的基础思想，以左上-右下对角线为基准计算dp表，根据dp表，得7488。</p>
-<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>$ O(n^2) $</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/16/%E6%9C%80%E4%BC%98%E4%BA%8C%E5%8F%89%E6%9F%A5%E6%89%BE%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -305,10 +220,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-16 14:22:54 / 修改时间：22:48:17" itemprop="dateCreated datePublished" datetime="2020-04-16T14:22:54+08:00">2020-04-16</time>
+              <time title="创建时间：2020-04-16 14:22:54" itemprop="dateCreated datePublished" datetime="2020-04-16T14:22:54+08:00">2020-04-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-18 11:52:41" itemprop="dateModified" datetime="2020-06-18T11:52:41+08:00">2020-06-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -331,22 +252,23 @@
 
       
           <h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><ol>
-<li>若左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
-<li>若右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
+<li>若左子树不空，则左子树上所有结点的值均小于它的<strong>根结点</strong>的值；</li>
+<li>若右子树不空，则右子树上所有结点的值均大于它的<strong>根结点</strong>的值；</li>
 <li>左、右子树也分别为二叉排序树；</li>
 <li>没有键值相等的结点。  </li>
 </ol>
-<p>在随机的情况下，二叉查找树的平均查找长度为O(nlogn)</p>
+<p>在随机的情况下，二叉查找树的平均查找长度为$O(nlogn)$</p>
 <h3 id="最优二叉搜索树"><a href="#最优二叉搜索树" class="headerlink" title="最优二叉搜索树"></a>最优二叉搜索树</h3><p>设$ \lbrace r_1,r_2,…,r_n \rbrace $是$ n $个记录的集合，其查找概率分别是$ \lbrace p_1,p_2,…,p_n \rbrace $，最优二叉查找树是以这$ n $个记录构成的查找树中具有最少平均比较次数的二叉查找树，即$ \sum_{i=1}^n p_ic_i $最小，其中$ p_i $是记录$ r_i $的查找概率，$ c_i $是在二叉查找树中查找$ r_i $的比较次数。</p>
 <h3 id="证明最优二叉查找树满足最优性定理"><a href="#证明最优二叉查找树满足最优性定理" class="headerlink" title="证明最优二叉查找树满足最优性定理"></a>证明最优二叉查找树满足最优性定理</h3><p>将$ \lbrace r_1,r_2,…,r_n \rbrace $构成的二叉查找树记为$ T(1,n) $，其中$ r_k $是其根节点，则其左子树$ T(1,k-1) $由$ \lbrace r_1,r_2,…,r_{k-1} \rbrace $，其右子树$ T(k+1,n) $由$ \lbrace r_{k+1},r_2,…,r_n \rbrace $组成。  </p>
 <p>要证：若$ T(1,n) $最优，则$ T(1,k-1) $与$ T(k+1,n) $均最优。  </p>
 <p>用反证法来说，就是当$ T(1,n) $最优时，假设$ T’(1,k-1) $是比$ T(1,k-1) $更优的二叉搜索树，那么由$ T’(1,k-1) $与$ T(k+1,n) $构成的二叉搜索树一定是更优，与假设矛盾，故最优性定理成立。</p>
-<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均搜索次数，那么该问题就是求解$ C(1,n) $。  </p>
-<p>假设定义根节点为$ r_k $，可以得到：  </p>
+<h3 id="动态规划求解"><a href="#动态规划求解" class="headerlink" title="动态规划求解"></a>动态规划求解</h3><p>设$ C(i,j) $是$ \lbrace r_i,…,r_j \rbrace $的平均查找次数，那么该问题就是求解$ C(1,n) $。  </p>
+<p>假设定义根节点为$ r_k $，即定义根节点下标为$k$，可以得到：  </p>
 <p>$ C(i,i-1)=0 (1\leq i\leq n+1) $ </p>
 <p>$ C(i,j)=p_i (1\leq i\leq n) $</p>
-<p>$ C(i,j)=min \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
-<p>这样问题就转化为<strong>斜对角线</strong>填C[n+1][n+1]这张二维表（通过第三个式子），结果在C[i][n]处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表R[n+1][n+1]，其下标范围与C相同，R[i][j]表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
+<p>$ C(i,j)= min_{i \le k \le j}{\lbrace p_k \times 1 + 左子树平均查找次数 + 右子树平均查找次数 \rbrace}$</p>
+<p>$= min_{i \le k \le j} \lbrace C(i,k-1)+C(k+1,j)+\sum_{s=i}^j p_s \rbrace $  </p>
+<p>这样问题就转化为<strong>斜对角线</strong>填$C[n+1][n+1]$这张二维表（通过第三个式子），结果在$C[i][n]$处，但是为了求出平均比较次数的同时也得到整个树，需要另外设一个二维表$R[n+1][n+1]$，其下标范围与$C$相同，$R[i][j]$表示根节点的序号，只要知道了根节点，左右子树又能递归解决了。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">OptimalIBST</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">double</span> p[], <span class="keyword">double</span> C[][], <span class="keyword">int</span> R[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;i++) &#123; <span class="comment">// 初始化</span></span><br><span class="line">        C[i][i<span class="number">-1</span>] = <span class="number">0</span>; <span class="comment">// 式子1</span></span><br><span class="line">        C[i][i] = p[i] <span class="comment">// 式子2</span></span><br><span class="line">        R[i][i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    C[n+<span class="number">1</span>][n]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (d=<span class="number">1</span>;d&lt;n;d++) &#123; <span class="comment">// 按对角线逐条计算</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n-d;i++) &#123;</span><br><span class="line">            j = i + d;</span><br><span class="line">            <span class="built_in">min</span> = INF;</span><br><span class="line">            mink = i;</span><br><span class="line">            sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (k=i;k&lt;=j;k++) &#123;</span><br><span class="line">                sum = sum + p[k];</span><br><span class="line">                <span class="keyword">if</span> (C[i][k<span class="number">-1</span>]+C[k+<span class="number">1</span>][j]&lt;<span class="built_in">min</span>) &#123;</span><br><span class="line">                    <span class="built_in">min</span> = C[i][k<span class="number">-1</span>] + C[k+<span class="number">1</span>][j];</span><br><span class="line">                    mink = k; <span class="comment">// 记录最小根节点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            C[i][j] = <span class="built_in">min</span> + sum; <span class="comment">// 式子3</span></span><br><span class="line">            R[i][j] = mink;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> C[<span class="number">1</span>][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -441,87 +363,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大子段和问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:17:22" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
-<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段a[1:n]分为a[1:n/2]和a[n/2+1:n]两段，那么就有三种情况：  </p>
-<ol>
-<li>最大子段和在a[1:n]上，设其为s1</li>
-<li>最大子段和在a[n/2+1:n]上，设其为s2</li>
-<li>最大子段和就是a[n]的最大子段和，即s1+s2  </li>
-</ol>
-<p>此时时间复杂度为O(nlogn)</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123; <span class="comment">// 子情况3</span></span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个b[j]，它的值分两种情况：</p>
-<ol>
-<li>当b[j-1] &lt;= 0的时候，b[j] = a[j]</li>
-<li>当b[j-1] &gt; 0的时候，b[j] = b[j-1] + a[j]<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是b[j]中的最大值。<br>此时，求最大子段和只要分别遍历求出b[j]和a[j]，时间复杂度为O(n)</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -545,10 +386,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:06:26" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 20:35:40" itemprop="dateModified" datetime="2020-06-16T20:35:40+08:00">2020-06-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -570,20 +417,136 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>暴力算可以。但分治法时间复杂度明显更低。</p>
+          <p>暴力算可以，但分治法时间复杂度明显更低。</p>
 <h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>其实和最大子段和是大同小异的。<br>划分：根据x坐标对S中的点按升序排序，在中间点处将整个平面一分为二。</p>
 <ol>
-<li>最近点对在左边，设其为d1</li>
-<li>最近点对在右边，设其为d2</li>
+<li>最近点对在左边，设其为$d_1$</li>
+<li>最近点对在右边，设其为$d_2$</li>
 <li>最近点对横跨了两个区  </li>
 </ol>
 <p>显然对于1，2，只要递归即可，但对于3，寻找一个好的解决方案就很重要了。</p>
 <ol>
 <li>对左右点集双重遍历，分治法等于白做。</li>
-<li>用递归生成的d1和d2，算dmin=min(d1, d2)，显然，<strong>在中心线+-dmin范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在+-dmin区域中）下的时间复杂度与1相同。  </li>
+<li>用递归生成的$d_1$和$d_2$，算$d_{min}=min(d_1, d_2)$，显然，<strong>在中心线$\pm d_{min}$范围外的点不用参与计算了</strong>，但最坏情况（即所有点都集中在$\pm d_{min}$区域中）下的时间复杂度与1相同。  </li>
 </ol>
-<p>改进一下2，通过观察可以发现，以中轴线为中心的的2dmin*dmin空间内至多含有8个点，故最近点对必在T[i]到T[i+7]中，故只需将T从小到大排序，选下标连续的8个点算距离即可。</p>
+<p>改进一下2，通过观察可以发现，以中轴线为中心的的$2d_{min}*d_{min}$空间内至多含有8个点，故最近点对必在$T[i]$到$T[i+7]$中，故只需将$T$从小到大排序，选下标连续的8个点算距离即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cp(S[], Y[], low, high) &#123;</span><br><span class="line">    if (high - low &lt;&#x3D; 3) then</span><br><span class="line">        mid &#x3D; (high - low) &#x2F; 2</span><br><span class="line">        x0 &#x3D; S[mid].x</span><br><span class="line">        d1 &#x3D; cp(S, low, mid) &#x2F;&#x2F; 子问题1</span><br><span class="line">        d2 &#x3D; cp(S, mid+1, high) &#x2F;&#x2F; 子问题2</span><br><span class="line">        dmin &#x3D; min(d1, d2)</span><br><span class="line">    for i &#x3D; 1 to n</span><br><span class="line">        if (|x(Y[i]-x0)|&lt;&#x3D;dmin) then</span><br><span class="line">            k &#x3D; k + 1</span><br><span class="line">            T[k] &#x3D; Y[i] &#x2F;&#x2F; 选出T[k]</span><br><span class="line">    dmin2 &#x3D; dmin</span><br><span class="line">    for i &#x3D; 1 to k-1</span><br><span class="line">        for j&#x3D;i+1 to min&#123;i+7, k&#125;</span><br><span class="line">            if d(T[i],T[j]) &lt; dmin2 then dmin2 &#x3D; d(T[i],T[j])</span><br><span class="line">    dmin &#x3D; dmin2</span><br><span class="line">    return dmin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大子段和问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 20:16:15" itemprop="dateModified" datetime="2020-06-16T20:16:15+08:00">2020-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>常规思想就是两重或者三重循环。但显然可以更简单一点：</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>将最大子段$a[1:n]$分为$a[1:\frac{n}{2}]$和$a[\frac{n}{2}+1:n]$两段，那么就有三种情况：  </p>
+<ol>
+<li>最大子段和在$a[1:\frac{n}{2}]$上，设其为$s_1$</li>
+<li>最大子段和在$a[ \frac{n}{2}+1:n] $上，设其为$s_2$</li>
+<li>最大子段和就是$a[n]$的最大子段和，即$s_1+s_2$  </li>
+</ol>
+<p>此时时间复杂度为$O(nlogn)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MaxSubSum</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (left==right) &#123;</span><br><span class="line">        sum = a[left]&gt;<span class="number">0</span> ? a[left] : <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>; <span class="comment">// 划分</span></span><br><span class="line">        <span class="keyword">int</span> leftsum = MaxSubSum(a, left, center); <span class="comment">// 子情况1</span></span><br><span class="line">        <span class="keyword">int</span> rightsum = MaxSubSum(a, center + <span class="number">1</span>, right); <span class="comment">// 子情况2</span></span><br><span class="line">        <span class="keyword">int</span> s1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> lefts = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 子情况3</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center; i &gt;= left; i--) &#123;</span><br><span class="line">            lefts += a[i];</span><br><span class="line">            <span class="keyword">if</span> (lefts &gt; s1) s1 = lefts;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">int</span> s2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = center+<span class="number">1</span>; i &lt;= right; i++) &#123;</span><br><span class="line">            rights += a[i];</span><br><span class="line">            <span class="keyword">if</span> (rights &gt; s2) s2 = rights;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = s1 + s2;</span><br><span class="line">        sum = <span class="built_in">max</span>(leftsum, rightsum, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>设置一个$b[j]$，它的值分两种情况：</p>
+<ol>
+<li>当$b[j-1] \le 0$的时候，$b[j] = a[j]$</li>
+<li>当$b[j-1] &gt; 0$的时候，$b[j] = b[j-1] + a[j]$<br>此时b[j]更像是一个<strong>状态量</strong>，最大子段和就是$b[j]$中的最大值。<br>此时，求最大子段和只要分别遍历求出$b[j]$和$a[j]$，时间复杂度为$O(n)$</li>
+</ol>
+<h3 id="股票问题"><a href="#股票问题" class="headerlink" title="股票问题"></a>股票问题</h3><p>股票问题实际上就是将变化数组单独算出来，求变化数组的最大子段和，例如：</p>
+<table>
+<thead>
+<tr>
+<th align="center">天</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">价格</td>
+<td align="center">bbb</td>
+<td align="center">11</td>
+<td align="center">7</td>
+<td align="center">10</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">变化</td>
+<td align="center"></td>
+<td align="center">1</td>
+<td align="center">-4</td>
+<td align="center">3</td>
+<td align="center">-4</td>
+</tr>
+</tbody></table>
+
       
     </div>
 
@@ -633,7 +596,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-28 17:40:21" itemprop="dateModified" datetime="2020-05-28T17:40:21+08:00">2020-05-28</time>
+                <time title="修改时间：2020-06-17 14:25:15" itemprop="dateModified" datetime="2020-06-17T14:25:15+08:00">2020-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -660,9 +623,9 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (p &lt; r) &#123; <span class="comment">// 仅仅确保它是个合法数组</span></span><br><span class="line">        <span class="keyword">int</span> q = Partition(a, p, r); <span class="comment">// 表面切分数组，获得哨兵q的位置与一个全部比q小的数组切分，一个全部比q大的数组切分</span></span><br><span class="line">        QuickSort(a, p, q<span class="number">-1</span>); <span class="comment">// 子问题求解</span></span><br><span class="line">        QuickSort(a, q+<span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>很显然Partition是这个算法的精髓。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> p, <span class="keyword">long</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = p;</span><br><span class="line">    <span class="keyword">int</span> j = r;</span><br><span class="line">    <span class="keyword">int</span> temp;</span><br><span class="line">    <span class="keyword">int</span> key = <span class="built_in">array</span>[p];</span><br><span class="line">    <span class="keyword">while</span> (i &lt;= j) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">array</span>[--j] &lt; key) &#123;</span><br><span class="line">            <span class="built_in">array</span>[i] = <span class="built_in">array</span>[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (<span class="built_in">array</span>[++i] &gt;= key) &#123;</span><br><span class="line">            <span class="built_in">array</span>[j] = <span class="built_in">array</span>[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">array</span>[j] = key;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>不过想一想，每次都初始化同一个哨兵位置是最合理的吗？显然不是，当分治时一边为0个元素，中间为哨兵，另一边为n-1个元素时，陷入了最坏的情况，与插入排序差不多慢，算法导论上有详细的说明。<strong>所以可以增加一点随机性去规避极端性</strong>：</p>
+<p>不过想一想，每次都初始化同一个哨兵位置是最合理的吗？显然不是，当分治时一边为$0$个元素，中间为哨兵，另一边为$n-1$个元素时，陷入了最坏的情况，与插入排序差不多慢，算法导论上有详细的说明。<strong>所以可以增加一点随机性去规避极端性</strong>：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RandomizedPartition</span><span class="params">(Type a[], <span class="keyword">int</span> p, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = Random(p, r);</span><br><span class="line">    Swap(a[i], a[p]);</span><br><span class="line">    <span class="keyword">return</span> Partition(a, p, r)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>快速排序在常数倍分割时时间复杂度为O(nlogn)，在最坏条件下（一边为0个元素，中间为哨兵，另一边为n-1个元素）时，时间复杂度为O(n^2)</p>
+<p>快速排序在常数倍分割时时间复杂度为$O(nlogn)$，在最坏条件下（一边为$0$个元素，中间为哨兵，另一边为$n-1$个元素）时，时间复杂度为$O(n^2)$</p>
 
       
     </div>
@@ -788,87 +751,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Franklin Lu">
-      <meta itemprop="description" content="给岁月以文明，时光以生命。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Franklinの灵质空间">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:13:33" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>穷举法：对于每一个$ X_m $的子序列，验证其是否为$ Y_m $的子序列。<br>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有m个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_m $的子序列需要花费$ O(n) $的时间。<br>总时间复杂度就成了 $ O(n2^{m}) $，这是一个突破天际的复杂度。<br>那么就要考虑更好的算法了。</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
-<ol>
-<li>xm = ym，即两个序列最后一个元素相同，那么子序列就是Xm-1和Ym-1的子序列，子序列长度就是之前长度+1</li>
-<li>xm != ym，即两个子序列最后一个元素不同，那么子序列就是(子序列(Xm,Ym-1), 子序列(Xm-1,Ym))中长的那个，子序列长度也是原来两个长度大的那个  </li>
-</ol>
-<p>这样就很容易构造二维表来存放最大公共子序列的长度。例如CABADCDB和DCADBCDAB，填表规则是：</p>
-<ol>
-<li>若xy方向两个元素一样，就将其左上方格子的值+1填入</li>
-<li>若xy方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
-<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
-<p>由上图右下角E6出发，经过U5,E5,E4,U3,E3,E2,L1,L1,E1到达边界，得出最大公共子序列为CABCDB</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E8%A3%85%E9%85%8D%E7%BA%BF%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -892,10 +774,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:12:35" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 22:17:26" itemprop="dateModified" datetime="2020-06-16T22:17:26+08:00">2020-06-16</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -918,7 +806,7 @@
 
       
           <blockquote>
-<p>某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂,然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,如果它移动到另一条线上,则花费时间为$ t_i[j] $。在离开一条装配线的第$ n $个装配站后,完成的汽车底盘花费时间为$ x_i $离开工厂。<br><strong>待求解的问题是,确定应该在装配线 1 内选择哪些站,在装配线 2 内选择哪些站,才能使汽车通过工厂的总时间最短。</strong>  </p>
+<p>某个汽车工厂共有两条装配线,每条有$ n $个装配站。装配线$ i $的第$ j $个装配站表示为$ S_i[j] $,在该站的装配时间为$ a_i[j] $。一个汽车底盘进入工厂，然后进入装配线$ i $($ i $为 1 或 2),花费时间为$ e_i $。在通过一条线的第$ j $个装配站后,这个底盘来到任一条装配线的第$ j+1 $个装配站。如果它留在相同的装配线,则没有移动开销。但是,如果它移动到另一条线上,则花费时间为$ t_i[j] $。在离开一条装配线的第$ n $个装配站后,完成的汽车底盘花费时间为$ x_i $离开工厂。<br><strong>待求解的问题是,确定应该在装配线 1 内选择哪些站,在装配线 2 内选择哪些站,才能使汽车通过工厂的总时间最短。</strong>  </p>
 </blockquote>
 <p>暴力办法由于每个站都有两个选择，总装配路线数就是$ 2^{n} $，当n很大时，变得不可行。</p>
 <h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>对于每一个问题$ S_i[j] $，其子问题有两种情况：</p>
@@ -932,6 +820,9 @@
 <li>$ j\neq1, f_1[j] = min(f_1[j-1]+a_1[j],f_2[j-1]+t_2[j-1]+a_1[j]) $<br>$ j\neq1, f_2[j] = min(f_2[j-1]+a_2[j],f_1[j-1]+t_1[j-1]+a_2[j])$  </li>
 </ol>
 <h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>用填表法，可以先将所有$ f_1[j],f_2[j] $的值全部计算出来，同时设置箭头指向用来回溯，或者新设一个$ l_i[j] $专门记录到$ S_i[j] $的最快路径的上一个工作台所在的装配线号。</p>
+<p>伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">DPFFastWay(a,t,e,x,n)</span><br><span class="line">	f1[1] &#x3D; e1 + a1[1]</span><br><span class="line">	f2[1] &#x3D; e2 + a2[1]</span><br><span class="line">	for j &#x3D; 2 to n do</span><br><span class="line">		if f1[i-1] + a1[j] &lt;&#x3D; f2[j-1] + t2[j-1] + a1[j] then</span><br><span class="line">			f1[j] &#x3D; f1[j-1] + a1[j]</span><br><span class="line">			l1[j] &#x3D; 1</span><br><span class="line">		else</span><br><span class="line">			f1[j] &#x3D; f2[j-1] + t2[j-1] + a1[j]</span><br><span class="line">			l1[j] &#x3D; 2</span><br><span class="line">		if f2[i-1] + a2[j] &lt;&#x3D; f1[j-1] + t1[j-1] + a2[j] then</span><br><span class="line">			f2[j] &#x3D; f2[j-1] + a2[j]</span><br><span class="line">			l2[j] &#x3D; 2</span><br><span class="line">		else</span><br><span class="line">			f2[j] &#x3D; f1[j-1] + t1[j-1] + a2[j]</span><br><span class="line">			l2[j] &#x3D; 1</span><br><span class="line">	if f1[n] + x1 &lt;&#x3D; f2[n] + x2 then</span><br><span class="line">		f* &#x3D; f1[n] + x2</span><br><span class="line">		l* &#x3D; 1</span><br><span class="line">	else</span><br><span class="line">		f* &#x3D; f2[n] + x2</span><br><span class="line">		l* &#x3D; 2</span><br></pre></td></tr></table></figure>
+
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
 <p>Professor Canty conjectures that there might exist some $ e_i $, $ a_i[j] $, and $ t_i[j] $ values for which FASTEST-WAY produces $ l_i[j] $ values such that $ l_1[j] = 2 $ and $ l_2[j] = 1 $ for some station number $ j $. Assuming that all transfer costs $ t_i[j] $ are nonnegative, show that the professor is wrong.  </p>
 </blockquote>
@@ -940,6 +831,102 @@
 <p>$ l_1[j] = 2 $ 即 $ f_2[j-1]+t_2[j-1] &lt; f_1[j-1] ①$  </p>
 <p>$ l_2[j] = 1 $ 即 $ f_1[j-1]+t_1[j-1] &lt; f_2[j-1] ②$  </p>
 <p>显然①②两个式子矛盾，故假设不成立。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">最大公共子序列问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 16:41:40" itemprop="dateModified" datetime="2020-06-16T16:41:40+08:00">2020-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="穷举"><a href="#穷举" class="headerlink" title="穷举"></a>穷举</h3><p>对于每一个$ X_m $的子序列，验证其是否为$ Y_n $的子序列。 </p>
+<p>假设$ X_m = {x_1, x_2, x_3, … , x_m} $有$ m $个元素，它就有$ 2^{m} $个子序列。对于每个$ X_m $中的子序列，验证其是否也是$ Y_n $的子序列需要花费$ O(n) $的时间。总时间复杂度就成了$ O(n2^{m}) $，这是一个突破天际的复杂度。</p>
+<p>那么就要考虑更好的算法了。</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>子问题有两种情况：</p>
+<ol>
+<li>$x_m = y_n$，即两个序列最后一个元素相同，那么子序列就是$X_{m-1}$和$Y_{n-1}$的子序列，子序列长度就是之前长度+1</li>
+<li>$x_m \ne y_n$，即两个子序列最后一个元素不同，那么子序列就是$(LCS(X_m,Y_{n-1}), LCS(X_{m-1},Y_n))$中长的那个，子序列长度即为$max(c[i,j-1],c[i-1,j])$</li>
+</ol>
+<p>这样就很容易构造二维表来存放最大公共子序列的长度。</p>
+<p>例如$CABADCDB$和$DCADBCDAB$，填表规则是：</p>
+<ol>
+<li>若横竖方向两个元素一样，就将其左上方格子的值+1填入</li>
+<li>若横竖方向两个元素不一样，就取其上边一格和左边一格中值较大的填入  </li>
+<li>E代表左上箭头，同时也意味着其处于子串中，L代表左箭头，U代表上箭头  </li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     C  A  B  A  D  C  D  B</span><br><span class="line">  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span>  <span class="number">0</span> </span><br><span class="line">D <span class="number">0</span> L0 U0 U0 U0 E1 L1 L1 L1</span><br><span class="line">C <span class="number">0</span> E1 L1 L1 L1 L1 E2 L2 L2</span><br><span class="line">A <span class="number">0</span> U1 E2 L2 E2 L2 U2 L2 L2</span><br><span class="line">D <span class="number">0</span> U1 U2 U2 U2 E3 L3 E3 L3</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 L3 U3 U3 U3 E4</span><br><span class="line">C <span class="number">0</span> E1 U2 U3 L3 L3 E4 L4 U4</span><br><span class="line">D <span class="number">0</span> U1 U2 U3 U3 E4 U4 E5 L5</span><br><span class="line">A <span class="number">0</span> U1 E2 U3 E4 U4 U4 U5 U5</span><br><span class="line">B <span class="number">0</span> U1 U2 E3 U4 U4 U4 U5 E6</span><br></pre></td></tr></table></figure>
+<p>由上图右下角$E6$出发，经过$U5,E5,E4,U3,E3,E2,L1,L1,E1$到达边界，得出最大公共子序列为$CABCDB$</p>
+<p>生成表的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DPLCSLength(X, Y, m, n) &#x2F;&#x2F; X,Y为两个子序列，m,n为两个子序列的长度</span><br><span class="line">	for i &#x3D; 1 to m do c[i,0] &#x3D; 0</span><br><span class="line">	for j &#x3D; 1 to n do c[0,j] &#x3D; 0 &#x2F;&#x2F; 初始化表的边界</span><br><span class="line">	for i &#x3D; 1 to m do</span><br><span class="line">		for j &#x3D; 1 to n do</span><br><span class="line">			if x_i &#x3D; t_j do</span><br><span class="line">				c[i,j] &#x3D; c[i-1,j-1] + 1</span><br><span class="line">				b[i,j] &#x3D; E</span><br><span class="line">			else if c[i-1,j] &gt; c[i,j-1] then</span><br><span class="line">				c[i,j] &#x3D; c[i-1,j]</span><br><span class="line">				b[i,j] &#x3D; U</span><br><span class="line">			else then</span><br><span class="line">				c[i,j] &#x3D; c[i,j-1]</span><br><span class="line">				b[i,j] &#x3D; L</span><br><span class="line">	return c and b</span><br></pre></td></tr></table></figure>
+
+<p>打印路径的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PrintLCS(b, X, i, j)</span><br><span class="line">	if i &#x3D; 0 or j &#x3D; 0 then return 0</span><br><span class="line">	if b[i,j] &#x3D; E then</span><br><span class="line">		PrintLCS(b, x, i-1, j-1)</span><br><span class="line">		print(x_i)</span><br><span class="line">	else if b[i,j] &#x3D; U then</span><br><span class="line">		PrintLCS(b, x, i-1, j)</span><br><span class="line">	else</span><br><span class="line">		PrintLCS(b, x, i, j-1)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1029,6 +1016,85 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://luxinyu1.github.io/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Franklin Lu">
+      <meta itemprop="description" content="给岁月以文明，时光以生命。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franklinの灵质空间">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">归并排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-17 22:25:25" itemprop="dateModified" datetime="2020-06-17T22:25:25+08:00">2020-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是$O(logn)$，加上一个合并的过程就成为了归并排序，其复杂度就应该是$O(nlogn)$ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MergeSort(A, p, r)</span><br><span class="line">	if p &lt; r then</span><br><span class="line">		q &#x3D; (p + r) &#x2F; 2 &#x2F;&#x2F; 向下取整</span><br><span class="line">		MergeSort(A, p, q)</span><br><span class="line">		MergeSort(A, q+1, r)</span><br><span class="line">		Merge(A, p, q, r)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Merge(A, p, q, r)</span><br><span class="line">	n1 &#x3D; q - p + 1</span><br><span class="line">	n2 &#x3D;  r - q</span><br><span class="line">	for i &#x3D; 1 to n1</span><br><span class="line">		L[i] &#x3D; A[p+i-1] &#x2F;&#x2F; 把原来的数组分为L和R两部分</span><br><span class="line">	for j &#x3D; 1 to n2</span><br><span class="line">		R[j] &#x3D; A[q+j] &#x2F;&#x2F; 把原来的数组分为L和R两部分</span><br><span class="line">	L[n1+1] &#x3D; INF</span><br><span class="line">	L[n2+1] &#x3D; INF &#x2F;&#x2F; 在最后放一个INF标志</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	j &#x3D; 1</span><br><span class="line">	for k &#x3D; p to r</span><br><span class="line">		if L[i] &lt;&#x3D; R[j]</span><br><span class="line">            A[k] &#x3D; L[i]</span><br><span class="line">            i &#x3D; i + 1</span><br><span class="line">		else</span><br><span class="line">			A[k] &#x3D; R[j]</span><br><span class="line">			j &#x3D; j + 1</span><br></pre></td></tr></table></figure>
+
+<p>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1098,7 +1164,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

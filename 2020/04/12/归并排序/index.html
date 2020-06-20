@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"luxinyu1.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：并不需要递归过程，直接可以从树的底部开始向上合并 1234567891011void Merg">
+  <meta name="description" content="归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程类比同样是树形结构的二分查找的时间复杂度是$O(logn)$，加上一个合并的过程就成为了归并排序，其复杂度就应该是$O(nlogn)$  123456MergeSort(A, p, r)	if p &lt; r then		q &#x3D; (p + r) &#x2F; 2 &#x2F;&#x2F; 向下取整		Mer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="归并排序">
 <meta property="og:url" content="http://luxinyu1.github.io/2020/04/12/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Franklinの灵质空间">
-<meta property="og:description" content="归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：并不需要递归过程，直接可以从树的底部开始向上合并 1234567891011void Merg">
+<meta property="og:description" content="归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程类比同样是树形结构的二分查找的时间复杂度是$O(logn)$，加上一个合并的过程就成为了归并排序，其复杂度就应该是$O(nlogn)$  123456MergeSort(A, p, r)	if p &lt; r then		q &#x3D; (p + r) &#x2F; 2 &#x2F;&#x2F; 向下取整		Mer">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-12T11:15:42.410Z">
-<meta property="article:modified_time" content="2020-04-12T12:08:15.479Z">
+<meta property="article:modified_time" content="2020-06-17T14:25:25.225Z">
 <meta property="article:author" content="Franklin Lu">
 <meta property="article:tag" content="分治法">
 <meta name="twitter:card" content="summary">
@@ -136,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">24</span></a>
 
   </li>
         <li class="menu-item menu-item-sitemap">
@@ -223,10 +223,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-12 19:15:42 / 修改时间：20:08:15" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
+              <time title="创建时间：2020-04-12 19:15:42" itemprop="dateCreated datePublished" datetime="2020-04-12T19:15:42+08:00">2020-04-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-17 22:25:25" itemprop="dateModified" datetime="2020-06-17T22:25:25+08:00">2020-06-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -248,8 +254,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是O(logn)，加上一个合并的过程就成为了归并排序，其复杂度就应该是O(nlogn)<br>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(Type a[], Type b[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left; <span class="comment">// 左数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> j = mid + <span class="number">1</span>; <span class="comment">// 右数组待比较游标</span></span><br><span class="line">    <span class="keyword">int</span> k = left; <span class="comment">// 合并数组的游标</span></span><br><span class="line">    <span class="keyword">while</span> (i&lt;=mid &amp;&amp; j&lt;=right) &#123; <span class="comment">// 在i,j有一个越界以后，循环即终止</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; a[j]) &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>归并排序本质上是一次自顶向下的二分分割，分割后的n个单元素子问题的两两合并的过程<br>类比同样是树形结构的二分查找的时间复杂度是$O(logn)$，加上一个合并的过程就成为了归并排序，其复杂度就应该是$O(nlogn)$ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MergeSort(A, p, r)</span><br><span class="line">	if p &lt; r then</span><br><span class="line">		q &#x3D; (p + r) &#x2F; 2 &#x2F;&#x2F; 向下取整</span><br><span class="line">		MergeSort(A, p, q)</span><br><span class="line">		MergeSort(A, q+1, r)</span><br><span class="line">		Merge(A, p, q, r)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Merge(A, p, q, r)</span><br><span class="line">	n1 &#x3D; q - p + 1</span><br><span class="line">	n2 &#x3D;  r - q</span><br><span class="line">	for i &#x3D; 1 to n1</span><br><span class="line">		L[i] &#x3D; A[p+i-1] &#x2F;&#x2F; 把原来的数组分为L和R两部分</span><br><span class="line">	for j &#x3D; 1 to n2</span><br><span class="line">		R[j] &#x3D; A[q+j] &#x2F;&#x2F; 把原来的数组分为L和R两部分</span><br><span class="line">	L[n1+1] &#x3D; INF</span><br><span class="line">	L[n2+1] &#x3D; INF &#x2F;&#x2F; 在最后放一个INF标志</span><br><span class="line">	i &#x3D; 1</span><br><span class="line">	j &#x3D; 1</span><br><span class="line">	for k &#x3D; p to r</span><br><span class="line">		if L[i] &lt;&#x3D; R[j]</span><br><span class="line">            A[k] &#x3D; L[i]</span><br><span class="line">            i &#x3D; i + 1</span><br><span class="line">		else</span><br><span class="line">			A[k] &#x3D; R[j]</span><br><span class="line">			j &#x3D; j + 1</span><br></pre></td></tr></table></figure>
+
+<p>但是本质上划分并没有意义，因为可以将原来的数组就看成一个已经划分成单元素子问题的集合，所以简而言之：<strong>并不需要递归过程，直接可以从树的底部开始向上合并</strong>。</p>
+
     </div>
 
     
@@ -346,7 +357,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
