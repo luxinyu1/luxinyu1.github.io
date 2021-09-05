@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/chinese-lexical-simplification
 excerpt: ''
 date: 2021-5-26
-venue: 'VOL. 29'
+venue: 'IEEE/ACM Transactions on Audio, Speech and Language Processing, VOL. 29, 2021'
 paperurl: 'https://ieeexplore.ieee.org/document/9439908'
 citation: ''
 ---

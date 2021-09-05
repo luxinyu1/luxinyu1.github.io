@@ -7,10 +7,10 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Xinyu Lu / Site Title"
+title                    : "Xinyu Lu"
 title_separator          : "-"
 name                     : &name "Xinyu Lu"
-description              : &description "personal description"
+description              : &description "A NLP Lover"
 url                      : https://luxinyu1.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "luxinyu1/luxinyu1.github.io"
@@ -85,7 +85,7 @@ author:
   bio              : "A NLP lover"
   location         : "Suzhou, China"
   employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  pubmed           : ""
   googlescholar    : "https://scholar.google.com/citations?user=_OsLG8EAAAAJ&hl=zh-CN"
   email            :
   researchgate     : "https://www.researchgate.net/profile/Xinyu_Lu18"
