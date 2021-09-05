@@ -14,7 +14,7 @@ I am currently an undergraduate student in the [Department of Computer Science](
 
 My research interests mainly lie in Natural Language Processing and Data Mining. More specifically, I am now focusing on [Text Simplification](http://nlpprogress.com/english/simplification.html) (word and sentence level). I also learned some basic knowledge about Knowledge Graph (KG) and implemented few KG Embedding algorithms during my internship.
 
-### Why NLP attracts me so much?
+### Why does NLP attract me so much?
 
 I love literature and Media Studies as much as Computer Science. In my eyes, NLP combines the beauty of Linguistics, Mathematics, and Computer Science, making it the crown of Artificial Intelligence.
 
