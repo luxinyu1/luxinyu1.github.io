@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/chinese-lexical-simplification
 excerpt: ''
 date: 2021-5-26
+authors: Jipeng Qiang, Xinyu Lu (co-first author), Yun Li, Yunhao Yuan, and Xindong Wu, Fellow, IEEE
 venue: 'IEEE/ACM Transactions on Audio, Speech and Language Processing, VOL. 29, 2021'
 paperurl: 'https://ieeexplore.ieee.org/document/9439908'
 citation: ''

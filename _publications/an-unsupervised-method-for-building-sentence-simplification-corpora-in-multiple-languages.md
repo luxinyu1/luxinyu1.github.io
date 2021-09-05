@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/an-unsupervised-method-for-building-sentence-simplification-corpora-in-multiple-languages
 excerpt: ''
 date: 2021-8-25
+authors: Xinyu Lu, Jipeng Qiang, Yun Li, Yunhao Yuan and Yi Zhu
 venue: 'The 2021 Conference on Empirical Methods in Natural Language Processing'
 paperurl: 'https://arxiv.org/pdf/2109.00165.pdf'
 citation: ''
