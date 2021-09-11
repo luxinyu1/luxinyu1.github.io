@@ -12,7 +12,7 @@ I am currently an undergraduate student in the [Department of Computer Science](
 
 ## Research
 
-My research interests mainly lie in Natural Language Processing and Data Mining. More specifically, I am now focusing on [Text Simplification](http://nlpprogress.com/english/simplification.html) (word and sentence level). I also learned some basic knowledge about Knowledge Graph (KG) and implemented few KG Embedding algorithms during my internship.
+My research interests mainly lie in Natural Language Processing and Data Mining. More specifically, I am now focusing on [Text Simplification](http://nlpprogress.com/english/simplification.html) (word and sentence level). I also learned some basic knowledge about Knowledge Graph (KG) and implemented several KG Embedding algorithms during my internship.
 
 ### Why does NLP attract me so much?
 
