@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a Master's student in the Chinese Information Processing Laboratory at the Institute of Software, Chinese Academy of Sciences, under the Supervision of Professor Xianpei Han.
+I am a Ph.D. student in the Chinese Information Processing Laboratory at the Institute of Software, Chinese Academy of Sciences, under the Supervision of Professor Xianpei Han.
 
 ## Research
 
