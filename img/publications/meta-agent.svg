@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" fill="none">
+  <!-- replication links: each agent builds the next copy of itself (plain dashed, no heads) -->
+  <g stroke="currentColor" stroke-opacity="0.28" stroke-width="2" stroke-dasharray="3 6">
+    <line x1="96" y1="156" x2="228" y2="138"/>
+    <line x1="228" y1="138" x2="372" y2="116"/>
+  </g>
+
+  <!-- agent 1 (same three-part glyph: outer / body / core) -->
+  <circle cx="96" cy="156" r="30" stroke="currentColor" stroke-opacity="0.6" stroke-width="2.5"/>
+  <circle cx="96" cy="156" r="16" fill="currentColor" fill-opacity="0.12"/>
+  <circle cx="96" cy="156" r="6"  fill="currentColor" fill-opacity="0.9"/>
+
+  <!-- agent 2: a copy of itself, improved (larger) -->
+  <circle cx="228" cy="138" r="42" stroke="currentColor" stroke-opacity="0.7" stroke-width="3"/>
+  <circle cx="228" cy="138" r="23" fill="currentColor" fill-opacity="0.13"/>
+  <circle cx="228" cy="138" r="8"  fill="currentColor" fill-opacity="0.9"/>
+
+  <!-- agent 3: improved again, with an extra halo marking the gain -->
+  <circle cx="372" cy="116" r="70" stroke="currentColor" stroke-opacity="0.28" stroke-width="2"/>
+  <circle cx="372" cy="116" r="56" stroke="currentColor" stroke-opacity="0.8" stroke-width="3"/>
+  <circle cx="372" cy="116" r="30" fill="currentColor" fill-opacity="0.15"/>
+  <circle cx="372" cy="116" r="11" fill="currentColor" fill-opacity="0.92"/>
+</svg>

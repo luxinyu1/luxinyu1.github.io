@@ -1,0 +1,102 @@
+{
+  "about": "I am a PhD student at the Chinese Information Processing Laboratory, Institute of Software, Chinese Academy of Sciences (ISCAS), where I am advised by Prof. Xianpei Han.\n\nMy research centers on the alignment of large language models — how we can keep increasingly capable models reliably aligned with human intent, at scale. My work spans safety systems, automated alignment, and scalable oversight.",
+  "select_publications": [
+    {
+      "title": "The Meta-Agent Challenge: Are Current Agents Capable of Autonomous Agent Development?",
+      "authors": [
+        "Xinyu Lu",
+        "Tianshu Wang",
+        "Pengbo Wang",
+        "Zujie Wen",
+        "Zhiqiang Zhang",
+        "Jun Zhou",
+        "Boxi Cao",
+        "Yaojie Lu",
+        "Hongyu Lin",
+        "Xianpei Han",
+        "Le Sun"
+      ],
+      "venue": "Preprint · arXiv 2026",
+      "summary": "A benchmark testing whether agents can autonomously build other agents — and where they still fall short.",
+      "picture": "img/publications/meta-agent.svg",
+      "paper": "https://arxiv.org/abs/2606.04455",
+      "code": "https://github.com/ant-research/meta-agent-challenge"
+    },
+    {
+      "title": "P²O: Joint Policy and Prompt Optimization",
+      "authors": [
+        "Xinyu Lu",
+        "Kaiqi Zhang",
+        "Jinglin Yang",
+        "Boxi Cao",
+        "Yaojie Lu",
+        "Hongyu Lin",
+        "Min He",
+        "Xianpei Han",
+        "Le Sun"
+      ],
+      "venue": "Preprint · arXiv 2026",
+      "summary": "Alternates RL policy updates with discrete prompt evolution to escape advantage collapse on hard samples, then internalizes the gains back into the model.",
+      "picture": "img/publications/p2o.svg",
+      "paper": "https://arxiv.org/abs/2603.21877"
+    },
+    {
+      "title": "AutoAlign: Get Your LLM Aligned with Minimal Annotations",
+      "authors": [
+        "Xinyu Lu",
+        "Dong Xu",
+        "Chunkang Zhang",
+        "Xinyan Guan",
+        "Junxiang Wang",
+        "Qingyu Zhang",
+        "Pengbo Wang",
+        "Yingzhi Mao",
+        "Hao Xiang",
+        "Xianpei Han",
+        "Le Sun"
+      ],
+      "venue": "ACL 2025 (System Demonstrations)",
+      "summary": "An automated pipeline that aligns an LLM with little to no human annotation.",
+      "picture": "img/publications/autoalign.svg",
+      "paper": "https://aclanthology.org/2025.acl-demo.19/",
+      "code": "https://github.com/icip-cas/AutoAlign"
+    },
+    {
+      "title": "Transferable Post-training via Inverse Value Learning",
+      "authors": [
+        "Xinyu Lu",
+        "Xueru Wen",
+        "Yaojie Lu",
+        "Bowen Yu",
+        "Hongyu Lin",
+        "Haiyang Yu",
+        "Le Sun",
+        "Xianpei Han",
+        "Yongbin Li"
+      ],
+      "venue": "NAACL 2025",
+      "summary": "Models post-training as a logit-level value residual learned by a separate network, transferable across base models of different sizes.",
+      "picture": "img/publications/inverse-value.svg",
+      "paper": "https://arxiv.org/abs/2410.21027",
+      "code": "https://github.com/luxinyu1/inverse-value-learning"
+    },
+    {
+      "title": "SoFA: Shielded On-the-fly Alignment via Priority Rule Following",
+      "authors": [
+        "Xinyu Lu",
+        "Bowen Yu",
+        "Yaojie Lu",
+        "Hongyu Lin",
+        "Haiyang Yu",
+        "Le Sun",
+        "Xianpei Han",
+        "Yongbin Li"
+      ],
+      "venue": "Findings of ACL 2024",
+      "summary": "Keeps models safe at inference time by following prioritized rules that can shift on the fly.",
+      "picture": "img/publications/sofa.svg",
+      "paper": "https://aclanthology.org/2024.findings-acl.424/",
+      "code": "https://github.com/luxinyu1/sofa"
+    }
+  ]
+}

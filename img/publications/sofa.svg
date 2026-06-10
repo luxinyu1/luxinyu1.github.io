@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" fill="none">
+  <!-- priority axis -->
+  <line x1="58" y1="135" x2="422" y2="135" stroke="currentColor" stroke-opacity="0.14" stroke-width="1.5"/>
+  <!-- prioritized rules: size and tone descend with priority (highest first) -->
+  <circle cx="92"  cy="135" r="46" fill="currentColor" fill-opacity="0.9"/>
+  <circle cx="196" cy="135" r="34" fill="currentColor" fill-opacity="0.6"/>
+  <circle cx="278" cy="135" r="25" fill="currentColor" fill-opacity="0.4"/>
+  <circle cx="344" cy="135" r="18" fill="currentColor" fill-opacity="0.26"/>
+  <circle cx="398" cy="135" r="12" fill="currentColor" fill-opacity="0.16"/>
+</svg>
